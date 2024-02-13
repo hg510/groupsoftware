@@ -1,4 +1,4 @@
 from django.shortcuts import render, HttpResponse
 
 def home(request):
-    return HttpResponse("hello world")
+    return HttpResponse("this is the landing page")
