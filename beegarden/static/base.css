@@ -5,18 +5,8 @@
     outline: 0;
     font-size: 100%;
     vertical-align: baseline;
-    background: blue;
     overflow: hidden;
 }
 
-body::after {
-    content: "If you see this, the CSS integration is working!";
-    display: block;
-    text-align: center;
-    padding: 10px;
-    background-color: transparent;
-    color: #333;
-    font-weight: bold;
-}
 
 

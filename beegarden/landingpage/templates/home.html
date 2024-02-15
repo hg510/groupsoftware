@@ -1,5 +1,13 @@
 {% extends "base.html" %} 
 
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    </style>
+{% endblock %}
+
 {% block content %}
 
 <div class="main">
@@ -7,20 +15,18 @@
     <h1 class="welcome-header">Welcome to the Bee Garden!</h1>
 
     <div class="welcome-container">
-
-        <div class="Sign-up">
-            Sign up
-        </div>
-
-        <div class="Sign-in">
-            Sign in
-        </div>
-
-        <div class="Play">
-            Play!
-        </div>
+        <ul class="buttons">
+            <li class="sign-up"><a href="#">Sign up</a></li>
+            <li class="sign-in"><a href="#">Sign in</a></li>
+            <li class="play-button"><a href="#">Play</a></li>
+        </ul>
 
     </div>
+
+    <div class="bee">
+        <img src="{% static 'images/bee-minecraft.gif' %}" alt="Animated GIF">
+    </div>
+    
 
 </div>
 
