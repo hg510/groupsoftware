@@ -1,0 +1,11 @@
+.body-login {
+    background-image: url('../img/background-login.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height:100vh;
+    background-size: cover;
+}
+.login-container {
+    padding-top: 100px;
+    width: 100%;
+}
