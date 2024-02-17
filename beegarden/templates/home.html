@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<body class="body-home">
+  <nav class="navbar">
+    <div class="container">
+      <img src="{% static 'img/logo.svg' %}" alt="My Logo" height="50" width="50">
+      <div>
+        {% if user.is_authenticated %}
+          <form action="{% url 'logout' %}" method="post">
+            <span>Hi {{ user.username }}!</span>
+            {% csrf_token %}
+            <button
+              class="btn btn-sm btn-secondary" 
+              type="submit"
+              style="margin-left: 10px;"
+            >
+              <i class="fas fa-sign-out-alt" style="margin-right: 4px;"></i>
+              Logout
+            </button>
+          </form>
+        {% else %}
+          <span>You are not logged in</span>
+          <a href="{% url 'login' %}" 
+            role="button" 
+            class="btn btn-sm btn-secondary"
+            style="margin-left: 10px;"
+          >
+            <i class="fas fa-sign-in-alt" style="margin-right: 4px;"></i>
+            Login
+          </a>
+        {% endif %} 
+      </div>
+    </div>
+  </nav>
+  <section class="section-header bg-soft text-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 d-md-none">
+          <h1 class="display-2 font-weight-bold mb-0">We<span class="font-weight-bold"> safeguard </span>the environment.
+          </h1>
+        </div>
+        <div class="col-8 col-md-7 col-lg-6 order-lg-1">
+          <h1 class="display-2 font-weight-bold d-none d-md-inline">We<span class="font-weight-bold"> safeguard </span>the
+            environment.</h1>
+          <p class="lead text-muted mt-4">Over the past several decades, as the world has<br
+              class="d-none d-lg-inline">increasingly warmed, so has its potential to burn.</p>
+        </div>
+        <div class="col-4 col-md-5 col-lg-6 order-lg-2"> <img src="{% static 'img/forest.svg' %}" class="img-fluid mb-lg-6 mb-0"
+            alt="Forest Illustration"></div>
+      </div>
+    </div>
+  </section>
+</body>
+{% endblock %}
