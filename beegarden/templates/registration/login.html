@@ -13,7 +13,7 @@
         <div class="card">
           <header class="card-header text-center">
             <img src="{% static 'img/logo.svg' %}" alt="My Logo" height="50" width="50">
-            <h2 class="card-title mt-2">Login into account</h4>
+            <h2 class="card-title mt-2">Login into account</h2>
           </header>
           <article class="card-body">
             <div>
@@ -41,6 +41,9 @@
                 {% else %}
                   {% render_field form.username class="form-control" %}
                 {% endif %}
+                {% for error in form.username.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
               </div> <!-- form-group end.// -->
               <div class="form-group mt-2">
                 <label>{{ form.password.label_tag }}</label>
@@ -53,9 +56,12 @@
                 {% else %}
                   {% render_field form.password class="form-control" %}
                 {% endif %}
+                {% for error in form.password.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
               </div> <!-- form-group end.// -->
               <div class="form-group mt-4">
-                <button type="submit" class="btn btn-block w-100 btn-success">Log In</button>
+                <button type="submit" class="btn btn-block w-100 btn-primary">Log In</button>
               </div> <!-- form-group// -->
             </form>
           </article> <!-- card-body end .// -->
