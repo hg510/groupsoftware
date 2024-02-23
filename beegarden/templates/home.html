@@ -11,6 +11,13 @@
       <img src="{% static 'img/logo.svg' %}" alt="My Logo" height="50" width="50">
       <div>
         {% if user.is_authenticated %}
+        <a href="{% url 'garden' %}" 
+        role="button" 
+        class="btn btn-sm btn-secondary"
+        style="margin-left: 10px;"
+      >
+        Open Garden
+      </a>
           <form action="{% url 'logout' %}" method="post">
             <span>Hi {{ user.username }}!</span>
             {% csrf_token %}
