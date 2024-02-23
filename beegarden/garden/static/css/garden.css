@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,14 +19,17 @@ body {
 
 
 h1{
-  color: #fff;
   text-align: center; 
   font-weight: 200;
   font-size: 80px;
+  border: solid black;
+  background-color: rgb(255, 249, 142);
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 h1 span{
   display: block;
   font-size: 40px;
+  
 }
 
 .holder{
@@ -129,4 +143,5 @@ li.over {
   width: 100px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
   margin: 5px; /* Add some spacing between images */
+  cursor: pointer;
 }
