@@ -9,5 +9,5 @@ urlpatterns = [
     path("",TemplateView.as_view(template_name="home.html"),name="home"),
     path("habit/", include("habittracker.urls")),
     path("garden/", include("garden.urls")),
-    path("",TemplateView.as_view(template_name="home.html"),name="home"),
+    path("home/", TemplateView.as_view(template_name="home.html"), name="home"), 
 ]
