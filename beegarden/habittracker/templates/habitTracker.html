@@ -1,0 +1,104 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="habit.css">
+<title>Habits Tracker</title>
+</head>
+<body>
+
+<h1>Habits Tracker</h1>
+<p>Welcome to your habits tracker</p>
+<form action='add' method='post'>
+    <fieldset>
+        <legend>Daily Tasks</legend>
+            <label for="walk">Walked instead of driving:</label>
+            <input type="checkbox" value="1" name="walk" id="walk">
+            <br>
+            <label for="plastic">Did not use single use plastics:</label>
+            <input type="checkbox" value="1" name="plastic" id="plastic">
+            <br>
+            <label for="frood">Did not eat meat today:</label>
+            <input type="checkbox" value="1" name="food" id="food">
+            <br>
+            <input type="submit" value="Submit now">
+            <input type="reset" value="Clear form" >
+    </fieldset>
+</form>
+<form action='add' method='post'>
+    <fieldset>
+        <legend>Habits</legend>
+            <label for="walk">Walked instead of driving:</label>
+            <input type="checkbox" value="1" name="walk" id="walk">
+            <br>
+            <label for="plastic">Did not use single use plastics:</label>
+            <input type="checkbox" value="1" name="plastic" id="plastic">
+            <br>
+            <label for="frood">Did not eat meat today:</label>
+            <input type="checkbox" value="1" name="food" id="food">
+            <br>
+            <input type="submit" value="Submit now">
+            <input type="reset" value="Clear form" >
+    </fieldset>
+</form>
+<div id="imageContainer">
+    <img src="" alt="Image" id="imageDisplay">
+</div>
+<script>
+    //This should pull from database not random number
+    var beeHappiness = 90; // Example 
+    var thresholdHappy = 80; 
+    var thresholdSad = 50; 
+
+  
+    var imageContainer = document.getElementById('imageContainer');
+  
+    var imageDisplay = document.getElementById('imageDisplay');
+
+   
+    if (beeHappiness > thresholdHappy) {
+        imageDisplay.src = 'beeplaceholder.png';
+    }
+    else if (beeHappiness < thresholdSad) {
+        imageDisplay.src = 'beeplaceholdersad.png';
+    }
+    
+    else {
+        imageDisplay.src = 'beeplaceholderneutral.png'; 
+    }
+</script>
+</body>
+</html> -->
+{% load static %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Habit Tracker</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{% static 'css/habit.css' %}">
+<body>
+<h1>Habit Tracker</h1>
+
+{% if form_submitted %}
+    <p>Form already submitted. Please come back tomorrow!</p>
+{% else %}
+    <form method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Daily Tasks</legend>
+            <label for="walk">Walked instead of driving:</label>
+            <input type="checkbox" name="walk" id="walk">
+            <br>
+            <label for="plastic">Did not use single use plastics:</label>
+            <input type="checkbox" name="plastic" id="plastic">
+            <br>
+            <label for="food">Did not eat meat today:</label>
+            <input type="checkbox" name="food" id="food">
+            <br>
+            <input type="submit" value="Submit now">
+            <input type="reset" value="Clear form" >
+        </fieldset>
+    </form>
+{% endif %}
+</body>
+</html>
+

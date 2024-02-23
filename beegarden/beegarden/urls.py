@@ -23,4 +23,5 @@ urlpatterns = [
     path("account/", include("accounts.urls")),
     path("", include("landingpage.urls")),
     path("",TemplateView.as_view(template_name="home.html"),name="home"),
+    path("habit/", include("habittracker.urls")),
 ]
