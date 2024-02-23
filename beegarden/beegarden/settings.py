@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'habittracker',
     'garden',
-    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
