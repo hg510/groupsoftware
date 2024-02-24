@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../img/background.jpg) no-repeat center center fixed;
+  background-size: cover; /* Zoom out the background image by 10% */
+  font-family: 'Lato', sans-serif;
+}
+
+
+h1{
+  text-align: center; 
+  font-weight: 200;
+  font-size: 80px;
+  border: solid black;
+  background-color: rgb(255, 249, 142);
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h1 span{
+  display: block;
+  font-size: 40px;
+  
+}
+
+.holder{
+  width: 600px;
+  margin: 0px auto;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #fff;
+  margin: 10px;
+  width: 150px;
+  background: #eee;
+  padding: 10px;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  cursor: move;
+}
+
+img {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+*[draggable=true] {
+  -moz-user-select:none;
+  -khtml-user-drag: element;
+  cursor: move;
+}
+
+*:-khtml-drag {
+  background-color: rgba(238,238,238, 0.5);
+}
+
+li a:hover:after {
+  content: ' (drag me)';
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: inline-block; /* Display list items horizontally */
+  margin-right: 10px; /* Add some spacing between items */
+}
+
+
+li.over {
+  border-color: #333;
+  background: #ccc;
+}
+#bin {
+  display: flex;
+}
+
+.small-square {
+  width: 100px; /* Adjust the width of the small squares as needed */
+  height: 100px; /* Adjust the height of the small squares as needed */
+  background-color: #ccc; /* Add a background color to the small squares */
+  border: 1px solid #000; /* Add a border to the small squares */
+  position: absolute; /* Position the small squares relative to the nearest positioned ancestor */
+}
+#square1 {
+  top: 200px;
+  left: 200px;
+}
+
+#square2 {
+  top: 200px;
+  left: 400px;
+}
+
+#square3 {
+  top: 200px;
+  left: 600px;
+}
+
+#square4 {
+  top: 400px;
+  left: 200px;
+}
+
+#square5 {
+  top: 400px;
+  left: 400px;
+}
+
+#square6 {
+  top: 400px;
+  left: 600px;
+}
+
+#draggable-container {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 50%; /* Position the element horizontally centered */
+  transform: translateX(-50%);
+}
+
+#bin img {
+  /* Styles for the dropped images within the bin */
+  width: 100px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin: 5px; /* Add some spacing between images */
+  cursor: pointer;
+}

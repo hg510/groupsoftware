@@ -1,3 +1,5 @@
+# The previous models.py has the merge conflict when I pull the latest branch
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -59,4 +61,3 @@ class Inventory(models.Model):
             return f"{self.player.username} + {self.seed.name} inventory"
         elif self.item:
             return f"{self.player.username} + {self.item.name} inventory"
-
