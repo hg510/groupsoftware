@@ -68,37 +68,68 @@
 </script>
 </body>
 </html> -->
-{% load static %} 
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Habit Tracker</title>
 </head>
 <link rel="stylesheet" type="text/css" href="{% static 'css/habit.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 <body>
 <h1>Habit Tracker</h1>
 
 {% if form_submitted %}
     <p>Form already submitted. Please come back tomorrow!</p>
+    <p>Your current score: {{ score }}</p>
 {% else %}
     <form method="post">
         {% csrf_token %}
         <fieldset>
             <legend>Daily Tasks</legend>
-            <label for="walk">Walked instead of driving:</label>
+            <label for="walk">Walked instead of driving</label>
             <input type="checkbox" name="walk" id="walk">
             <br>
-            <label for="plastic">Did not use single use plastics:</label>
+            <label for="plastic">Did not use single use plastics (Disposable cutleries, Plastic Bottles)</label>
             <input type="checkbox" name="plastic" id="plastic">
             <br>
-            <label for="food">Did not eat meat today:</label>
-            <input type="checkbox" name="food" id="food">
+            <label for="water_bottle">Used a reusable water bottle instead of buying bottled water:</label>
+            <input type="checkbox" name="water_bottle" id="water_bottle">
+            <br>
+            <label for="utensils">Used reusable utensils (fork, spoon, knife):</label>
+            <input type="checkbox" name="utensils" id="utensils">
+            <br>
+            <label for="short_trips">Choose walking, biking, or electric scooters for short trips instead of driving:</label>
+            <input type="checkbox" name="short_trips" id="short_trips">
+            <br>
+            <label for="plant_based_meals">Ate plant-based meals or went completely meatless:</label>
+            <input type="checkbox" name="plant_based_meals" id="plant_based_meals">
+            <br>
+            <label for="unplug_electronics">Unplugged electronics and appliances when not in use to conserve energy:</label>
+            <input type="checkbox" name="unplug_electronics" id="unplug_electronics">
+            <br>
+            <label for="natural_light">Utilized natural light during the day:</label>
+            <input type="checkbox" name="natural_light" id="natural_light">
+            <br>
+            <label for="community_cleanups">Participated in or organized community cleanups to remove litter and debris:</label>
+            <input type="checkbox" name="community_cleanups" id="community_cleanups">
+            <br>
+            <label for="reduce_food_waste">Reduced food waste by planning meals, composting organic waste, and donating excess food:</label>
+            <input type="checkbox" name="reduce_food_waste" id="reduce_food_waste">
+            <br>
+            <label for="public_transportation">Used public transportation or carpooling instead of driving alone:</label>
+            <input type="checkbox" name="public_transportation" id="public_transportation">
+            <br>
+            <label for="turn_off_lights">Turned off lights and appliances when leaving a room to save energy:</label>
+            <input type="checkbox" name="turn_off_lights" id="turn_off_lights">
             <br>
             <input type="submit" value="Submit now">
-            <input type="reset" value="Clear form" >
+            <input type="reset" value="Clear form">
         </fieldset>
     </form>
 {% endif %}
 </body>
 </html>
-
