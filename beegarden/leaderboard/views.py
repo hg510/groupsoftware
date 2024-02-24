@@ -1,10 +1,15 @@
-from django.urls import path
-from . import views
-
 from django.shortcuts import render
-from .models import Leaderboard
+from habittracker.models import UserScore  
+from .models import LeaderboardEntry
 
-def leaderboard(request):
-    # Get the leaderboard that display the user's score from top to bottom (Ex. Rank one is the player with highest score)
-    leaderboard = Leaderboard.objects.order_by('-score')
-    return render(request, 'leaderboard.html', {'leaderboard': leaderboard})
+def leaderboard_view(request):
+    return render(request, 'leaderboard.html')
+
+def leaderboard_view(request):
+    # Retrieve user scores ordered by score in descending order
+    user_scores = UserScore.objects.order_by('-score')
+
+    # Pass user scores to the template context
+    context = {'user_scores': user_scores}
+    
+    return render(request, 'leaderboard.html', context)
