@@ -23,6 +23,12 @@
            style="margin-left: 10px;">
           Habit Tracker
         </a>
+        <a href="{% url 'leaderboard' %}" 
+        role="button" 
+        class="btn btn-sm btn-secondary"
+        style="margin-left: 10px;">
+            Leaderboard
+        </a>
           <form action="{% url 'logout' %}" method="post">
             <span>Hi {{ user.username }}!</span>
             {% csrf_token %}
