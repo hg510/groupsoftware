@@ -133,3 +133,5 @@ LOGOUT_REDIRECT_URL = "landing"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+AUTH_USER_MODEL = 'auth.User'
