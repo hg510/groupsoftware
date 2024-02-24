@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<main>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'img/logo.svg' %}" alt="My Logo" height="30" width="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item active" aria-current="page">
+              <a class="nav-link active" href="{% url 'about' %}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/leaderboard">Leaderboard</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            {% if user.is_authenticated %}
+              <form action="{% url 'logout' %}" method="post">
+                <span>Hi {{ user.username }}!</span>
+                {% csrf_token %}
+                <button
+                  class="btn btn-sm btn-secondary" 
+                  type="submit"
+                  style="margin-left: 10px;"
+                >
+                  <i class="fas fa-sign-out-alt" style="margin-right: 4px;"></i>
+                  Logout
+                </button>
+              </form>
+            {% else %}
+              <span>You are not logged in</span>
+              <a href="{% url 'login' %}" 
+                role="button" 
+                class="btn btn-sm btn-secondary"
+                style="margin-left: 10px;"
+              >
+                <i class="fas fa-sign-in-alt" style="margin-right: 4px;"></i>
+                Login
+              </a>
+            {% endif %} 
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section section-lg bg-image overlay-secondary text-white"
+        data-background="{% static 'img/about/about.jpg' %}"
+        style="background-image: url('/static/img/about/about.jpg');">
+        <div class=" pad-about">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-10 mx-auto text-center">
+                        <h1 class="display-1 font-weight-bold">About us</h1>
+                        <p class="lead mb-4 font-weight-bold">Leaf provides regular assessments of the scientific basis of
+                            climate change, its impacts and future risks, and options for adaptation and mitigation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section section-sm" style="padding-top:30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-1.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Tanislav Robert</h5>
+                                <h6 class="card-subtitle text-gray">Head of the Climate Investment Funds</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-2.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Zoltan Szőgyényi</h5>
+                                <h6 class="card-subtitle text-gray">Lead Operations Officer</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-3.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Calota Oana</h5>
+                                <h6 class="card-subtitle text-gray">Communications Officer</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-4.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Glavan George</h5>
+                                <h6 class="card-subtitle text-gray">Senior Evaluation &amp; Learning Specialist</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-5.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Calota Anca</h5>
+                                <h6 class="card-subtitle text-gray">Database Assistant</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="profile-card mb-5">
+                        <div class="card shadow-sm border-soft"><img src="{% static 'img/about/profile-image-6.jpg' %}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Maria Madalina</h5>
+                                <h6 class="card-subtitle text-gray">Forest Specialist, FIP</h6>
+                                <p class="card-text my-2">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                                <ul class="social-buttons mt-3">
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-facebook"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Add me on Facebook"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-twitter"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Twitter"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-slack" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Let's chat on Slack"><i
+                                                class="fab fa-slack-hash"></i></a></li>
+                                    <li><a href="#" target="_blank" class="btn btn-link btn-dribbble"
+                                            data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Follow me on Dribbble"><i
+                                                class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<style>
+    .pad-about {
+        padding-top: 100px;
+        padding-bottom: 150px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #f1f1f1;
+    }
+    .profile-card .card-image .card-title {
+        position: absolute;
+        left: 1.25rem;
+        top: 1.25rem
+    }
+
+    .profile-card .card-image .dropdown {
+        position: absolute;
+        right: 1rem;
+        top: 1rem
+    }
+
+    .profile-card .profile-cover {
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        height: 175px
+    }
+
+    .profile-card .profile-image {
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto;
+        transform: translateY(-3rem)
+    }
+
+    .profile-card .profile-image-small {
+        width: 8rem;
+        height: 8rem;
+        margin: 0 auto
+    }
+
+    .profile-card .profile-image-small img {
+        border: .25rem solid #fff
+    }
+
+    .profile-card .card-link {
+        font-size: .875rem
+    }
+
+    .profile-card .card-footer {
+        background-color: #fff
+    }
+
+    .profile-card .social-buttons {
+        margin-bottom: 0;
+        padding: 0;
+        list-style: none
+    }
+
+    .profile-card .social-buttons li {
+        display: inline-block
+    }
+
+    .profile-card .social-buttons li a.btn {
+        padding: .25rem .375rem
+    }
+
+</style>
+{% endblock %}
