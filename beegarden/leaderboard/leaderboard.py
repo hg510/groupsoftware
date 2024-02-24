@@ -18,6 +18,3 @@ def get_user_rank(user):
     leaderboard = get_leaderboard()
     user_position = list(leaderboard).index(user) + 1
     return user_position
-
-
-
