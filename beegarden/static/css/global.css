@@ -43,3 +43,10 @@
 .navbar {
     background-color: #fff;
 }
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../fonts/Minecraft.ttf')
+}
+body {
+    font-family: 'Minecraft';
+}
