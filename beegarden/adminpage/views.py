@@ -20,7 +20,7 @@ def adminPage(request):
         # Delete request
         delete_request(id)
 
-    return render(request, 'habitTracker.html', {'form_submitted': form_submitted, 'score': total_score})
+    return render(request, 'adminPage.html', {'form_submitted': form_submitted})
 
 
 def delete_request(id):
