@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -39,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'landingpage',
     'accounts',
-    'widget_tweaks'
+    'widget_tweaks',
+    'habittracker',
+    'garden',
+    'leaderboard',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 
 # Default primary key field type
@@ -132,3 +134,5 @@ LOGOUT_REDIRECT_URL = "home"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+AUTH_USER_MODEL = 'auth.User'
