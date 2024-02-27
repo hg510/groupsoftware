@@ -17,7 +17,7 @@ def adminPage(request):
         # Create Response object
         response = Response.objects.create(id=id, accepted=accepted)
 
-        # Reset or increment streak based on submission date
+        # Delete request
         delete_request(id)
 
     return render(request, 'habitTracker.html', {'form_submitted': form_submitted, 'score': total_score})
