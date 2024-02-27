@@ -1,0 +1,31 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="admin.css">
+    <title>Admin Page</title>
+    </head>
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+<body>
+<!--Should check if there are pending requests-->
+{% if form_submitted %}
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <p>User {{userid}} has a request {{goal}}</p>
+        <label for="accept">Accept their request?:</label>
+        <input type="checkbox" value="1" name="accept" id="accept">
+        <br>
+            <input type="submit" value="Submit now">
+            <input type="reset" value="Clear form" >
+{% else %}
+    <p>There are no pending requests.</p>
+{% endif %}
+
+
+</body>
+</html>
