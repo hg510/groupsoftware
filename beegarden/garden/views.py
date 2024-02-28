@@ -1,4 +1,5 @@
 # garden/views.py
+
 from django.shortcuts import render
 
 def garden_view(request):

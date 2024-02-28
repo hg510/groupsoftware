@@ -14,6 +14,5 @@ urlpatterns = [
     path("habit/", include("habittracker.urls")),
     path("garden/", include("garden.urls")),
     path("leaderboard/", include("leaderboard.urls")),
-    # path("adminpage/", include("adminpage.urls")),
     path("adminpage/", adminPage, name="adminpage"),
 ]
