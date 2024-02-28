@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
-from .models import Request, Response, 
+from .models import Request, Response
 
 def adminPage(request):
     user = request.user
