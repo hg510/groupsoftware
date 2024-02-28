@@ -13,6 +13,7 @@
 <body>
 <!--Should check if there are pending requests-->
 {% if form_submitted %}
+    {% for request in request.set.all %}
 <form method="post">
     {% csrf_token %}
     <fieldset>
@@ -22,6 +23,7 @@
         <br>
             <input type="submit" value="Submit now">
             <input type="reset" value="Clear form" >
+        {% endfor %}
 {% else %}
     <p>There are no pending requests.</p>
 {% endif %}
