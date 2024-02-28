@@ -1,24 +1,30 @@
-from .models import Seed
+from django.contrib.auth.models import User
+from .models import Seed, UserGarden, SeedInventory
 import random
 
-def get_random_seed():
-    drop_rates = {
-        'Common': 0.45,
-        'Uncommon': 0.30,
-        'Rare': 0.15,
-        'Epic': 0.10,
-    }
+# This part is meant for the user to be awarded the seed once the admin has approved the habit form
+# It is not working properly. Therefore, it will be improved and validated in the 2nd sprint
 
-    # Generate a random number between 0 and 1
-    # The logic is , 0 to 0.45 would be the biggest range, folloing by 0.45 to 0.75, then 0.75 to 0.90, then 0.90 to 1
-    rand = random.random()
-    cumulative = 0.0
+# def award_seeds_to_user(user):
+#     """
+#     Awards a specified seed to a user, incrementing quantity in inventory if already owned or creating a new entry otherwise.
+#     """
+#     seed_type = "Example Seed"
+#     quantity = 1
 
-    seeds = Seed.objects.all().order_by('-rarity')  
+#     # Retrieve the seed object
+#     seed = Seed.objects.get(name=seed_type)
 
-    for seed in seeds:
-        cumulative += drop_rates[seed.rarity]
-        if rand < cumulative:
-            return seed
+#     # Check if the seed already exists in the user's inventory
+#     existing_seed = SeedInventory.objects.filter(user=user, seed=seed).first()
+#     if existing_seed:
+#         # If the seed exists, increment its quantity
+#         existing_seed.quantity += quantity
+#         existing_seed.save()
+#     else:
+#         # If the seed doesn't exist, create a new SeedInventory object
+#         SeedInventory.objects.create(user=user, seed=seed, quantity=quantity)
 
-    return seeds.first()
+
+
+# # Seed randomization will be implemented in the 2nd sprint
