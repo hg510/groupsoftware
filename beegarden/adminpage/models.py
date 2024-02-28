@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from habittracker.models import Habit  
 
+
+# Represents a request made for reviewing a habit submission.
 class Request(models.Model):
     goal = models.CharField(max_length=150, verbose_name="Goal")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests', verbose_name="User")
@@ -13,6 +15,8 @@ class Request(models.Model):
         verbose_name = "Request"
         verbose_name_plural = "Requests"
 
+
+# Represents an admin's response to a request, indicating acceptance or rejection.
 class Response(models.Model):
     accepted = models.BooleanField(verbose_name="Accepted")
     date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date Created")

@@ -55,8 +55,9 @@ def calculate_daily_score(user):
 
 
 def award_seeds_to_user(user):
-    seed_type = "Example Seed"  # Specify the type of seed to award
-    quantity = 1  # Specify the quantity of seeds to award
+    # Specify the type and quantity of seed to award
+    seed_type = "Example Seed"  
+    quantity = 1  
     seed = Seed.objects.create(user=user, type=seed_type, quantity=quantity)
 
 

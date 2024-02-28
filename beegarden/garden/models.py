@@ -7,27 +7,29 @@ class Seed(models.Model):
     def __str__(self):
         return self.name
 
-class SeedInventory(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seed_inventory')
-    seed = models.ForeignKey(Seed, on_delete=models.CASCADE, related_name='inventory_items')
-    quantity = models.IntegerField(default=1)
+# Will be used in the 2nd sprint
 
-    def __str__(self):
-        return f"{self.user.username} - {self.seed.name} x{self.quantity}"
+# class SeedInventory(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seed_inventory')
+#     seed = models.ForeignKey(Seed, on_delete=models.CASCADE, related_name='inventory_items')
+#     quantity = models.IntegerField(default=1)
 
-class UserGarden(models.Model):
-    PLANT_STATUS_CHOICES = [
-        ('planted', 'Planted'),
-        ('harvested', 'Harvested'),
-    ]
+#     def __str__(self):
+#         return f"{self.user.username} - {self.seed.name} x{self.quantity}"
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    seed = models.ForeignKey(Seed, related_name='plants', on_delete=models.CASCADE)
-    date_planted = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=PLANT_STATUS_CHOICES, default='planted')
+# class UserGarden(models.Model):
+#     PLANT_STATUS_CHOICES = [
+#         ('planted', 'Planted'),
+#         ('harvested', 'Harvested'),
+#     ]
 
-    def __str__(self):
-        return f"{self.user.username}'s {self.seed.name} - ({self.status})"
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     seed = models.ForeignKey(Seed, related_name='plants', on_delete=models.CASCADE)
+#     date_planted = models.DateTimeField(auto_now_add=True)
+#     status = models.CharField(max_length=10, choices=PLANT_STATUS_CHOICES, default='planted')
+
+#     def __str__(self):
+#         return f"{self.user.username}'s {self.seed.name} - ({self.status})"
 
 
 

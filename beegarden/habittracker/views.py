@@ -2,9 +2,12 @@ from django.utils import timezone
 from django.shortcuts import render, redirect
 from .models import Habit, UserScore
 
+# Manages habit tracking submissions and updates user scores and streaks.
 def habitTracker(request):
     user = request.user
     today = timezone.now().date()
+
+    # Check if a habit form has been submitted today
     form_submitted = Habit.objects.filter(user=user, date_created__date=today).exists()
 
     # Retrieve or create the user's score
@@ -14,8 +17,10 @@ def habitTracker(request):
     streak_count = calculate_streak(user)
     total_score = user_score.score + streak_count * 10
 
+    # Handle habit form submission
     if request.method == 'POST':
         if form_submitted:
+            # Prevent multiple submissions on the same day
             return render(request, 'habitTracker.html', {'form_submitted': True, 'score': total_score})
 
         walk = request.POST.get('walk') == 'on'
@@ -79,7 +84,7 @@ def habitTracker(request):
 
     return render(request, 'habitTracker.html', {'form_submitted': form_submitted, 'score': total_score})
 
-
+# Calculates the consecutive days a user has submitted habits.
 def calculate_streak(user):
     habits = Habit.objects.filter(user=user).order_by('-date_created')
     streak_count = 0
@@ -94,11 +99,13 @@ def calculate_streak(user):
     
     return streak_count
 
+# Resets the user's streak count to zero.
 def reset_streak(user):
     user_score = UserScore.objects.get(user=user)
     user_score.streak_count = 0
     user_score.save()
 
+# Increments the user's streak count by one.
 def increment_streak(user):
     user_score = UserScore.objects.get(user=user)
     user_score.streak_count += 1
