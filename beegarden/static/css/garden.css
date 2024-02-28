@@ -55,9 +55,9 @@ li a {
 }
 
 img {
-  width: 100px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-}
+  width: 100px; 
+  height: auto; 
+} 
 
 
 *[draggable=true] {
@@ -133,8 +133,8 @@ li.over {
 
 #draggable-container {
   position: fixed;
-  bottom: 20px; /* Adjust the distance from the bottom as needed */
-  left: 50%; /* Position the element horizontally centered */
+  bottom: 20px; 
+  left: 50%; 
   transform: translateX(-50%);
 }
 
@@ -144,4 +144,23 @@ li.over {
   height: auto; /* Maintain aspect ratio */
   margin: 5px; /* Add some spacing between images */
   cursor: pointer;
+}
+
+#beeemotions {
+  border: 10px solid #FF0000;
+  display: inline-block;
+  padding: 5px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%; 
+  right: 20px;
+  transform: translateY(-50%);
+  border-radius: 20px; 
+  background-color: #FFFFCC;
+  height: 550px;
+}
+
+#beeemotions img {
+  width: 400px !important;
+  height: 400px !important;
 }
