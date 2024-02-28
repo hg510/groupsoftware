@@ -47,7 +47,20 @@ input[type="checkbox"] {
     margin-right: 5px; 
     accent-color: #239F02;
 }
-
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background: linear-gradient(to right, #3f34db, #3f34db);
+    color: #fff;
+    border: none;
+    font-family: "Pixelify Sans", sans-serif;
+    border-radius: 8px;
+}
 .submit-btn {
     display: inline-block;
     padding: 10px 20px;

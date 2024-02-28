@@ -119,6 +119,7 @@ switch (season){
 <head>
     <title>Habit Tracker</title>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/habit.css' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +134,20 @@ switch (season){
 </div>
 {% else %}
     <form method="post" class="container">
+        <div>
+            <a href="{% url 'home' %}" 
+              class="home-btn"
+            >
+              <i class="fas fa-home" style="margin-right: 4px;"></i>
+              Home
+            </a>
+            <a href="{% url 'leaderboard' %}" 
+              class="home-btn"
+            >
+              <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+              Leaderboard
+            </a>
+        </div>
         {% csrf_token %}
         <fieldset>
             <legend>Daily Tasks</legend>
