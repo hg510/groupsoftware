@@ -43,7 +43,6 @@
 .navbar {
     background-color: #fff;
 }
-.body-home {
-    height: 100vh;
-    background-color: #f3f7fa;
+body {
+    font-family: "Pixelify Sans", sans-serif;
 }

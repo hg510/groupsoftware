@@ -1,5 +1,10 @@
-# garden/views.py
 from django.shortcuts import render
+from habittracker.models import UserScore
 
 def garden_view(request):
-    return render(request, 'garden/garden.html')
+    # Fetch the user's score
+    user_score = UserScore.objects.get(user=request.user)
+    score = user_score.score
+    
+    # Pass the score to the template
+    return render(request, 'garden/garden.html', {'score': score})

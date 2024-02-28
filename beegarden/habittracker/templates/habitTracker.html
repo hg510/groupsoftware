@@ -111,6 +111,7 @@ switch (season){
 </script>
 </body>
 </html> -->
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -118,6 +119,7 @@ switch (season){
 <head>
     <title>Habit Tracker</title>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/habit.css' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,52 +128,82 @@ switch (season){
 <h1>Habit Tracker</h1>
 
 {% if form_submitted %}
+<div class="submitted-form">
     <p>Form already submitted. Please come back tomorrow!</p>
     <p>Your current score: {{ score }}</p>
+</div>
 {% else %}
-    <form method="post">
+    <form method="post" class="container">
+        <div>
+            <a href="{% url 'home' %}" 
+              class="home-btn"
+            >
+              <i class="fas fa-home" style="margin-right: 4px;"></i>
+              Home
+            </a>
+            <a href="{% url 'leaderboard' %}" 
+              class="home-btn"
+            >
+              <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+              Leaderboard
+            </a>
+        </div>
         {% csrf_token %}
         <fieldset>
             <legend>Daily Tasks</legend>
-            <label for="walk">Walked instead of driving</label>
-            <input type="checkbox" name="walk" id="walk">
-            <br>
-            <label for="plastic">Did not use single use plastics (Disposable cutleries, Plastic Bottles)</label>
-            <input type="checkbox" name="plastic" id="plastic">
-            <br>
-            <label for="water_bottle">Used a reusable water bottle instead of buying bottled water:</label>
-            <input type="checkbox" name="water_bottle" id="water_bottle">
-            <br>
-            <label for="utensils">Used reusable utensils (fork, spoon, knife):</label>
-            <input type="checkbox" name="utensils" id="utensils">
-            <br>
-            <label for="short_trips">Choose walking, biking, or electric scooters for short trips instead of driving:</label>
-            <input type="checkbox" name="short_trips" id="short_trips">
-            <br>
-            <label for="plant_based_meals">Ate plant-based meals or went completely meatless:</label>
-            <input type="checkbox" name="plant_based_meals" id="plant_based_meals">
-            <br>
-            <label for="unplug_electronics">Unplugged electronics and appliances when not in use to conserve energy:</label>
-            <input type="checkbox" name="unplug_electronics" id="unplug_electronics">
-            <br>
-            <label for="natural_light">Utilized natural light during the day:</label>
-            <input type="checkbox" name="natural_light" id="natural_light">
-            <br>
-            <label for="community_cleanups">Participated in or organized community cleanups to remove litter and debris:</label>
-            <input type="checkbox" name="community_cleanups" id="community_cleanups">
-            <br>
-            <label for="reduce_food_waste">Reduced food waste by planning meals, composting organic waste, and donating excess food:</label>
-            <input type="checkbox" name="reduce_food_waste" id="reduce_food_waste">
-            <br>
-            <label for="public_transportation">Used public transportation or carpooling instead of driving alone:</label>
-            <input type="checkbox" name="public_transportation" id="public_transportation">
-            <br>
-            <label for="turn_off_lights">Turned off lights and appliances when leaving a room to save energy:</label>
-            <input type="checkbox" name="turn_off_lights" id="turn_off_lights">
-            <br>
-            <input type="submit" value="Submit now">
-            <input type="reset" value="Clear form">
+            <div class="form-group">
+                <input type="checkbox" name="walk" id="walk">
+                <label for="walk">Walked instead of driving</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="plastic" id="plastic">
+                <label for="plastic">Did not use single use plastics (Disposable cutleries, Plastic Bottles)</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="water_bottle" id="water_bottle">
+                <label for="water_bottle">Used a reusable water bottle instead of buying bottled water:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="utensils" id="utensils">
+                <label for="utensils">Used reusable utensils (fork, spoon, knife):</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="short_trips" id="short_trips">
+                <label for="short_trips">Choose walking, biking, or electric scooters for short trips instead of driving:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="plant_based_meals" id="plant_based_meals">
+                <label for="plant_based_meals">Ate plant-based meals or went completely meatless:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="unplug_electronics" id="unplug_electronics">
+                <label for="unplug_electronics">Unplugged electronics and appliances when not in use to conserve energy:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="natural_light" id="natural_light">
+                <label for="natural_light">Utilized natural light during the day:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="community_cleanups" id="community_cleanups">
+                <label for="community_cleanups">Participated in or organized community cleanups to remove litter and debris:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="reduce_food_waste" id="reduce_food_waste">
+                <label for="reduce_food_waste">Reduced food waste by planning meals, composting organic waste, and donating excess food:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="public_transportation" id="public_transportation">
+                <label for="public_transportation">Used public transportation or carpooling instead of driving alone:</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="turn_off_lights" id="turn_off_lights">
+                <label for="turn_off_lights">Turned off lights and appliances when leaving a room to save energy:</label>
+            </div>
         </fieldset>
+            <div class="center">
+                <input type="submit" class="submit-btn" value="Submit now">
+                <input type="reset" class="reset-btn" value="Clear form">
+            </div>
     </form>
 {% endif %}
 </body>
