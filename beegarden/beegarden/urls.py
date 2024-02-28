@@ -10,4 +10,5 @@ urlpatterns = [
     path("habit/", include("habittracker.urls")),
     path("garden/", include("garden.urls")),
     path("leaderboard/", include("leaderboard.urls")),
+    path("map/", include("map.urls")),
 ]
