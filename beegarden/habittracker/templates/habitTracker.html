@@ -1,117 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="habit.css">
-<title>Habits Tracker</title>
-</head>
-<body>
-
-<h1>Habits Tracker</h1>
-
-</form action='add' method='post'>
-
-    <fieldset>
-        <legend>Daily Tasks</legend>
-            <label for="plastic">Did not use single use plastics:</label>
-            <input type="checkbox" value="1" name="plastic" id="plastic">
-            <br>
-            <label for="food">Did not eat meat today:</label>
-            <input type="checkbox" value="1" name="food" id="food">
-            <br>
-            <input type="submit" value="Submit now">
-            <input type="reset" value="Clear form" >
-    </fieldset>
-</form>
-<form action='add' method='post'>
-    <fieldset>
-        <legend>Weekly Tasks</legend>
-            <label for="recycle">Recycled something:</label>
-            <input type="checkbox" value="1" name="recycle" id="recycle">
-            <br>
-            <label for="walk">Walked instead of driving:</label>
-            <input type="checkbox" value="1" name="walk" id="walk">
-            <br>
-            <input type="submit" value="Submit now">
-            <input type="reset" value="Clear form" >
-    </fieldset>
-</form>
-<div id="imageContainer">
-    <img src="" alt="Image" id="imageDisplay">
-</div>
-<script>
-    //This should pull from database not random number
-    var beeHappiness = 120; // Example 
-    var thresholdHappy = 80; 
-    var thresholdSad = 50; 
-    var imageContainer = document.getElementById('imageContainer');
-    var imageDisplay = document.getElementById('imageDisplay');
-
-    if (beeHappiness > thresholdHappy) {
-        imageDisplay.src = 'beeplaceholder.png';
-    }
-    else if (beeHappiness < thresholdSad) {
-        imageDisplay.src = 'beeplaceholdersad.png';
-    }
-    
-    else {
-        imageDisplay.src = 'beeplaceholderneutral.png'; 
-    }
-
-// bit to make it respond to being pet
-var beeImage = document.getElementById('imageDisplay');
-
-// event listener for clicking the bee
-beeImage.addEventListener('click', function() {
-  // source of the inmage that displayes on pet
-  beeImage.src = 'beepetplaceholder.png';
-});
-
-//chabges background based on season
-var currentdate = new Date();
-var season = currentdate.getMonth()
-switch (season){
-    case 0:
-    document.body.style.backgroundColor = 'rgb(0,0,0)';
-    break;
-    case 1:
-    document.body.style.backgroundColor = 'rgb(103, 226, 218)';
-    break;
-    case 2:
-    document.body.style.backgroundColor = 'rgb(0,255,0)';
-    break;
-    case 3:
-    document.body.style.backgroundColor = 'rgb(0,0,255)';
-    break;
-    case 4:
-    document.body.style.backgroundColor = 'rgb(0,0,0)';
-    break;
-    case 5:
-    document.body.style.backgroundColor = 'rgb(103, 226, 218)';
-    break;
-    case 6:
-    document.body.style.backgroundColor = 'rgb(0,255,0)';
-    break;
-    case 7:
-    document.body.style.backgroundColor = 'rgb(0,0,255)';
-    break;
-    case 8:
-    document.body.style.backgroundColor = 'rgb(0,0,0)';
-    break;
-    case 9:
-    document.body.style.backgroundColor = 'rgb(103, 226, 218)';
-    break;
-    case 10:
-    document.body.style.backgroundColor = 'rgb(0,255,0)';
-    break;
-    case 11:
-    document.body.style.backgroundColor = 'rgb(0,0,255)';
-    break;
-}
-
-</script>
-</body>
-</html> -->
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -128,24 +14,38 @@ switch (season){
 <h1>Habit Tracker</h1>
 
 {% if form_submitted %}
+<div class="home-btn-container">
+    <a href="{% url 'home' %}" class="home-btn">
+        <i class="fas fa-home" style="margin-right: 4px;"></i>
+        Home
+    </a>
+    <a href="{% url 'habit_tracker' %}" class="home-btn">
+        <i class="fas fa-home" style="margin-right: 4px;"></i>
+        Track Habits
+    </a>
+    <a href="{% url 'leaderboard' %}" class="home-btn">
+        <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+        Leaderboard
+    </a>
+</div>
 <div class="submitted-form">
     <p>Form already submitted. Please come back tomorrow!</p>
     <p>Your current score: {{ score }}</p>
 </div>
 {% else %}
     <form method="post" class="container">
-        <div>
-            <a href="{% url 'home' %}" 
-              class="home-btn"
-            >
-              <i class="fas fa-home" style="margin-right: 4px;"></i>
-              Home
+        <div class="home-btn-container">
+            <a href="{% url 'home' %}" class="home-btn">
+                <i class="fas fa-home" style="margin-right: 4px;"></i>
+                Home
             </a>
-            <a href="{% url 'leaderboard' %}" 
-              class="home-btn"
-            >
-              <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
-              Leaderboard
+            <a href="{% url 'habit_tracker' %}" class="home-btn">
+                <i class="fas fa-home" style="margin-right: 4px;"></i>
+                Track Habits
+            </a>
+            <a href="{% url 'leaderboard' %}" class="home-btn">
+                <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+                Leaderboard
             </a>
         </div>
         {% csrf_token %}

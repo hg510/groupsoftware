@@ -1,9 +1,12 @@
   {% load static %}
 
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/garden.css' %}">
+  <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+  
+  
   <div class="holder">
     <h1>Virtual Garden</h1>
-    <link rel="stylesheet" href="{% static 'css/garden.css' %}">
-    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
     <div id="bin">
       <div class="small-square" id="square1">
       </div>
@@ -25,22 +28,60 @@
     </ul>
   </div>
 
-  <div id="beeemotions">
-    <p>Click on the bee to pet it! </p>
-    <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
-    <p id="userScore">Score: <span id="scoreValue">{{ score }}</span></p>
+  <div>
+    <a href="{% url 'home' %}" 
+      class="home-btn"
+    >
+      <i class="fas fa-home" style="margin-right: 4px;"></i>
+      Home
+    </a>
+    <a href="{% url 'habit_tracker' %}" 
+      class="home-btn"
+    >
+      <i class="fas fa-home" style="margin-right: 4px;"></i>
+      Track Habits
+    </a>
+    <a href="{% url 'leaderboard' %}" 
+      class="home-btn"
+    >
+      <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+      Leaderboard
+    </a>
+  </div>
+
+  <div id="beeemotions" class="pixel-box">
+    <div class="content">
+        <h2>Meet Steve!</h2>
+        <h3>Click on the bee to pet it! </h3>
+        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+        <div class="health-bar">
+            <div id="health" class="health"></div>
+            <span class="heart">❤</span>
+        </div>
+        <p id="userScore">Score: <span id="scoreValue">{{ score }}</span></p>
+    </div>
     <script>
-      var happyImagePath = "{% static 'img/happybee.png' %}";
-      var sadImagePath = "{% static 'img/sadbee.png' %}";
-      var mehImagePath = "{% static 'img/mehbee.png' %}";
-      var petImagePath = "{% static 'img/petbee.png' %}";
+        var happyImagePath = "{% static 'img/happybee.png' %}";
+        var sadImagePath = "{% static 'img/sadbee.png' %}";
+        var mehImagePath = "{% static 'img/mehbee.png' %}";
+        var petImagePath = "{% static 'img/petbee.png' %}";
+
+        function updateHealthBar(score) {
+            const healthBar = document.getElementById('health');
+            healthBar.style.width = score + '%';
+        }
+
+        // Call the updateHealthBar function with the initial score
+        updateHealthBar({{ score }});
     </script>
     <script src="{% static 'js/beeemotions.js' %}"></script>
     <script>
-      // Call the emotion function from beeemotions.js
-      emotion({{ score }});
+        // Call the emotion function from beeemotions.js
+        emotion({{ score }});
     </script>
   </div>
+
+
   
   <div class="popup">
     <div id="closeButton" onclick="close">&times;</div>

@@ -7,6 +7,7 @@
   vertical-align: baseline;
   background: transparent;
   overflow: hidden;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 body {
@@ -19,12 +20,13 @@ body {
 
 
 h1{
-  text-align: center; 
+  text-align: left; 
   font-weight: 200;
   font-size: 80px;
-  border: solid black;
-  background-color: rgb(255, 249, 142);
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /* border: solid black;
+  background-color: rgb(255, 249, 142); */
+  font-family: "Pixelify Sans", sans-serif;
+  white-space: nowrap;
 }
 h1 span{
   display: block;
@@ -147,20 +149,84 @@ li.over {
 }
 
 #beeemotions {
-  border: 10px solid #FF0000;
-  display: inline-block;
-  padding: 5px;
-  box-sizing: border-box;
   position: absolute;
-  top: 50%; 
-  right: 20px;
+  top: 50%;
+  right: 40px;
   transform: translateY(-50%);
-  border-radius: 20px; 
+  border-radius: 20px;
   background-color: #FFFFCC;
   height: 550px;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 8px solid rgb(84, 60, 40); /* Adding the pixelated border directly to #beeemotions */
+  clip-path: polygon(
+    0px 16px,
+    16px 16px,
+    16px 0px,
+    calc(100% - 16px) 0px,
+    calc(100% - 16px) 16px,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    16px calc(100% - 16px),
+    0 calc(100% - 16px)
+  );
+  display: flex; /* Add flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
 }
 
 #beeemotions img {
   width: 400px !important;
   height: 400px !important;
+}
+
+#beeemotions h2,
+#beeemotions h3 {
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center text */
+}
+
+.health-bar {
+  width: 300px;
+  height: 30px;
+  border: 1px solid #000000;
+  border-radius: 15px; /* Adjust the value to change the roundness */
+  position: relative;
+  margin: 50px auto;
+  overflow: hidden; /* This is to ensure rounded corners are applied properly */
+}
+
+.health {
+  height: 100%;
+  background-color: #4CAF50;
+  width: 100%;
+  transition: width 0.3s ease-in-out;
+  border-radius: 14px; /* Adjust the value to match the health bar's border-radius */
+}
+
+.heart {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-size: 20px;
+}
+
+.home-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  background: linear-gradient(to right, #3f34db, #3f34db);
+  color: #fff;
+  border: none;
+  font-family: "Pixelify Sans", sans-serif;
+  border-radius: 8px;
 }
