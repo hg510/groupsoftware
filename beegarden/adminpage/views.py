@@ -25,8 +25,8 @@ def adminPage(request):
                     if daily_score >= 50:
                         award_seeds_to_user(admin_request.user)
 
-                    # Delete the request
-                    admin_request.delete()
+                # Delete the request
+                admin_request.delete()
 
                 # Redirect to admin page
                 return redirect('custom_admin')
