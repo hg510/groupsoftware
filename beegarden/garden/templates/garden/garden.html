@@ -28,7 +28,22 @@
     </ul>
   </div>
 
-  <div>
+<div class="popup">
+  <div id="closeButton" onclick="close">&times;</div>
+  <p>
+    This is a popup window!
+    information about the plant...
+  </p>  
+  <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+</div>
+
+<div class="learn">
+  Click on the plants to learn more!
+</div>
+
+<script src="{% static 'javascript/script.js' %}"></script>
+<script src="{% static 'javascript/popup.js' %}"></script>
+  
     <a href="{% url 'home' %}" 
       class="home-btn"
     >

@@ -148,6 +148,14 @@ li.over {
   cursor: pointer;
 }
 
+.learn {
+  font-size: large;
+  margin-top: 470px;
+  margin-left: 310px;
+  background-color: rgb(255, 249, 142);
+  width: 270px;
+}
+
 #beeemotions {
   position: absolute;
   top: 50%;
