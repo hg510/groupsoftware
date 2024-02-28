@@ -5,7 +5,7 @@ from adminpage.views import adminPage
 
 urlpatterns = [
     # URL pattern for the Django admin site
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     # URL patterns for other app functionalities
     path("account/", include("accounts.urls")),

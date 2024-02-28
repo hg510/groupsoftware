@@ -45,12 +45,14 @@ def adminPage(request):
         # If user is not admin, redirect to home page or show an error message
         return render(request, 'home.html', {'error_message': 'You are not authorized to access this page'})
 
+
 def calculate_daily_score(user):
     today = timezone.now().date()
     habits = Habit.objects.filter(user=user, date_created__date=today)
     daily_score = sum([10 for habit in habits])
 
     return daily_score
+
 
 def award_seeds_to_user(user):
     seed_type = "Example Seed"  # Specify the type of seed to award
