@@ -17,7 +17,7 @@ def adminPage(request):
 
         if request.method == 'POST':
             if form_submitted:
-                return render(request, 'adminPage.html', {'form_submitted': True})
+                return render(request, 'admin.html', {'form_submitted': True})
 
             request_id = request.POST.get('request_id')
             accepted = request.POST.get('accepted') == 'on'
@@ -28,7 +28,7 @@ def adminPage(request):
             # Delete request
             delete_request(request_id)
 
-        return render(request, 'adminPage.html', {'form_submitted': form_submitted})
+        return render(request, 'admin.html', {'form_submitted': form_submitted})
     return render(request, 'home.html')
 
 def delete_request(request_id):
@@ -37,7 +37,6 @@ def delete_request(request_id):
         goal_request.delete()
     except Request.DoesNotExist:
         pass  # Handle the case where the request does not exist gracefully
-
 
 
 
