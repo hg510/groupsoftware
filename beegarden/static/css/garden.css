@@ -155,7 +155,7 @@ li.over {
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
-  height: 550px;
+  height: 650px;
   padding: 5px;
   box-sizing: border-box;
   border: 8px solid rgb(84, 60, 40); /* Adding the pixelated border directly to #beeemotions */
@@ -194,10 +194,10 @@ li.over {
   width: 300px;
   height: 30px;
   border: 1px solid #000000;
-  border-radius: 15px; /* Adjust the value to change the roundness */
+  border-radius: 15px; 
   position: relative;
   margin: 50px auto;
-  overflow: hidden; /* This is to ensure rounded corners are applied properly */
+  overflow: hidden; 
 }
 
 .health {
@@ -205,7 +205,7 @@ li.over {
   background-color: #4CAF50;
   width: 100%;
   transition: width 0.3s ease-in-out;
-  border-radius: 14px; /* Adjust the value to match the health bar's border-radius */
+  border-radius: 14px;
 }
 
 .heart {
@@ -215,6 +215,34 @@ li.over {
   right: 10px;
   font-size: 20px;
 }
+
+.pet-bar {
+  width: 300px;
+  height: 30px;
+  border: 1px solid #000000;
+  border-radius: 15px; 
+  position: relative;
+  margin: 50px auto;
+  overflow: hidden; 
+}
+
+.pet {
+  height: 100%;
+  background-color: #b32560;
+  width: 100%;
+  transition: width 0.3s ease-in-out;
+  border-radius: 14px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-size: 20px;
+}
+
+
 
 .home-btn {
   display: inline-block;
