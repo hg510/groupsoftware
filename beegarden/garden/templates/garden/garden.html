@@ -1,38 +1,55 @@
-{% load static %}
+  {% load static %}
 
-<div class="holder">
-  <h1>Virtual Garden</h1>
-  <link rel="stylesheet" href="{% static 'css/garden.css' %}">
-  <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-  <div id="bin">
-    <div class="small-square" id="square1">
+  <div class="holder">
+    <h1>Virtual Garden</h1>
+    <link rel="stylesheet" href="{% static 'css/garden.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+    <div id="bin">
+      <div class="small-square" id="square1">
+      </div>
+      <div class="small-square" id="square2">
+      </div>
+      <div class="small-square" id="square3">
+      </div>
+      <div class="small-square" id="square4">
+      </div>
+      <div class="small-square" id="square5">
+      </div>
+      <div class="small-square" id="square6">
+      </div> 
     </div>
-    <div class="small-square" id="square2">
-    </div>
-    <div class="small-square" id="square3">
-    </div>
-    <div class="small-square" id="square4">
-    </div>
-    <div class="small-square" id="square5">
-    </div>
-    <div class="small-square" id="square6">
-    </div> 
+    <ul>
+      <li id="draggable-container">
+          <img draggable="true" src="{% static 'img/seeds.png' %}" id="one">
+      </li>
+    </ul>
   </div>
-  <ul>
-    <li id="draggable-container">
-        <img draggable="true" src="{% static 'img/seeds.png' %}" id="one">
-    </li>
-  </ul>
-</div>
 
-<div class="popup">
-  <div id="closeButton" onclick="close">&times;</div>
-  <p>
-    This is a popup window!
-    It is very shy and incomplete because it doesn't want to move above the squares i might just kms
-  </p>  
-  <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
-</div>
+  <div id="beeemotions">
+    <p>Click on the bee to pet it! </p>
+    <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+    <p id="userScore">Score: <span id="scoreValue">{{ score }}</span></p>
+    <script>
+      var happyImagePath = "{% static 'img/happybee.png' %}";
+      var sadImagePath = "{% static 'img/sadbee.png' %}";
+      var mehImagePath = "{% static 'img/mehbee.png' %}";
+      var petImagePath = "{% static 'img/petbee.png' %}";
+    </script>
+    <script src="{% static 'js/beeemotions.js' %}"></script>
+    <script>
+      // Call the emotion function from beeemotions.js
+      emotion({{ score }});
+    </script>
+  </div>
+  
+  <div class="popup">
+    <div id="closeButton" onclick="close">&times;</div>
+    <p>
+      This is a popup window!
+      It is very shy and incomplete because it doesn't want to move above the squares i might just kms
+    </p>  
+    <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+  </div>
 
-<script src="{% static 'js/script.js' %}"></script>
-<script src="{% static 'js/popup.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/popup.js' %}"></script>

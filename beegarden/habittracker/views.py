@@ -77,6 +77,9 @@ def habitTracker(request):
         else:
             increment_streak(user)
 
+        # Set the score in the session
+        request.session['total_score'] = total_score
+
     return render(request, 'habitTracker.html', {'form_submitted': form_submitted, 'score': total_score})
 
 
