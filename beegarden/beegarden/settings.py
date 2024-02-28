@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'habittracker',
     'garden',
     'leaderboard',
+    'adminpage',
 ]
 
 MIDDLEWARE = [

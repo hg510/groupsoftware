@@ -29,6 +29,13 @@
         style="margin-left: 10px;">
             Leaderboard
         </a>
+        <!-- Admin Page button -->
+        <a href="{% url 'adminpage' %}" 
+           role="button" 
+           class="btn btn-sm btn-secondary"
+           style="margin-left: 10px;">
+            Custom Admin Page
+        </a>
           <form action="{% url 'logout' %}" method="post">
             <span>Hi {{ user.username }}!</span>
             {% csrf_token %}
