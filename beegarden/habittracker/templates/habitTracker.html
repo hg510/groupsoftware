@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 <body>
 <h1>Habit Tracker</h1>
-
+<!--Stops the user from submitting more than once per day-->
 {% if form_submitted %}
 <div class="home-btn-container">
     <a href="{% url 'home' %}" class="home-btn">
@@ -48,6 +48,7 @@
                 Leaderboard
             </a>
         </div>
+        <!--Habits List-->
         {% csrf_token %}
         <fieldset>
             <legend>Daily Tasks</legend>
