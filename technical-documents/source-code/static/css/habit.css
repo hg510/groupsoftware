@@ -1,0 +1,151 @@
+/* Author: Iona Cessford */
+
+body {
+    font-family: "Pixelify Sans", sans-serif;
+    background: linear-gradient(to bottom, #1E90FF, #239F02);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
+    position: relative;
+    height:100vh;
+}
+
+.container {
+    max-width: 975px; /* Limit container width */
+    margin: 0 auto; /* Center container horizontally */
+    padding: 20px; /* Add padding inside container */
+}
+fieldset {
+    border: 2px solid #fff !important;
+    border-radius: 10px;
+}
+legend {
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+}
+
+h1 {
+    color: #000; /* Gold color for headings */
+    font-size: 36px; /* Increase font size */
+    text-align: center; /* Center align headings */
+    margin-bottom: 0px; /* Add margin below headings */
+}
+
+p {
+    color: #ffffff; /* White color for paragraphs */
+    font-size: 18px; /* Font size for paragraphs */
+    line-height: 1.5; /* Increase line height for readability */
+}
+
+label {
+    font-size: 16px;
+    color: #000; /* Gold color for labels */
+    margin-right: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px; 
+    accent-color: #239F02;
+}
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background: linear-gradient(to right, #3f34db, #3f34db);
+    color: #fff;
+    border: none;
+    font-family: "Pixelify Sans", sans-serif;
+    border-radius: 8px;
+}
+.submit-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    color: #000;
+    border: none;
+    font-family: "Pixelify Sans", sans-serif;
+    border-radius: 8px;
+}
+.reset-btn {
+    font-family: "Pixelify Sans", sans-serif;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background: linear-gradient(to right, #3498db, #cb5612);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+}
+
+.checkbox-label {
+    display: inline-block; /* Display checkboxes inline */
+    margin-bottom: 10px; /* Add spacing between checkboxes */
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none; /* Hide default checkboxes */
+}
+
+.checkbox-label span {
+    display: inline-block; /* Display spans inline */
+    width: 20px; /* Set width of custom checkboxes */
+    height: 20px; /* Set height of custom checkboxes */
+    border: 2px solid #ffd700; /* Gold border for custom checkboxes */
+    background-color: transparent; /* Transparent background */
+    margin-right: 10px; /* Add spacing between checkbox and label */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.checkbox-label span::after {
+    content: ""; /* Add content after spans */
+    display: none; /* Hide content by default */
+    width: 10px; /* Set width of checkmark */
+    height: 5px; /* Set height of checkmark */
+    border: solid #ffd700; /* Gold color for checkmark */
+    border-width: 0 2px 2px 0; /* Set checkmark shape */
+    transform: rotate(45deg); /* Rotate checkmark */
+}
+
+.checkbox-label input[type="checkbox"]:checked + span::after {
+    display: block; /* Show checkmark when checkbox is checked */
+}
+
+.form-group {
+    background: linear-gradient(to bottom, #d3db34, #2ecc71);
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 8px;
+}
+
+.center {
+    text-align: center;
+}
+.submitted-form {
+    background: linear-gradient(to right, #2ecc71, #2ecc71);
+    padding: 10px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 8px;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}

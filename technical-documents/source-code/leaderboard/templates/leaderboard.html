@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="home-btn-container">
+        <a href="{% url 'home' %}" class="home-btn">
+            <i class="fas fa-home" style="margin-right: 4px;"></i>
+            Home
+        </a>
+        <a href="{% url 'habit_tracker' %}" class="home-btn">
+            <i class="fas fa-home" style="margin-right: 4px;"></i>
+            Track Habits
+        </a>
+        <a href="{% url 'leaderboard' %}" class="home-btn">
+            <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
+            Leaderboard
+        </a>
+    </div>
+
+    <div class="leaderboard">
+        <h2>Leaderboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player's Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_score in user_scores %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ user_score.user.username }}</td>
+                    <td>{{ user_score.score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>            
+        </table>
+    </div>
+</body>
+</html>

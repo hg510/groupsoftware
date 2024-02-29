@@ -1,0 +1,35 @@
+<!-- Author Iona Cessford -->
+{% load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <title>Admin Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>User request Administration Page </h1>
+<!-- Display pending requests -->
+{% if pending_requests %}
+<form method="post">
+    {% csrf_token %}
+    {% for request in pending_requests %}
+    <fieldset>
+        <input type="hidden" name="request_id" value="{{ request.id }}">
+        <p>User {{ request.user.username }} has a request: {{ request.goal }}</p>
+        <label for="accept">Accept their request?</label>
+        <input type="checkbox" name="accept" id="accept" value="1">
+    </fieldset>
+    {% endfor %}
+    <input type="submit" value="Submit now">
+    <input type="reset" value="Clear form">
+</form>
+{% else %}
+    <p>There are no pending requests.</p>
+{% endif %}
+</body>
+</html>
+

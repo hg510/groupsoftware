@@ -1,0 +1,50 @@
+/* Author: Aisha Farouk */
+
+.body-login {
+    background-image: url('../img/login-background.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height:100vh;
+    background-size: cover;
+}
+.login-container {
+    padding-top: 100px;
+    width: 100%;
+}
+.body-register {
+    background-image: url('../img/register-background.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100vh;
+    background-size: cover;
+}
+.register-container {
+    padding-top: 50px;
+    width: 100%;
+}
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #11ab7c !important;
+    border-color: #11ab7c !important;
+}
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:visited,
+.btn-secondary:focus {
+    background-color: #005ad4 !important;
+    border-color: #005ad4 !important;
+}
+.section-header {
+    position: relative;
+    padding-top: 5rem;
+}
+.navbar {
+    background-color: #fff;
+}
+body {
+    font-family: "Pixelify Sans", sans-serif;
+}
