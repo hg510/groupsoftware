@@ -17,10 +17,7 @@ class Habit(models.Model):
     community_cleanups = models.BooleanField(default=False)
     reduce_food_waste = models.BooleanField(default=False)
     public_transportation = models.BooleanField(default=False)
-    turn_off_lights = models.BooleanField(default=False)
-    
-    # This field functions as a simple flag to indicate whether each habit submission form has been reviewed and approved
-    approved = models.BooleanField(default=False)
+    turn_off_lights = models.BooleanField(default=False)    
 
     # Add a field for date created
     date_created = models.DateTimeField(auto_now_add=True)
