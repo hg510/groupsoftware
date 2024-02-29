@@ -1,3 +1,5 @@
+// Author: Saida Amirova
+
 var popupOpened = {};
 
 /* This function makes the hidden popup visible and shows it over the plant boxes. */

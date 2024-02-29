@@ -1,3 +1,5 @@
+// Author: Saida Amirova
+
 // setting the main view point as Exeter Streatham Campus
 var map = L.map('map', {
 }).setView([50.734663728, -3.534497862], 13);

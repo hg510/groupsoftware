@@ -1,3 +1,5 @@
+# Author: Saida Amirova 
+
 from django.shortcuts import render
 
 def map(request):

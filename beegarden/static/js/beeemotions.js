@@ -1,3 +1,5 @@
+// Author: Iona Cessford and Nur Deeni
+
 var beeImage = document.getElementById('beeImage');
 
 // Function to update the pet bar

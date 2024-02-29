@@ -1,3 +1,5 @@
+# Author: Nur Deeni
+
 from django.apps import AppConfig
 
 class GardenConfig(AppConfig):

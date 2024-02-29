@@ -1,3 +1,5 @@
+# Author: Nur Deeni
+
 from django.shortcuts import render
 from habittracker.models import UserScore
 

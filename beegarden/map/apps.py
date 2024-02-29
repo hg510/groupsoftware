@@ -1,3 +1,5 @@
+# Author: Saida Amirova 
+
 from django.apps import AppConfig
 
 

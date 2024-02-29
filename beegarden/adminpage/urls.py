@@ -1,4 +1,4 @@
-# app/urls.py
+# Author: Pawarisa Saiyut
 
 from django.urls import path
 from .views import adminPage

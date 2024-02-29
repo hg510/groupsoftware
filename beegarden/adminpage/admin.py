@@ -1,4 +1,4 @@
-# adminpage/admin.py
+# Author: Pawarisa Saiyut
 
 from django.contrib import admin
 from .models import Request, Response

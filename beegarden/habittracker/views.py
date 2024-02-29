@@ -1,3 +1,5 @@
+# Author: Nur Deeni
+
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from .models import Habit, UserScore

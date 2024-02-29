@@ -1,4 +1,4 @@
-# garden/urls.py
+# Author: Nur Deeni
 
 from django.urls import path
 from . import views

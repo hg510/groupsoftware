@@ -1,4 +1,4 @@
-# app/urls.py
+# Author: Harry Gimmie
 
 from django.urls import path
 from .views import habitTracker

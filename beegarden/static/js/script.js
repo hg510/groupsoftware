@@ -1,84 +1,115 @@
-// Attach event listeners to DOM elements
+// Author: Nur Deeni
+
+// This function ensures cross-browser compatibility for attaching event listeners to DOM elements.
 var addEvent = (function () {
-  if (document.addEventListener) {
-      return function (el, type, fn) {
-          if (el && el.nodeName || el === window) {
-              el.addEventListener(type, fn, false);
-          } else if (el && el.length) {
-              for (var i = 0; i < el.length; i++) {
-                  addEvent(el[i], type, fn);
-              }
-          }
-      };
-  } else {
-      return function (el, type, fn) {
-          if (el && el.nodeName || el === window) {
-              el.attachEvent('on' + type, function () { return fn.call(el, window.event); });
-          } else if (el && el.length) {
-              for (var i = 0; i < el.length; i++) {
-                  addEvent(el[i], type, fn);
-              }
-          }
-      };
-  }
+    // Checks if the browser supports the standard event listener interface
+    if (document.addEventListener) {
+        // Returns a function for adding event listeners using the standard interface
+        return function (el, type, fn) {
+            // Checks if the target element is a single DOM node or the window object
+            if (el && el.nodeName || el === window) {
+                // Attaches the event listener to the target element
+                el.addEventListener(type, fn, false);
+            } else if (el && el.length) {
+                // If the target is a collection of elements, iterates over each element and attaches the event listener
+                for (var i = 0; i < el.length; i++) {
+                    addEvent(el[i], type, fn);
+                }
+            }
+        };
+    } else {
+        // If the browser does not support the standard interface, returns a function for attaching event listeners using the old IE interface
+        return function (el, type, fn) {
+            // Checks if the target element is a single DOM node or the window object
+            if (el && el.nodeName || el === window) {
+                // Attaches the event listener to the target element
+                el.attachEvent('on' + type, function () { return fn.call(el, window.event); });
+            } else if (el && el.length) {
+                // If the target is a collection of elements, iterates over each element and attaches the event listener
+                for (var i = 0; i < el.length; i++) {
+                    addEvent(el[i], type, fn);
+                }
+            }
+        };
+    }
 })();
 
-var eat = ['yum!', 'gulp', 'burp!', 'nom'];
+// Creates a paragraph element
 var yum = document.createElement('p');
+// Detects whether the browser is Internet Explorer
 var msie = /*@cc_on!@*/0;
+// Sets the opacity of the paragraph element to 1
 yum.style.opacity = 1;
 
+// Selects all image elements within list items of unordered lists
 var images = document.querySelectorAll('ul li img');
 
+// Iterates over each image element
 for (var i = 0; i < images.length; i++) {
     var img = images[i];
     
+    // Makes each image draggable
     img.setAttribute('draggable', 'true');
     
+    // Adds a dragstart event listener to each image element
     img.addEventListener('dragstart', function (e) {
-        e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be droppable
-        e.dataTransfer.setData('Text', this.src); // Set image source as drag data
+        // Sets the effect allowed for the drag operation to 'copy'
+        e.dataTransfer.effectAllowed = 'copy';
+        // Sets the source of the dragged data to the source URL of the image
+        e.dataTransfer.setData('Text', this.src);
     });
 }
 
+// Selects all elements with the class 'small-square'
 var smallSquares = document.querySelectorAll('.small-square');
 
+// Iterates over each element with the class 'small-square'
 for (var i = 0; i < smallSquares.length; i++) {
     var square = smallSquares[i];
     
+    // Adds a dragover event listener to each 'small-square' element
     square.addEventListener('dragover', function (e) {
-        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        // Prevents the default dragover behavior
+        if (e.preventDefault) e.preventDefault();
+        // Adds the 'over' class to the element to indicate it's being dragged over
         this.classList.add('over');
+        // Sets the drop effect to 'copy'
         e.dataTransfer.dropEffect = 'copy';
+        // Returns false to indicate the drop target is valid
         return false;
     });
 
-    // to get IE to work
+    // Adds a dragenter event listener to each 'small-square' element
     square.addEventListener('dragenter', function (e) {
+        // Adds the 'over' class to the element to indicate it's being dragged over
         this.classList.add('over');
+        // Returns false to indicate the drop target is valid
         return false;
     });
 
+    // Adds a dragleave event listener to each 'small-square' element
     square.addEventListener('dragleave', function () {
+        // Removes the 'over' class from the element when the dragged item leaves
         this.classList.remove('over');
     });
 
+    // Adds a drop event listener to each 'small-square' element
     square.addEventListener('drop', function (e) {
-        if (e.stopPropagation) e.stopPropagation(); // stops the browser from redirecting
+        // Prevents the default drop behavior
+        if (e.stopPropagation) e.stopPropagation();
         
-        var imageUrl = e.dataTransfer.getData('Text'); // Get the image source from drag data
+        // Retrieves the image URL from the dragged data
+        var imageUrl = e.dataTransfer.getData('Text');
         
-        // Create a new image element and set its source to the dropped image
+        // Creates a new image element and sets its source to the dropped image URL
         var droppedImage = new Image();
         droppedImage.src = imageUrl;
         
-        // Append the dropped image to the square
+        // Appends the dropped image to the square element
         this.appendChild(droppedImage);
         
-        // Replace the dropped image with a new image
+        // Creates a new image element based on the square ID
         var newImage = new Image();
-        // Get the id of the square to determine which image to use
-        
         var squareId = this.id;
         switch(squareId) {
             case 'square1':
@@ -101,19 +132,15 @@ for (var i = 0; i < smallSquares.length; i++) {
                 break;
         }
      
-        // Replace the dropped image with the new image
+        // Replaces the dropped image with the new image
         this.replaceChild(newImage, droppedImage);
         
-        // Update the content of the yum element with a random string from the eat array
-        yum.innerHTML = eat[Math.floor(Math.random() * eat.length)];
-        
-        // Create a clone of the yum element
+        // Clones the 'yum' element
         var yumClone = yum.cloneNode(true);
-        
-        // Append the yum clone to the square
+        // Appends the cloned 'yum' element to the square
         this.appendChild(yumClone);
         
-        // Set up the fade effect for the yum element clone
+        // Sets up a fading effect for the cloned 'yum' element
         setTimeout(function () {
             var opacity = 1;
             var fadeInterval = setInterval(function () {
@@ -126,7 +153,7 @@ for (var i = 0; i < smallSquares.length; i++) {
             }, 50);
         }, 250);
 
-        // Prevent default behavior
+        // Returns false to indicate the drop operation is complete
         return false;
     });
 }

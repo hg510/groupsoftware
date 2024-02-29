@@ -1,3 +1,5 @@
+# Author: Pawarisa Saiyut
+
 from django.shortcuts import render
 from habittracker.models import UserScore  
 from .models import LeaderboardEntry
