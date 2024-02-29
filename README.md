@@ -22,7 +22,7 @@ trello link: [https://trello.com/b/Za0j0OfJ/group-software-engineering]
 
 We have also taken regular snapshots of the kanban board in trello to archive our progress. These are held in the repository below.
 
-[./process-documents/kanban-snapshot/](./process-documents/kanban-snapshot/)
+[./process-documents/kanban-snapshots/](./process-documents/kanban-snapshots/)
 
 Within process documents we have also included the meeting notes, agenda and minutes. These will be found in the repository below.
 
