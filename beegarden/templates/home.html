@@ -42,9 +42,9 @@
                 <a class="nav-link" href="{% url 'map' %}">Map</a>
               </li>
               <!-- Admin page not working yet -->
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminpage' %}">Admin</a>
-              </li> -->
+              </li>
             </ul>
             <form action="{% url 'logout' %}" method="post">
               <span>Hi {{ user.username }}!</span>
