@@ -2,7 +2,7 @@
 
 from django.utils import timezone
 from django.shortcuts import render, redirect
-from .models import Request, Response
+from .models import Request, Response, Habit
 from garden.models import Seed
 
 def adminPage(request):
@@ -31,7 +31,8 @@ def adminPage(request):
                 admin_request.delete()
 
                 # Redirect to admin page
-                return redirect('custom_admin')
+                # return redirect('custom_admin')
+                return redirect('adminpage')
 
             except Request.DoesNotExist:
                 # Handle case where request does not exist

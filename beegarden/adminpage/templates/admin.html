@@ -14,7 +14,8 @@
     <h1>User request Administration Page </h1>
 <!-- Display pending requests -->
 {% if pending_requests %}
-<form method="post">
+<!-- <form method="post"> -->
+<form action="{% url 'adminpage' %}" method="post">
     {% csrf_token %}
     {% for request in pending_requests %}
     <fieldset>
