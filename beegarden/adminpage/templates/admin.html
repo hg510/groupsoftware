@@ -31,6 +31,17 @@
 {% else %}
     <p>There are no pending requests.</p>
 {% endif %}
+
+    <!-- Display habit forms -->
+    {% for form in habit_forms %}
+    <fieldset>
+        <p>User {{ form.request.user.username }} has completed {{ form.habits_completed }} habits.</p>
+        {% if form.habits_completed >= 4 %}
+            <label for="accept">Accept their request?</label>
+            <input type="checkbox" name="accept" id="accept" value="{{ form.request.id }}">
+        {% endif %}
+    </fieldset>
+    {% endfor %}
 </body>
 </html>
 
