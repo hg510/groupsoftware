@@ -28,6 +28,10 @@ function pet(path) {
   beeImage.addEventListener('click', function() {
       // Change the image source to the pet image
       beeImage.src = petImagePath;
+
+      // Create an audio element for the pet sound
+      var petSound = new Audio('/static/sound/steve_giggle.wav');
+      petSound.play();
   
       setTimeout(function() {
           beeImage.src = path;
@@ -89,9 +93,7 @@ var beeImage = document.getElementById('beeImage');
     } else {
       pet(mehImagePath);
     }
-  }  
-
-
+  }
 
 // //chabges background based on season
 // var currentdate = new Date();

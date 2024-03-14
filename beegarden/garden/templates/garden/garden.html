@@ -2,6 +2,11 @@
   
   {% load static %}
 
+  <audio autoplay loop>
+    <source src="{% static 'sound/default_music.wav' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/garden.css' %}">
   <link rel="stylesheet" href="{% static 'css/popup.css' %}">
@@ -24,34 +29,37 @@
       <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
       Leaderboard
     </a>
-  
+
   <div class="holder">
     <h1>Virtual Garden</h1>
     <div id="bin">
-      <div class="small-square" id="square1">
-      </div>
-      <div class="small-square" id="square2">
-      </div>
-      <div class="small-square" id="square3">
-      </div>
-      <div class="small-square" id="square4">
-      </div>
-      <div class="small-square" id="square5">
-      </div>
-      <div class="small-square" id="square6">
-      </div> 
+        <div class="small-square" id="square1"></div>
+        <div class="small-square" id="square2"></div>
+        <div class="small-square" id="square3"></div>
+        <div class="small-square" id="square4"></div>
+        <div class="small-square" id="square5"></div>
+        <div class="small-square" id="square6"></div>
+        <div class="small-square" id="square7"></div>
+        <div class="small-square" id="square8"></div>
+        <div class="small-square" id="square9"></div>
+        <div class="small-square" id="square10"></div>
     </div>
     <ul>
-      <li id="draggable-container">
-          <img draggable="true" src="{% static 'img/seeds.png' %}" id="one">
-      </li>
+        <li id="draggable-container">
+            <img draggable="true" src="{% static 'img/seeds/betony_seed.png' %}" data-seedType="betony" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/chamomile_seed.png' %}" data-seedType="chamomile" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/hops_seed.png' %}" data-seedType="hops" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/lavender_seed.png' %}" data-seedType="lavender" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/passion_seed.png' %}" data-seedType="passion" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/skullcap_seed.png' %}" data-seedType="skullcap" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/stjohn_seed.png' %}" data-seedType="stjohn" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/valerian_seed.png' %}" data-seedType="valerian" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/vervain_seed.png' %}" data-seedType="vervain" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/viper_seed.png' %}" data-seedType="viper" class="seed">
+        </li>
     </ul>
-  </div>
+</div>
 
-    <div class="learn">
-      Click on the plants to learn more!
-    </div>
-  
   <div id="beeemotions" class="pixel-box">
       <div class="content">
         <h2>Meet Steve!</h2>
@@ -89,14 +97,10 @@
       </div>
     </div>
 
-  <div class="popup">
-    <div id="closeButton" onclick="close">&times;</div>
-    <p>
-      This is a popup window!
-      information about the plant...
-    </p>  
-    <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
-  </div>
+    <div class="popup">
+      <div id="closeButton" onclick="closePopup()">&times;</div>
+      <div id="flowerInfo"></div>
+      <img id="flowerPopupImages" class="real-plant" src="" alt="flower">
+    </div>    
 
-  <script src="{% static 'js/script.js' %}"></script>
-  <script src="{% static 'js/popup.js' %}"></script>
+  <script src="{% static 'js/plant.js' %}"></script>
