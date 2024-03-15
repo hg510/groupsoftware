@@ -5,8 +5,10 @@ from django.shortcuts import render, redirect
 from .models import HabitRequest, ResponseRequest, Habit  # Updated imports
 from garden.models import Seed
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.db.models import Count
 from django.template import RequestContext
+from adminpage.models import HabitRequest, ResponseRequest
 
 def adminPage(request):
     user = request.user
@@ -18,11 +20,13 @@ def adminPage(request):
             accept = request.POST.get('accept') == '1'
 
             try:
-                # Get the corresponding HabitRequest object
-                admin_habit_request = HabitRequest.objects.get(id=habit_request_id)  # Updated variable and model
+                admin_habit_request = HabitRequest.objects.get(id=habit_request_id)
+                ResponseRequest.objects.create(habit_request=admin_habit_request, accepted=accept)
+                # # Get the corresponding HabitRequest object
+                # admin_habit_request = HabitRequest.objects.get(id=habit_request_id)  # Updated variable and model
 
-                # Create a ResponseRequest object
-                response = ResponseRequest.objects.create(habit_request=admin_habit_request, accepted=accept)  # Updated model
+                # # Create a ResponseRequest object
+                # response = ResponseRequest.objects.create(habit_request=admin_habit_request, accepted=accept)  # Updated model
 
                 # Award seeds if request is accepted and daily score is over 40
                 if accept:
@@ -32,39 +36,31 @@ def adminPage(request):
 
                 # Delete the habit request
                 admin_habit_request.delete()
-
-                # Redirect to admin page
+                messages.success(request, "Habit request processed successfully.")
                 return redirect('adminpage')
 
-            except HabitRequest.DoesNotExist:  # Updated model
-                # Handle case where HabitRequest does not exist
-                error_message = 'Invalid request ID'
-                pending_habit_requests = HabitRequest.objects.all()  # Updated variable and model
 
-                habit_forms = []
-                for habit_request in pending_habit_requests:  # Renamed variable for clarity
-                    habits_completed = Habit.objects.filter(user=habit_request.user).count()
-                    if habits_completed >= 4:
-                        habit_forms.append({'request': habit_request, 'habits_completed': habits_completed})
-                context = {'habit_forms': habit_forms}
-                return render(request, 'admin.html', context)
+            except HabitRequest.DoesNotExist:
+                messages.error(request, "Invalid request ID. Please try again.")
+                return redirect('adminpage')
 
         else:
-            # Retrieve pending HabitRequests
-            pending_habit_requests = HabitRequest.objects.all()  # Updated variable and model
+            pending_habit_requests = HabitRequest.objects.all()
 
-            # Filter habit forms to include only those with at least 4 tasks completed
-            habit_forms = []
-            for habit_request in pending_habit_requests:  # Renamed variable for clarity
-                habits_completed = Habit.objects.filter(user=habit_request.user).count()
-                if habits_completed >= 4:
-                    habit_forms.append({'request': habit_request, 'habits_completed': habits_completed})
+            habit_forms = [{
+                'request': habit_request,
+                'habits_completed': Habit.objects.filter(user=habit_request.user).count()
+            } for habit_request in pending_habit_requests if Habit.objects.filter(user=habit_request.user).count() >= 4]
+
+            if not habit_forms:
+                messages.info(request, "No habit forms available for review at the moment.")
 
             context = {'habit_forms': habit_forms}
-            return render(request, 'admin.html', context)  
-
-        # If user is not admin, redirect to home page or show an error message
-        return render(request, 'home.html', {'error_message': 'You are not authorized to access this page'})
+            return render(request, 'admin.html', context)
+ 
+    else:
+        # messages.error(request, "You are not authorized to access this page.")
+        return redirect('home')  # Assuming 'home' is the name of your homepage URL pattern
 
 def calculate_daily_score(user):
     today = timezone.now().date()

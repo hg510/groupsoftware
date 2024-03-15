@@ -9,6 +9,7 @@ class HabitRequest(models.Model):
     goal = models.CharField(max_length=150, verbose_name="Goal")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='habit_requests', verbose_name="User")
     habit = models.ForeignKey(Habit, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Habit")
+    reviewed = models.BooleanField(default=False, verbose_name="Reviewed")
 
     class Meta:
         verbose_name = "Habit Request"
