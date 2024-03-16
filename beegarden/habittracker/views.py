@@ -3,6 +3,7 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from .models import Habit, UserScore
+from adminpage.models import HabitRequest, ResponseRequest
 
 # Manages habit tracking submissions and updates user scores and streaks.
 def habitTracker(request):
@@ -83,6 +84,15 @@ def habitTracker(request):
             reset_streak(user)
         else:
             increment_streak(user)
+
+        # Create a HabitRequest instance for this submission
+        HabitRequest.objects.create(
+            user=user,
+            habit=habit,
+            goal="Review my daily habits",
+            reviewed=False
+        )
+
 
         # Set the score in the session
         request.session['total_score'] = total_score
