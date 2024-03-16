@@ -1,11 +1,14 @@
 // Author: Nur Deeni
 
+// const { flow } = require("lodash");
+
 // This function ensures cross-browser compatibility for attaching event listeners to DOM elements.
 
 document.addEventListener("DOMContentLoaded", function() {
 
     console.log("DOM plant content loaded");
     fetchPlantedSeeds();
+    randomSeed();
     
     var addEvent = (function () {
         if (document.addEventListener) {
@@ -354,3 +357,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var closeButton = document.getElementById('closeButton');
     closeButton.addEventListener('click', closePopup);
+
+    function randomSeed(){
+        const flowersArray = ["betony", "chamomile", "lavender", "passion", "stjohn", "valerian", "vervain", "viper"];
+
+        var chosenFlower = flowersArray[Math.floor(Math.random() * flowersArray.length)];
+
+        console.log("Chosen flower: ", chosenFlower);
+
+        return chosenFlower;
+    }
