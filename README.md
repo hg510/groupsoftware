@@ -47,45 +47,33 @@ The UI and design documents for the client have been archived under the link bel
 
 ## PRIVACY POLICY
 
-What data do we collect?
 Our website collects the following data:
 •	Email address
 •	Location data
 •	Activity data (in the habit tracker)
 
-How do we collect your data?
 You directly provide us with most of the data we collect. We collect data and process data when you:
 •	Register an account with our website online.
 •	Voluntarily complete a habit tracker form.
 •	Complete a location task by going to the given location.
 
-How will we use your data?
 We collect your data so that we can:
 •	Manage your account.
 •	Provide you with in-site rewards and leaderboard points.
 
-What are your data protection rights?
 We would like to make sure you are fully aware of all your data protection rights. Every user is entitled to the following:
 
-The right to access - You have the right to request copies of your personal data.
+•	The right to access - You have the right to request copies of your personal data.
+•	The right to rectification - You have the right to request that we correct any information you believe is inaccurate. You also have the right to request us to complete information you believe is incomplete.
+•	The right to erasure - You have the right to request that we erase your personal data, under certain conditions.
+•	The right to restrict processing - You have the right to request that we restrict the processing of your personal data, under certain conditions.
+•	The right to object to processing - You have the right to object to our processing of your personal data, under certain conditions.
+•	The right to data portability - You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.
 
-The right to rectification - You have the right to request that we correct any information you believe is inaccurate. You also have the right to request us to complete information you believe is incomplete.
-
-The right to erasure - You have the right to request that we erase your personal data, under certain conditions.
-
-The right to restrict processing - You have the right to request that we restrict the processing of your personal data, under certain conditions.
-
-The right to object to processing - You have the right to object to our processing of your personal data, under certain conditions.
-
-The right to data portability - You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.
-
-What are cookies?
 Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our websites, we may collect information from you automatically through cookies or similar technology.
 
 For further information, visit allaboutcookies.org.
 
-How do we use cookies?
 Our website uses cookies in order to keep you signed in.
 
-How to manage cookies
 You can set your browser not to accept cookies, and the above website tells you how to remove cookies from your browser. 
