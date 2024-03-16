@@ -83,13 +83,14 @@ map.on('locationfound', function(e) {
     }
 });
 
+// Function to update the user's score
 function updateScore() {
     // Retrieve the CSRF token from the HTML
     var csrftoken = getCookie('csrftoken');
 
-    // Send an AJAX request to your Django backend to update the user's score
+    // Send an AJAX request to update the user's score
     $.ajax({
-        url: '/map/seedMap/', // Replace with your endpoint URL
+        url: 'http://127.0.0.1:8000/map/seedMap/', // Endpoint URL to update the score
         method: 'POST',
         headers: {
             'X-CSRFToken': csrftoken  // Include the CSRF token in the headers
@@ -97,8 +98,15 @@ function updateScore() {
         data: {
             score_increment: 30  // Fixed score increment of 30 points
         },
-        success: function() {
-            console.log('Score updated successfully.');
+        success: function(response) {
+            if (response.success) {
+                console.log('Score updated successfully.');
+                // Handle success as needed
+                console.log('Current Score:', response.current_score);
+                console.log('Updated Score:', response.updated_score);
+            } else {
+                console.error('Error updating score:', response.error);
+            }
         },
         error: function(error) {
             console.error('Error updating score:', error);
@@ -121,7 +129,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
 
 
 // map.on('locationfound', function(e) {
