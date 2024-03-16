@@ -100,3 +100,15 @@
 
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/popup.js' %}"></script>
+
+  //changes the background seasonally
+  <script>
+  var winterPath = "{% static 'img/backgroundwinter.png' %}";
+  var springPath = "{% static 'img/backgroundspring.png' %}";
+  var summerPath = "{% static 'img/backgroundsummer.png' %}";
+  var autumnPath = "{% static 'img/backgroundautumn.png' %}";
+  </script>
+  <script src="{% static 'js/background.js' %}"></script>
+  <script>
+  changeBackground();
+  </script>
