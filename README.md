@@ -22,7 +22,7 @@ trello link: [https://trello.com/b/Za0j0OfJ/group-software-engineering]
 
 We have also taken regular snapshots of the kanban board in trello to archive our progress. These are held in the repository below.
 
-[./process-documents/kanban-snapshot/](./process-documents/kanban-snapshot/)
+[./process-documents/kanban-snapshots/](./process-documents/kanban-snapshots/)
 
 Within process documents we have also included the meeting notes, agenda and minutes. These will be found in the repository below.
 
@@ -41,10 +41,6 @@ We have also include the versioned source code for archiving.
 Technical documents are broken down into front end and back end etc.  
 
 ## PRODUCT DOCUMENTS
-Our product documents are primarily in the form of a product UI. Below is a link to our latest version.
-
-public link: [https://ibm/cloud/12i7dvgj/exeter-orienteering]
-
-The UI and design documents for the client have also been archived under the link below:
+The UI and design documents for the client have been archived under the link below:
 
 [./product-documents/UI/](./product-documents/UI/)
