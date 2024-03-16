@@ -34,8 +34,9 @@ def adminPage(request):
                     if daily_score >= 40:
                         award_seeds_to_user(admin_habit_request.user)
 
-                # Delete the habit request
-                admin_habit_request.delete()
+                # Instead of deleting, mark as reviewed
+                admin_habit_request.status = 'reviewed'
+                admin_habit_request.save()
                 messages.success(request, "Habit request processed successfully.")
                 return redirect('adminpage')
 
