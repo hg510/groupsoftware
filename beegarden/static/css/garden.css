@@ -58,10 +58,10 @@ li a {
   cursor: move;
 }
 
-img {
+img:not([id^="pot-image"]) {
   width: 100px; 
   height: auto; 
-} 
+}
 
 
 *[draggable=true] {
@@ -101,12 +101,11 @@ li.over {
 .small-square {
   width: 150px;
   height: 150px;
-  /* background-color: #ccc; */
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   position: absolute;
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #square1 {
@@ -114,9 +113,26 @@ li.over {
   left: 200px;
 }
 
+#pot-image-square1 {
+  position: absolute;  
+  top: 330px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
+  z-index: 1;
+}
+
 #square2 {
   top: 200px;
   left: 400px;
+}
+
+#pot-image-square2 {
+  position: absolute;  
+  top: 330px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square3 {
@@ -124,9 +140,25 @@ li.over {
   left: 600px;
 }
 
+#pot-image-square3 {
+  position: absolute;  
+  top: 330px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square4 {
   top: 400px;
   left: 200px;
+}
+
+#pot-image-square4 {
+  position: absolute;  
+  top: 330px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square5 {
@@ -134,9 +166,25 @@ li.over {
   left: 400px;
 }
 
+#pot-image-square5 {
+  position: absolute;  
+  top: 330px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square6 {
   top: 400px;
   left: 600px;
+}
+
+#pot-image-square6 {
+  position: absolute;  
+  top: 530px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square7 {
@@ -144,9 +192,25 @@ li.over {
   left: 800px;
 }
 
+#pot-image-square7 {
+  position: absolute;  
+  top: 530px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square8 {
   top: 400px;
   left: 800px;
+}
+
+#pot-image-square8 {
+  position: absolute;  
+  top: 530px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square9 {
@@ -154,10 +218,27 @@ li.over {
   left: 0px;
 }
 
+#pot-image-square9 {
+  position: absolute;  
+  top: 530px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square10 {
   top: 400px;
   left: 0px;
 }
+
+#pot-image-square10 {
+  position: absolute;  
+  top: 530px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
+}
+
 
 #draggable-container {
   position: fixed;
@@ -275,8 +356,6 @@ li.over {
   font-size: 20px;
 }
 
-
-
 .home-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -292,35 +371,7 @@ li.over {
   border-radius: 8px;
 }
 
-/* Author: Saida Amirova */
-
-.popup {
-  width: 15%; 
-  height: 50%;
-  background-color: rgb(255, 249, 142); 
-  border: black solid;   
-  position: relative; 
-  display: none;
-}
-
-#closeButton {
-  color: black;   
-  position: absolute;
-  left: 0;
-  cursor: pointer;
-}
-
-.real-plant {
-  height: 200px;
-  width: 200px;
-  border: black solid;
-  margin-left: 60%;
-  margin-right: 30%;
-  margin-top: 5%;
-}
-
-/* Styling for flower information */
-#flowerInfo {
-  font-size: 16px;
-  margin: 20px; /* Adjust margin as needed */
+.square-container {
+  position: relative;
+  display: inline-block;
 }
