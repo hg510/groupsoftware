@@ -60,16 +60,16 @@
     </div>
     <ul>
         <li id="draggable-container">
-            <img draggable="true" src="{% static 'img/seeds/betony_seed.png' %}" data-seedType="betony" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/chamomile_seed.png' %}" data-seedType="chamomile" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/hops_seed.png' %}" data-seedType="hops" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/lavender_seed.png' %}" data-seedType="lavender" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/passion_seed.png' %}" data-seedType="passion" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/skullcap_seed.png' %}" data-seedType="skullcap" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/stjohn_seed.png' %}" data-seedType="stjohn" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/valerian_seed.png' %}" data-seedType="valerian" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/vervain_seed.png' %}" data-seedType="vervain" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/viper_seed.png' %}" data-seedType="viper" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/betony_seed.png' %}" data-seedType="betony" data-flowerName="betony" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/chamomile_seed.png' %}" data-seedType="chamomile"  data-flowerName="chamomile" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/hops_seed.png' %}" data-seedType="hops" data-flowerName="hops" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/lavender_seed.png' %}" data-seedType="lavender" data-flowerName="lavender" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/passion_seed.png' %}" data-seedType="passion" data-flowerName="passion" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/skullcap_seed.png' %}" data-seedType="skullcap" data-flowerName="skullcap class="seed">
+            <img draggable="true" src="{% static 'img/seeds/stjohn_seed.png' %}" data-seedType="stjohn" data-flowerName="stjohn" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/valerian_seed.png' %}" data-seedType="valerian" data-flowerName="valerian" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/vervain_seed.png' %}" data-seedType="vervain" data-flowerName="vervain" class="seed">
+            <img draggable="true" src="{% static 'img/seeds/viper_seed.png' %}" data-seedType="viper" data-flowerName="viper" class="seed">
         </li>
     </ul>
 </div>
@@ -113,8 +113,17 @@
 
     <div class="popup">
       <div id="closeButton" onclick="closePopup()">&times;</div>
+      <p>
+        This is a popup window!
+        information about the plant...
+      </p>  
+      <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+    </div>    
+
+    <!-- <div class="popup">
+      <div id="closeButton" onclick="closePopup()">&times;</div>
       <div id="flowerInfo"></div>
       <img id="flowerPopupImages" class="real-plant" src="" alt="flower">
-    </div>    
+    </div>     -->
 
   <script src="{% static 'js/plant.js' %}"></script>

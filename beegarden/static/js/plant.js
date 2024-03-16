@@ -4,7 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    console.log("DOM content loaded");
+    console.log("DOM plant content loaded");
     fetchPlantedSeeds();
     
     var addEvent = (function () {
@@ -50,6 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Set seed type as a data attribute
             img.dataset.seedType = seedType;
+
+            //Pass the flower name
+            img.dataset.flowerName = seedType;            
     
             img.addEventListener('dragstart', function (e) {
                 e.dataTransfer.effectAllowed = 'copy';
@@ -209,13 +212,145 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
         console.log("Rendering planted seeds: ", seeds);
-    
+
+
+        console.log("Before");
+
         seeds.forEach(seed => {
+            console.log("After");
             const square = document.getElementById(seed.position);
             const newImage = new Image();
             newImage.src = `/static/img/flowers/${seed.seed_type}.png`;
             square.innerHTML = '';
             square.appendChild(newImage);
         });
-    }     
+    }
 });
+
+    // Author: Saida Amirova
+
+    var popupOpened = {};
+
+    /* This function makes the hidden popup visible and shows it over the plant boxes. */
+    function showPopupAtPosition(squareX, squareY, seedType) {
+        var popup = document.querySelector('.popup');
+        popup.style.display = 'block';
+        popup.style.width = '600px'; 
+
+        var popupContent = '';
+
+        switch(seedType) {
+            case 'betony':
+                popupContent = ' This is Betony popup';
+                break;
+            case 'chamomile':
+                popupContent = 'This is Chamomile popup';
+                break;
+            case 'hops':
+                popupContent = 'This is Hops popup';
+                break;
+            case 'lavender':
+                popupContent = 'This is Lavender popup';
+                break;
+            case 'passion':
+                popupContent = 'This is Passion popup';
+                break;
+            case 'skullcap':
+                popupContent = 'This is Skullcap popup';
+                break;
+            case 'stjohn':
+                popupContent = 'This is St John\s popup';
+                break;
+            case 'valerian':
+                popupContent = 'This is Valerian popup';
+                break;
+            case 'vervain':
+                popupContent = 'This is Vervain popup';
+                break;
+            case 'viper':
+                popupContent = 'This is Viper popup';
+                break;
+            default:
+                popupContent = 'Information about the plant...';
+        }    
+
+        popup.innerHTML = `
+        <div id="closeButton" onclick="closePopup()">&times;</div>
+        <p>${popupContent}</p>  
+        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}">`;
+
+        var popupX = 100;
+        var popupY = 100; 
+
+        popup.style.left = popupX + 'px';
+        popup.style.top = popupY + 'px';
+    }
+
+    function getSeedType(element) {
+        while (element && element.tagName !== 'IMG') {
+            element = element.parentNode;
+        }
+        console.log("Element:", element);
+        console.log("Dataset:", element ? element.dataset : null);
+    
+        if (element) {
+            const flowerName = extractFlowerName(element.src);
+            console.log("Flower name:", flowerName);
+            return flowerName;
+        } else {
+            return null;
+        }
+    }    
+    
+    function extractFlowerName(src) {
+        // Extracting flower name from image source URL
+        const parts = src.split('/');
+        const filename = parts[parts.length - 1];
+        const flowerName = filename.split('.')[0];
+        return flowerName;
+    }   
+    
+    function handleImageClick(event) {
+        console.log("Image clicked");
+    
+        // Check the event target
+        console.log("Event target:", event.target);
+    
+        var squareId = event.target.parentElement.id;
+    
+        var flowerName = getSeedType(event.target);
+    
+        console.log('Flower name:', flowerName);
+    
+        if (!popupOpened[squareId]) {
+            console.log('After if Clicked flower name:', flowerName);
+            var squareRect = event.target.parentElement.getBoundingClientRect();
+            var squareX = squareRect.left + window.pageXOffset;
+            var squareY = squareRect.top + window.pageYOffset;
+    
+            if (flowerName) {
+                showPopupAtPosition(squareX, squareY, flowerName);
+                popupOpened[squareId] = true;
+            } else {
+                console.error('Flower name is undefined');
+            }
+        }
+    }    
+
+    /* This function helps to close the opened popup */
+    function closePopup() {
+        var popup = document.querySelector('.popup');
+        popup.style.display = 'none';
+        
+        popupOpened = {};
+    }
+
+    // adding an event listener to the squares/plant placeholder
+    document.getElementById('bin').addEventListener('click', function(event) {
+        if (event.target.tagName === 'IMG' && event.target.parentElement.classList.contains('small-square')) {
+            handleImageClick(event);
+        }
+    });
+
+    var closeButton = document.getElementById('closeButton');
+    closeButton.addEventListener('click', closePopup);
