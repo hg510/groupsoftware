@@ -50,7 +50,6 @@ function addRouting(userLocation, seedLocation) {
     routingControls.push(control);
 }
 
-
 function clearRoutingControls() {
     routingControls.forEach(function(control) {
         map.removeControl(control);
@@ -64,26 +63,100 @@ function isNearSeed(userLocation, seedLocation) {
     return distance <= 10; // Adjust the distance threshold as needed
 }
 
-
 map.on('locationfound', function(e) {
     var userLocation = e.latlng;
-    
+    var nearSeed = false;
 
     markerLocations.forEach(function(seed) {
         var seedLocation = L.latLng(seed.location);
         if (isNearSeed(userLocation, seedLocation)) {
-
+            nearSeed = true;    
             clearRoutingControls();
-        } else {
-
-            addRouting(userLocation, seedLocation);
+            updateScore();
         }
     });
+
+    // Update score only if not near any seeds
+    if (!nearSeed) {
+        // Update score without any seed information
+        updateScore();
+    }
 });
 
+function updateScore() {
+    // Retrieve the CSRF token from the HTML
+    var csrftoken = getCookie('csrftoken');
+
+    // Send an AJAX request to your Django backend to update the user's score
+    $.ajax({
+        url: '/map/seedMap/', // Replace with your endpoint URL
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken  // Include the CSRF token in the headers
+        },
+        data: {
+            score_increment: 30  // Fixed score increment of 30 points
+        },
+        success: function() {
+            console.log('Score updated successfully.');
+        },
+        error: function(error) {
+            console.error('Error updating score:', error);
+        }
+    });
+}
+
+// Function to retrieve the CSRF token from cookies
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+// map.on('locationfound', function(e) {
+//     var userLocation = e.latlng;
+
+//     markerLocations.forEach(function(seed) {
+//         var seedLocation = L.latLng(seed.location);
+//         if (isNearSeed(userLocation, seedLocation)) {
+//             clearRoutingControls();
+//             updateScore(seed.name);
+//         } else {
+//             addRouting(userLocation, seedLocation);
+//         }
+//     });
+// }); 
+
+// function updateScore() {
+//     // Send an AJAX request to your Django backend to update the user's score
+
+//     $.ajax({
+//         url: '/map/seedMap/', // Replace with your endpoint URL
+//         method: 'POST',
+//         data: {
+//             score_increment: 30  // Fixed score increment of 30 points
+//         },
+//         success: function() {
+//             console.log('Score updated successfully.');
+//         },
+//         error: function(error) {
+//             console.error('Error updating score:', error);
+//         }
+//     });
+// }
 
 map.on('locationerror', onLocationError);
-
 
 /* This function helps to find the user's location. If the location is found, it is shown on the map immediately. */
 function onLocationFound(e) {
@@ -103,6 +176,8 @@ function onLocationError(e) {
 }
 
 map.on('locationerror', onLocationError);
+
+var userMarker = L.marker([0, 0]).addTo(map); // Initialize userMarker with a dummy location
 
 // the variable finds the user's geolocation
 var watchId = navigator.geolocation.watchPosition(function(position) {

@@ -4,5 +4,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('map/', views.map, name='map'),
+    path('seedMap/', views.map, name='map'),
 ]
