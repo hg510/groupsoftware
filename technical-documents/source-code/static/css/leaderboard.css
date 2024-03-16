@@ -1,0 +1,75 @@
+/* Author: Pawarisa Saiyut */
+
+body {
+    margin: 0;
+    padding: 0;
+    /* background-image: url('actual_background_to_be_added.jpg');  */
+    background-size: cover;
+    background-position: center;
+    font-family: "Pixelify Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.leaderboard {
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard h2 {
+    text-align: center;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.home-btn-container {
+    position: fixed; /* Position the container fixed at the top */
+    top: 0; /* Align the container at the top of the page */
+    left: 0; /* Align the container at the left of the page */
+    right: 0; /* Align the container at the right of the page */
+    background-color: #fff; /* Optional: Add a background color */
+    padding: 10px; /* Optional: Add some padding */
+    z-index: 1000; /* Ensure the buttons are above other elements */
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background: linear-gradient(to right, #3f34db, #3f34db);
+    color: #fff;
+    border: none;
+    font-family: "Pixelify Sans", sans-serif;
+    border-radius: 8px;
+    margin-right: 10px; /* Add some margin between buttons */
+}
+
+.leaderboard {
+    margin-top: 50px; /* Add margin to separate the leaderboard from the buttons */
+}
