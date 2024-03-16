@@ -3,6 +3,7 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from .models import Habit, UserScore
+from django.db.models import Sum
 
 # Manages habit tracking submissions and updates user scores and streaks.
 def habitTracker(request):
@@ -17,7 +18,7 @@ def habitTracker(request):
 
     # Calculate streak and total score
     streak_count = calculate_streak(user)
-    total_score = user_score.score + streak_count * 10
+    total_score = user_score.score
 
     # Handle habit form submission
     if request.method == 'POST':

@@ -3,6 +3,9 @@
 // This function ensures cross-browser compatibility for attaching event listeners to DOM elements.
 
 document.addEventListener("DOMContentLoaded", function() {
+
+    console.log("DOM content loaded");
+    fetchPlantedSeeds();
     
     var addEvent = (function () {
         if (document.addEventListener) {
@@ -85,6 +88,9 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             
             var seedType = e.dataTransfer.getData('seedType');
+            var position = this.id;
+
+            savePlantedSeed(seedType,position);
             
             var flowerPlantingImages = {                
                 betony: "/static/img/flowers/betony.png",
@@ -136,104 +142,80 @@ document.addEventListener("DOMContentLoaded", function() {
         });             
     }
 
-    // Author: Saida Amirova
-
-    var popupOpened = {};
-
-    /* This function makes the hidden popup visible and shows it over the plant boxes. */
-    function showPopupAtPosition(squareId, flowerName) {
+    function savePlantedSeed(seedType, position) {
         
-        console.log("flowerName:", flowerName);
+        console.log("Flower type: ", seedType);
+        console.log("At position: ", position);
         
-        var popup = document.querySelector('.popup');
-        popup.style.display = 'block';
-        popup.style.width = '600px';
+        fetch('http://127.0.0.1:8000/garden/save_planted_seed/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCSRFToken() 
+            },
+            body: JSON.stringify({seed_type: seedType, position: position})
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Seed saved successfully');
+            } else {
+                console.error('Failed to save seed');
+            }
+        })
+        .catch(error => console.error('Error saving seed:', error));
+    }    
 
-        // Get the flower information text from the flowerInfo object
-        var flowerInfoText = flowerInfo[flowerName];
-
-        // Get the flower image path from the flowerPopupImages object
-        var flowerImagePath = flowerPopupImages[flowerName];
-
-        // Set the flower information text and image source in the popup
-        document.getElementById('flowerInfo').textContent = flowerInfoText;
-
-        // Set the src attribute of the img element with ID 'flowerPopupImages'
-        document.getElementById('flowerPopupImages').src = flowerImagePath;
-
-        // Set the position of the popup
-        var popupX = 100;
-        var popupY = 100;
-        popup.style.left = popupX + 'px';
-        popup.style.top = popupY + 'px';
-    }
-
-    /* This function helps to click on the plants */
-    function handleImageClick(event) {
-        
-        console.log("Event: ", event.target);
-        var imgElement = event.target.closest('img');
-        if (!imgElement) return; // Ensure that imgElement is found
-        
-        console.log("Dataset: ", imgElement.dataset); // Log dataset attributes
-        var squareId = imgElement.parentElement.id;
-        var flowerName = imgElement.dataset.seedType;
-        console.log("flowerName: ", flowerName);
-
-        if (!popupOpened[squareId]) {
-            var squareRect = imgElement.parentElement.getBoundingClientRect();
-            var squareX = squareRect.left + window.pageXOffset;
-            var squareY = squareRect.top + window.pageYOffset;
-            showPopupAtPosition(squareId, flowerName); // Pass squareId and flowerName
-            popupOpened[squareId] = true;
+    function getCSRFToken() {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Search for CSRF token cookie
+                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                    break;
+                }
+            }
         }
+        return cookieValue;
     }
 
-
-    /* This function helps to close the opened popup */
-    function closePopup() {
-        var popup = document.querySelector('.popup');
-        popup.style.display = 'none';
-
-        popupOpened = {};
-    }
-
-    // adding an event listener to the squares/plant placeholder
-    document.getElementById('bin').addEventListener('click', function (event) {
-        if (event.target.tagName === 'IMG' && event.target.parentElement.classList.contains('small-square')) {
-            handleImageClick(event);
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch planted seeds from the server
+        fetchPlantedSeeds();
     });
 
-    var closeButton = document.getElementById('closeButton');
-    if (closeButton) {  
-        closeButton.addEventListener('click', closePopup);
+    function fetchPlantedSeeds() {
+        fetch('http://127.0.0.1:8000/garden/load_planted_seeds/', {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCSRFToken()
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Planted seeds data: ", data);
+            renderPlantedSeeds(data);
+        })
+        .catch(error => console.error('Error fetching planted seeds:', error));
     }
 
-    var flowerInfo = {
-        betony: "Betony is a flowering plant...",
-        chamomile: "Chamomile is a common name for several daisy-like plants...",
-        hops: "Hops are the flowers of the hop plant...",
-        lavender: "Lavender is a genus of 47 known species...",
-        passion: "Passionflower, a climbing vine, is used for sleep problems...",
-        skullcap: "Skullcap is a perennial herbaceous plant in the mint family...",
-        stjohn: "St. John's wort is a flowering plant...",
-        valerian: "Valerian is a perennial flowering plant...",
-        vervain: "Vervain is a flowering plant in the family Verbenaceae...",
-        viper: "Viper's bugloss is a plant species in the borage family..."
-    };
-
-    // Define flower image paths object
-    var flowerPopupImages = {
-        betony: "/static/img/popup/betony_popup.png",
-        chamomile: "/static/img/popup/chamomile_popup.jpg",
-        hops: "/static/img/popup/hops_popup.jpg",
-        lavender: "/static/img/popup/lavender_popup.jpg",
-        passion: "/static/img/popup/passion_popup.png",
-        skullcap: "/static/img/popup/skullcap_popup.jpg",
-        stjohn: "/static/img/popup/stjohn_popup.jpg",
-        valerian: "/static/img/popup/valerian_popup.jpg",
-        vervain: "/static/img/popup/vervain_popup.png",
-        viper: "/static/img/popup/viper_popup.jpg"
-    };    
+    function renderPlantedSeeds(seeds) {
+        if (!Array.isArray(seeds)) {
+            console.error("Invalid data format for planted seeds:", seeds);
+            return;
+        }
+    
+        console.log("Rendering planted seeds: ", seeds);
+    
+        seeds.forEach(seed => {
+            const square = document.getElementById(seed.position);
+            const newImage = new Image();
+            newImage.src = `/static/img/flowers/${seed.seed_type}.png`;
+            square.innerHTML = '';
+            square.appendChild(newImage);
+        });
+    }     
 });

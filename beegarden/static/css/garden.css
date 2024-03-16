@@ -101,8 +101,8 @@ li.over {
 .small-square {
   width: 150px;
   height: 150px;
-  /* background-color: #ccc;
-  border: 1px solid #000; */
+  /* background-color: #ccc; */
+  border: 1px solid #000;
   position: absolute;
   display: flex; 
   justify-content: center; 
