@@ -48,6 +48,8 @@ The UI and design documents for the client have been archived under the link bel
 
 
 ## PRIVACY POLICY
+By signing up to the website, you are consenting to the following terms:
+
 
 Our website collects the following data:
 
