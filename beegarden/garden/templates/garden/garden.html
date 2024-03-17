@@ -69,6 +69,7 @@
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
         <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+        <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
         <div class="health-bar">
             <div id="health" class="health"></div>
             <span class="heart">❤</span>
@@ -77,7 +78,6 @@
           <div id="pet" class="pet"></div>
           <span class="icon">😊</span>
       </div>
-        <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
       </div>
       <script>
         var happyImagePath = "{% static 'img/happybee.png' %}";

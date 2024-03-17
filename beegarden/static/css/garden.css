@@ -268,7 +268,7 @@ li.over {
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
-  height: 650px;
+  height: 600px;
   padding: 5px;
   box-sizing: border-box;
   border: 8px solid rgb(84, 60, 40); /* Adding the pixelated border directly to #beeemotions */
@@ -303,13 +303,18 @@ li.over {
   text-align: center; /* Center text */
 }
 
+#userScore {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .health-bar {
-  width: 300px;
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 0px auto;
   overflow: hidden; 
 }
 
@@ -329,13 +334,13 @@ li.over {
   font-size: 20px;
 }
 
-.pet-bar {
-  width: 300px;
+.pet-bar {  
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 20px auto;
   overflow: hidden; 
 }
 
