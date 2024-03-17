@@ -58,10 +58,10 @@ li a {
   cursor: move;
 }
 
-img {
+img:not([id^="pot-image"]) {
   width: 100px; 
   height: auto; 
-} 
+}
 
 
 *[draggable=true] {
@@ -99,15 +99,26 @@ li.over {
 }
 
 .small-square {
-  width: 100px; /* Adjust the width of the small squares as needed */
-  height: 100px; /* Adjust the height of the small squares as needed */
-  background-color: #ccc; /* Add a background color to the small squares */
-  border: 1px solid #000; /* Add a border to the small squares */
-  position: absolute; /* Position the small squares relative to the nearest positioned ancestor */
+  width: 150px;
+  height: 150px;
+  /* border: 1px solid #000; */
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 #square1 {
   top: 200px;
   left: 200px;
+}
+
+#pot-image-square1 {
+  position: absolute;  
+  top: 330px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square2 {
@@ -115,9 +126,25 @@ li.over {
   left: 400px;
 }
 
+#pot-image-square2 {
+  position: absolute;  
+  top: 330px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square3 {
   top: 200px;
   left: 600px;
+}
+
+#pot-image-square3 {
+  position: absolute;  
+  top: 330px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square4 {
@@ -125,9 +152,25 @@ li.over {
   left: 200px;
 }
 
+#pot-image-square4 {
+  position: absolute;  
+  top: 330px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square5 {
   top: 400px;
   left: 400px;
+}
+
+#pot-image-square5 {
+  position: absolute;  
+  top: 330px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square6 {
@@ -135,18 +178,78 @@ li.over {
   left: 600px;
 }
 
+#pot-image-square6 {
+  position: absolute;  
+  top: 530px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square7 {
+  top: 200px;
+  left: 800px;
+}
+
+#pot-image-square7 {
+  position: absolute;  
+  top: 530px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square8 {
+  top: 400px;
+  left: 800px;
+}
+
+#pot-image-square8 {
+  position: absolute;  
+  top: 530px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square9 {
+  top: 200px;
+  left: 0px;
+}
+
+#pot-image-square9 {
+  position: absolute;  
+  top: 530px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square10 {
+  top: 400px;
+  left: 0px;
+}
+
+#pot-image-square10 {
+  position: absolute;  
+  top: 530px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
+}
+
+
 #draggable-container {
   position: fixed;
-  bottom: 20px; 
-  left: 50%; 
+  bottom: 50px; 
+  left: 35%; 
   transform: translateX(-50%);
 }
 
 #bin img {
-  /* Styles for the dropped images within the bin */
   width: 100px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
-  margin: 5px; /* Add some spacing between images */
+  /* margin: 5px; Add some spacing between images */
   cursor: pointer;
 }
 
@@ -165,7 +268,7 @@ li.over {
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
-  height: 650px;
+  height: 600px;
   padding: 5px;
   box-sizing: border-box;
   border: 8px solid rgb(84, 60, 40); /* Adding the pixelated border directly to #beeemotions */
@@ -200,13 +303,18 @@ li.over {
   text-align: center; /* Center text */
 }
 
+#userScore {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .health-bar {
-  width: 300px;
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 0px auto;
   overflow: hidden; 
 }
 
@@ -226,13 +334,13 @@ li.over {
   font-size: 20px;
 }
 
-.pet-bar {
-  width: 300px;
+.pet-bar {  
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 20px auto;
   overflow: hidden; 
 }
 
@@ -252,8 +360,6 @@ li.over {
   font-size: 20px;
 }
 
-
-
 .home-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -267,4 +373,9 @@ li.over {
   border: none;
   font-family: "Pixelify Sans", sans-serif;
   border-radius: 8px;
+}
+
+.square-container {
+  position: relative;
+  display: inline-block;
 }
