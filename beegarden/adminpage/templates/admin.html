@@ -12,24 +12,34 @@
 </head>
 <body>
     <h1>User request Administration Page </h1>
-<!-- Display pending requests -->
-{% if pending_requests %}
-<form method="post">
-    {% csrf_token %}
-    {% for request in pending_requests %}
-    <fieldset>
-        <input type="hidden" name="request_id" value="{{ request.id }}">
-        <p>User {{ request.user.username }} has a request: {{ request.goal }}</p>
-        <label for="accept">Accept their request?</label>
-        <input type="checkbox" name="accept" id="accept" value="1">
-    </fieldset>
-    {% endfor %}
-    <input type="submit" value="Submit now">
-    <input type="reset" value="Clear form">
-</form>
-{% else %}
-    <p>There are no pending requests.</p>
-{% endif %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Display habit forms -->
+    {% if habit_forms %}
+    <form action="{% url 'adminpage' %}" method="post">
+        {% csrf_token %}
+        {% for form in habit_forms %}
+        <fieldset>
+            <p>User {{ form.request.user.username }} has completed {{ form.habits_completed }} habits.</p>
+            {% if form.habits_completed >= 4 %}
+                <input type="hidden" name="request_id" value="{{ form.request.id }}">
+                <label for="accept{{ forloop.counter }}">Accept their request?</label>
+                <input type="checkbox" name="accept" id="accept{{ forloop.counter }}" value="1">
+            {% endif %}
+        </fieldset>
+        {% endfor %}
+        <input type="submit" value="Submit now">
+        <input type="reset" value="Clear form">
+    </form>
+    {% else %}
+    <p>There are no pending requests at the moment.</p>
+    {% endif %}
 </body>
 </html>
-

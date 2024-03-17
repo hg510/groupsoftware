@@ -2,8 +2,14 @@
 
 from django.utils import timezone
 from django.shortcuts import render, redirect
-from .models import Request, Response
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.db.models import Count
+from django.db.models import Q
+from django.template import RequestContext
 from garden.models import Seed
+from habittracker.models import Habit
+from adminpage.models import HabitRequest
 
 def adminPage(request):
     user = request.user
@@ -11,42 +17,52 @@ def adminPage(request):
     # Check if user is admin
     if user.is_staff:
         if request.method == 'POST':
-            request_id = request.POST.get('request_id')
+            habit_request_id = request.POST.get('request_id')  # Renamed variable for clarity
             accept = request.POST.get('accept') == '1'
 
             try:
-                # Get the corresponding request object
-                admin_request = Request.objects.get(id=request_id)
+                admin_habit_request = HabitRequest.objects.get(id=habit_request_id)
+                ResponseRequest.objects.create(habit_request=admin_habit_request, accepted=accept)
+                # # Get the corresponding HabitRequest object
+                # admin_habit_request = HabitRequest.objects.get(id=habit_request_id)  # Updated variable and model
 
-                # Create a response object
-                response = Response.objects.create(request=admin_request, accepted=accept)
+                # # Create a ResponseRequest object
+                # response = ResponseRequest.objects.create(habit_request=admin_habit_request, accepted=accept)  # Updated model
 
-                # Award seeds if request is accepted and daily score is over 50
+                # Award seeds if request is accepted and daily score is over 40
                 if accept:
-                    daily_score = calculate_daily_score(admin_request.user)
-                    if daily_score >= 50:
-                        award_seeds_to_user(admin_request.user)
+                    daily_score = calculate_daily_score(admin_habit_request.user)
+                    if daily_score >= 40:
+                        award_seeds_to_user(admin_habit_request.user)
 
-                # Delete the request
-                admin_request.delete()
+                # Instead of deleting, mark as reviewed
+                admin_habit_request.status = 'reviewed'
+                admin_habit_request.save()
+                messages.success(request, "Habit request processed successfully.")
+                return redirect('adminpage')
 
-                # Redirect to admin page
-                return redirect('custom_admin')
 
-            except Request.DoesNotExist:
-                # Handle case where request does not exist
-                return render(request, 'admin.html', {'error_message': 'Invalid request ID'})
+            except HabitRequest.DoesNotExist:
+                messages.error(request, "Invalid request ID. Please try again.")
+                return redirect('adminpage')
 
         else:
-            # Retrieve pending requests
-            pending_requests = Request.objects.all()
+            pending_habit_requests = HabitRequest.objects.all()
 
-            return render(request, 'admin.html', {'pending_requests': pending_requests})
+            habit_forms = [{
+                'request': habit_request,
+                'habits_completed': Habit.objects.filter(user=habit_request.user).count()
+            } for habit_request in pending_habit_requests if Habit.objects.filter(user=habit_request.user).count() >= 4]
 
+            if not habit_forms:
+                messages.info(request, "No habit forms available for review at the moment.")
+
+            context = {'habit_forms': habit_forms}
+            return render(request, 'admin.html', context)
+ 
     else:
-        # If user is not admin, redirect to home page or show an error message
-        return render(request, 'home.html', {'error_message': 'You are not authorized to access this page'})
-
+        # messages.error(request, "You are not authorized to access this page.")
+        return redirect('home')  # Assuming 'home' is the name of your homepage URL pattern
 
 def calculate_daily_score(user):
     today = timezone.now().date()
@@ -55,11 +71,10 @@ def calculate_daily_score(user):
 
     return daily_score
 
-
 def award_seeds_to_user(user):
     # Specify the type and quantity of seed to award
-    seed_type = "Example Seed"  
-    quantity = 1  
+    seed_type = "Example Seed"
+    quantity = 1
     seed = Seed.objects.create(user=user, type=seed_type, quantity=quantity)
 
 
