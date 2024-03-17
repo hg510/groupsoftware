@@ -19,6 +19,8 @@ class Habit(models.Model):
     public_transportation = models.BooleanField(default=False)
     turn_off_lights = models.BooleanField(default=False)    
 
+    # number_of_habits = models.IntegerField(default=0)
+
     # Add a field for date created
     date_created = models.DateTimeField(auto_now_add=True)
 

@@ -28,9 +28,12 @@
         {% for form in habit_forms %}
         <fieldset>
             <p>User {{ form.request.user.username }} has completed {{ form.habits_completed }} habits.</p>
+            <!-- Display approve checkbox only for forms with at least 4 completed habits -->
             {% if form.habits_completed >= 4 %}
                 <input type="checkbox" name="request_ids" value="{{ form.request.id }}" id="request_{{ forloop.counter }}">
                 <label for="request_{{ forloop.counter }}">Accept their request?</label>
+            {% else %}
+                <p>This request does not meet the criteria for approval.</p>
             {% endif %}
         </fieldset>
         {% endfor %}
