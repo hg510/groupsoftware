@@ -128,7 +128,7 @@ for (var i = 0; i < smallSquares.length; i++) {
                 newImage.src = '/static/img/5.png';
                 break;
             case 'square6':
-                newImage.src = '/static/img/6.png';
+                newImage.src = '/static/img/1.png';
                 break;
         }
      
@@ -140,18 +140,11 @@ for (var i = 0; i < smallSquares.length; i++) {
         // Appends the cloned 'yum' element to the square
         this.appendChild(yumClone);
         
-        // Sets up a fading effect for the cloned 'yum' element
-        setTimeout(function () {
-            var opacity = 1;
-            var fadeInterval = setInterval(function () {
-                if (opacity <= 0) {
-                    clearInterval(fadeInterval);
-                } else {
-                    yumClone.style.opacity = opacity;
-                    opacity -= 0.1;
-                }
-            }, 50);
-        }, 250);
+        // Triggering reflow to restart the animation
+        void newImage.offsetWidth;
+        // Add a class to apply animation
+        newImage.classList.add('fade-in');
+        newImage.classList.add('shake');
 
         // Returns false to indicate the drop operation is complete
         return false;
