@@ -8,6 +8,7 @@
   </audio>
 
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/garden.css' %}">
   <link rel="stylesheet" href="{% static 'css/popup.css' %}">
   
@@ -59,19 +60,8 @@
         <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square10" class="pot-image">
     </div>
     <ul>
-        <li id="draggable-container">
-            <img draggable="true" src="{% static 'img/seeds/betony_seed.png' %}" data-seedType="betony" data-flowerName="betony" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/chamomile_seed.png' %}" data-seedType="chamomile"  data-flowerName="chamomile" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/hops_seed.png' %}" data-seedType="hops" data-flowerName="hops" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/lavender_seed.png' %}" data-seedType="lavender" data-flowerName="lavender" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/passion_seed.png' %}" data-seedType="passion" data-flowerName="passion" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/skullcap_seed.png' %}" data-seedType="skullcap" data-flowerName="skullcap class="seed">
-            <img draggable="true" src="{% static 'img/seeds/stjohn_seed.png' %}" data-seedType="stjohn" data-flowerName="stjohn" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/valerian_seed.png' %}" data-seedType="valerian" data-flowerName="valerian" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/vervain_seed.png' %}" data-seedType="vervain" data-flowerName="vervain" class="seed">
-            <img draggable="true" src="{% static 'img/seeds/viper_seed.png' %}" data-seedType="viper" data-flowerName="viper" class="seed">
-        </li>
-    </ul>
+      <li id="draggable-container"></li>
+  </ul>  
 </div>
 
   <div id="beeemotions" class="pixel-box">
@@ -127,3 +117,16 @@
     </div>     -->
 
   <script src="{% static 'js/plant.js' %}"></script>
+
+  <!-- <li id="draggable-container">
+    <img draggable="true" src="{% static 'img/seeds/betony_seed.png' %}" data-seedType="betony" data-flowerName="betony" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/chamomile_seed.png' %}" data-seedType="chamomile"  data-flowerName="chamomile" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/hops_seed.png' %}" data-seedType="hops" data-flowerName="hops" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/lavender_seed.png' %}" data-seedType="lavender" data-flowerName="lavender" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/passion_seed.png' %}" data-seedType="passion" data-flowerName="passion" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/skullcap_seed.png' %}" data-seedType="skullcap" data-flowerName="skullcap" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/stjohn_seed.png' %}" data-seedType="stjohn" data-flowerName="stjohn" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/valerian_seed.png' %}" data-seedType="valerian" data-flowerName="valerian" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/vervain_seed.png' %}" data-seedType="vervain" data-flowerName="vervain" class="seed">
+    <img draggable="true" src="{% static 'img/seeds/viper_seed.png' %}" data-seedType="viper" data-flowerName="viper" class="seed">
+</li> -->

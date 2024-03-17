@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log("DOM plant content loaded");
     fetchPlantedSeeds();
-    randomSeed();
     
     var addEvent = (function () {
         if (document.addEventListener) {
@@ -358,12 +357,79 @@ document.addEventListener("DOMContentLoaded", function() {
     var closeButton = document.getElementById('closeButton');
     closeButton.addEventListener('click', closePopup);
 
-    function randomSeed(){
-        const flowersArray = ["betony", "chamomile", "lavender", "passion", "stjohn", "valerian", "vervain", "viper"];
 
-        var chosenFlower = flowersArray[Math.floor(Math.random() * flowersArray.length)];
+// Function to generate a random seed
+function randomSeed() {
+    const flowersArray = ["betony", "chamomile", "lavender", "passion", "stjohn", "valerian", "vervain", "viper"];
+    var chosenFlower = flowersArray[Math.floor(Math.random() * flowersArray.length)];
+    console.log("Chosen flower:", chosenFlower);
+    return chosenFlower;
+}
 
-        console.log("Chosen flower: ", chosenFlower);
+// Initialize user seeds array if it doesn't exist in localStorage
+var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
 
-        return chosenFlower;
-    }
+// Function to add the chosen flower to the user's seeds array
+function userSeeds(chosenFlower) {
+    // Add the chosen flower to the user seeds array
+    userSeedsArray.push(chosenFlower);
+    // Store the updated user seeds array in localStorage
+    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+    console.log("User's seeds:", userSeedsArray);
+}
+
+// Function to clear the user seeds array
+function clearUserSeeds() {
+    // Empty the user seeds array
+    userSeedsArray = [];
+    // Update the localStorage to reflect the changes
+    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+    console.log("User's seeds cleared.");
+}
+
+// Function to update the displayed seed images based on userSeedsArray
+function updateDisplayedSeeds() {
+    // Get the draggable container
+    var container = document.getElementById("draggable-container");
+
+    // Clear the existing content of the container
+    container.innerHTML = '';
+
+    // Iterate over userSeedsArray
+    userSeedsArray.forEach(function(seedType) {
+        // Add the seed image to the container
+        addSeedImage(seedType);
+    });
+}
+
+// Function to add a seed image to the draggable container
+function addSeedImage(seedType) {
+    // Create a new image element
+    var newImg = document.createElement('img');
+    // Set the src attribute of the image
+    newImg.src = "/static/img/seeds/" + seedType + "_seed.png";
+    // Set the data attributes
+    newImg.setAttribute('data-seedType', seedType);
+    newImg.setAttribute('data-flowerName', seedType);
+    newImg.setAttribute('draggable', true);
+    // Add the 'seed' class to the image
+    newImg.classList.add('seed');
+    // Append the image to the draggable container
+    document.getElementById('draggable-container').appendChild(newImg);
+}
+
+function assignAndDisplay(){
+    
+    // Call randomSeed and userSeeds functions
+    var randomFlower = randomSeed(); 
+    userSeeds(randomFlower);  
+
+    // Update the displayed seeds
+    updateDisplayedSeeds();
+
+    // Clear user seeds
+    clearUserSeeds();
+
+}
+
+assignAndDisplay();
