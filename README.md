@@ -55,6 +55,8 @@ Our website collects the following data:
 
 •	Email address
 
+•	First and last name
+
 •	Location data
 
 •	Activity data (in the habit tracker)
