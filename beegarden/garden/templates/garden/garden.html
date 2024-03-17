@@ -100,3 +100,31 @@
 
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/popup.js' %}"></script>
+<style>
+.fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+}
+
+.shake {
+    animation: shakeAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shakeAnimation {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+</style>
