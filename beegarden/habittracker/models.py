@@ -19,7 +19,7 @@ class Habit(models.Model):
     public_transportation = models.BooleanField(default=False)
     turn_off_lights = models.BooleanField(default=False)    
 
-    # number_of_habits = models.IntegerField(default=0)
+    number_of_habits = models.IntegerField(default=0)
 
     # Add a field for date created
     date_created = models.DateTimeField(auto_now_add=True)
@@ -27,7 +27,15 @@ class Habit(models.Model):
     # Make the user field mandatory
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
+    def save(self, *args, **kwargs):
+        self.number_of_habits = sum([
+            self.walk, self.plastic, self.food, self.water_bottle, self.utensils,
+            self.short_trips, self.plant_based_meals, self.unplug_electronics,
+            self.natural_light, self.community_cleanups, self.reduce_food_waste,
+            self.public_transportation, self.turn_off_lights
+        ])
+        super().save(*args, **kwargs)
+        
 # Model for tracking overall user scores and streaks based on habit tracking.
 class UserScore(models.Model):
     score = models.IntegerField(default=0)

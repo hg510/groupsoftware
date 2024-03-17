@@ -91,7 +91,8 @@ def habitTracker(request):
             user=user,
             habit=habit,
             goal="Review my daily habits",
-            reviewed=False
+            reviewed=False,
+            number_of_habits=habit.number_of_habits
         )
 
 

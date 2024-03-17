@@ -17,13 +17,12 @@ def adminPage(request):
 
     if request.method == 'POST':
         approved_request_ids = request.POST.getlist('request_ids')  # Ensure the name matches your HTML form input for checkboxes
+        rejected_request_ids = request.POST.getlist('rejected_request_ids')
 
         # Update status for approved requests
         HabitRequest.objects.filter(id__in=approved_request_ids).update(status='approved')
-        
-        # Optionally, update status for rejected requests if necessary
-        # This assumes any request not approved is automatically rejected
-        HabitRequest.objects.exclude(id__in=approved_request_ids).update(status='rejected')
+        # Update status for rejected requests
+        HabitRequest.objects.filter(id__in=rejected_request_ids).update(status='rejected')
         
         messages.success(request, "Habit requests processed successfully.")
         return redirect('adminpage')
@@ -35,7 +34,8 @@ def adminPage(request):
         
         habit_forms = [{
             'request': hr,
-            'habits_completed': Habit.objects.filter(user=hr.user).count(),
+            'habits_completed': hr.number_of_habits,
+            # 'habits_completed': Habit.objects.filter(user=hr.user).count(),
             # Add any additional data you need in the template here
         } for hr in pending_habit_requests]
 
@@ -45,7 +45,7 @@ def adminPage(request):
         }
 
         return render(request, 'admin.html', context)
-        
+
 # def adminPage(request):
 #     user = request.user
 
