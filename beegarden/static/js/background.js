@@ -3,7 +3,7 @@
 function changeBackground() {
     var currentdate = new Date();
     var currentmonth = currentdate.getMonth()
-    var season = Math.floor(currentmonth / 3)
+    var season = Math.floor(currentmonth / 5)
     switch (season){
         case 0:
             document.body.style.backgroundImage = "url('" + winterPath + "') ";
