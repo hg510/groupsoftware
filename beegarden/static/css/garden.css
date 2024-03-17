@@ -20,16 +20,19 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-
-h1{
-  text-align: left; 
-  font-weight: 200;
+h1 {
+  width: 600px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(29, 26, 21);
+  text-shadow: 0 0 3px #0fb230, 0 0 5px #df933c;
+  font-weight: 300px;
   font-size: 80px;
-  /* border: solid black;
-  background-color: rgb(255, 249, 142); */
+  color: #eef661;
   font-family: "Pixelify Sans", sans-serif;
   white-space: nowrap;
 }
+
+
 h1 span{
   display: block;
   font-size: 40px;
@@ -37,8 +40,9 @@ h1 span{
 }
 
 .holder{
-  width: 600px;
+  width: 1265px;
   margin: 0px auto;
+  margin-top: 40px;
 }
 
 li {
@@ -58,10 +62,10 @@ li a {
   cursor: move;
 }
 
-img {
-  width: 100px; 
+img:not([id^="pot-image"]) {
+  width: 133px; 
   height: auto; 
-} 
+}
 
 
 *[draggable=true] {
@@ -99,15 +103,26 @@ li.over {
 }
 
 .small-square {
-  width: 100px; /* Adjust the width of the small squares as needed */
-  height: 100px; /* Adjust the height of the small squares as needed */
-  background-color: #ccc; /* Add a background color to the small squares */
-  border: 1px solid #000; /* Add a border to the small squares */
-  position: absolute; /* Position the small squares relative to the nearest positioned ancestor */
+  width: 150px;
+  height: 150px;
+  /* border: 1px solid #000; */
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 #square1 {
   top: 200px;
   left: 200px;
+}
+
+#pot-image-square1 {
+  position: absolute;  
+  top: 273px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square2 {
@@ -115,9 +130,25 @@ li.over {
   left: 400px;
 }
 
+#pot-image-square2 {
+  position: absolute;  
+  top: 273px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square3 {
   top: 200px;
   left: 600px;
+}
+
+#pot-image-square3 {
+  position: absolute;  
+  top: 273px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square4 {
@@ -125,9 +156,25 @@ li.over {
   left: 200px;
 }
 
+#pot-image-square4 {
+  position: absolute;  
+  top: 273px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
+}
+
 #square5 {
   top: 400px;
   left: 400px;
+}
+
+#pot-image-square5 {
+  position: absolute;  
+  top: 273px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
 }
 
 #square6 {
@@ -135,18 +182,78 @@ li.over {
   left: 600px;
 }
 
+#pot-image-square6 {
+  position: absolute;  
+  top: 475px;
+  left: 25px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square7 {
+  top: 200px;
+  left: 800px;
+}
+
+#pot-image-square7 {
+  position: absolute;  
+  top: 475px;
+  left: 230px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square8 {
+  top: 400px;
+  left: 800px;
+}
+
+#pot-image-square8 {
+  position: absolute;  
+  top: 475px;
+  left: 430px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square9 {
+  top: 200px;
+  left: 0px;
+}
+
+#pot-image-square9 {
+  position: absolute;  
+  top: 475px;
+  left: 630px;
+  width: 200px; 
+  height: 200px;
+}
+
+#square10 {
+  top: 400px;
+  left: 0px;
+}
+
+#pot-image-square10 {
+  position: absolute;  
+  top: 475px;
+  left: 830px;
+  width: 200px; 
+  height: 200px;
+}
+
+
 #draggable-container {
   position: fixed;
-  bottom: 20px; 
-  left: 50%; 
+  bottom: 1%; 
+  left: 8%; 
   transform: translateX(-50%);
 }
 
 #bin img {
-  /* Styles for the dropped images within the bin */
   width: 100px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
-  margin: 5px; /* Add some spacing between images */
+  /* margin: 5px; Add some spacing between images */
   cursor: pointer;
 }
 
@@ -161,11 +268,11 @@ li.over {
 #beeemotions {
   position: absolute;
   top: 50%;
-  right: 40px;
+  right: 5.3%;
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
-  height: 650px;
+  height: 600px;
   padding: 5px;
   box-sizing: border-box;
   border: 8px solid rgb(84, 60, 40); /* Adding the pixelated border directly to #beeemotions */
@@ -200,13 +307,18 @@ li.over {
   text-align: center; /* Center text */
 }
 
+#userScore {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .health-bar {
-  width: 300px;
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 0px auto;
   overflow: hidden; 
 }
 
@@ -226,13 +338,14 @@ li.over {
   font-size: 20px;
 }
 
-.pet-bar {
-  width: 300px;
+.pet-bar {  
+  width: 350px;
   height: 30px;
   border: 1px solid #000000;
   border-radius: 15px; 
   position: relative;
-  margin: 50px auto;
+  margin: 20px auto;
+  
   overflow: hidden; 
 }
 
@@ -242,6 +355,7 @@ li.over {
   width: 100%;
   transition: width 0.3s ease-in-out;
   border-radius: 14px;
+  
 }
 
 .icon {
@@ -251,8 +365,6 @@ li.over {
   right: 10px;
   font-size: 20px;
 }
-
-
 
 .home-btn {
   display: inline-block;
@@ -267,4 +379,22 @@ li.over {
   border: none;
   font-family: "Pixelify Sans", sans-serif;
   border-radius: 8px;
+}
+
+@keyframes floatBee {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.steve {
+  animation: floatBee 3s ease-in-out infinite;
+}
+
+.square-container {
+  position: relative;
+  display: inline-block;
 }
