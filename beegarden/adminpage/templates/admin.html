@@ -29,14 +29,12 @@
         <fieldset>
             <p>User {{ form.request.user.username }} has completed {{ form.habits_completed }} habits.</p>
             {% if form.habits_completed >= 4 %}
-                <input type="hidden" name="request_id" value="{{ form.request.id }}">
-                <label for="accept{{ forloop.counter }}">Accept their request?</label>
-                <input type="checkbox" name="accept" id="accept{{ forloop.counter }}" value="1">
+                <input type="checkbox" name="request_ids" value="{{ form.request.id }}" id="request_{{ forloop.counter }}">
+                <label for="request_{{ forloop.counter }}">Accept their request?</label>
             {% endif %}
         </fieldset>
         {% endfor %}
         <input type="submit" value="Submit now">
-        <input type="reset" value="Clear form">
     </form>
     {% else %}
     <p>There are no pending requests at the moment.</p>
