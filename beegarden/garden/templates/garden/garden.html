@@ -77,7 +77,7 @@
       <div class="content">
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
-        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage" class="steve">
         <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
         <div class="health-bar">
             <div id="health" class="health"></div>
@@ -112,11 +112,12 @@
 
     <div class="popup">
       <div id="closeButton" onclick="closePopup()">&times;</div>
-      <p>
-        This is a popup window!
-        information about the plant...
-      </p>  
-      <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
-    </div>    
-
+      <div class="popup-content">
+        <div class="flower-info"></div>
+        <div class="image-container">
+          <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+        </div>
+      </div>
+    </div>
+    
   <script src="{% static 'js/plant.js' %}"></script>

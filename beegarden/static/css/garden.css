@@ -20,16 +20,19 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-
-h1{
-  text-align: left; 
-  font-weight: 200;
+h1 {
+  width: 600px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(29, 26, 21);
+  text-shadow: 0 0 3px #0fb230, 0 0 5px #df933c;
+  font-weight: 300px;
   font-size: 80px;
-  /* border: solid black;
-  background-color: rgb(255, 249, 142); */
+  color: #eef661;
   font-family: "Pixelify Sans", sans-serif;
   white-space: nowrap;
 }
+
+
 h1 span{
   display: block;
   font-size: 40px;
@@ -37,8 +40,9 @@ h1 span{
 }
 
 .holder{
-  width: 600px;
+  width: 1265px;
   margin: 0px auto;
+  margin-top: 40px;
 }
 
 li {
@@ -59,7 +63,7 @@ li a {
 }
 
 img:not([id^="pot-image"]) {
-  width: 100px; 
+  width: 133px; 
   height: auto; 
 }
 
@@ -115,7 +119,7 @@ li.over {
 
 #pot-image-square1 {
   position: absolute;  
-  top: 330px;
+  top: 273px;
   left: 230px;
   width: 200px; 
   height: 200px;
@@ -128,7 +132,7 @@ li.over {
 
 #pot-image-square2 {
   position: absolute;  
-  top: 330px;
+  top: 273px;
   left: 430px;
   width: 200px; 
   height: 200px;
@@ -141,7 +145,7 @@ li.over {
 
 #pot-image-square3 {
   position: absolute;  
-  top: 330px;
+  top: 273px;
   left: 630px;
   width: 200px; 
   height: 200px;
@@ -154,7 +158,7 @@ li.over {
 
 #pot-image-square4 {
   position: absolute;  
-  top: 330px;
+  top: 273px;
   left: 830px;
   width: 200px; 
   height: 200px;
@@ -167,7 +171,7 @@ li.over {
 
 #pot-image-square5 {
   position: absolute;  
-  top: 330px;
+  top: 273px;
   left: 25px;
   width: 200px; 
   height: 200px;
@@ -180,7 +184,7 @@ li.over {
 
 #pot-image-square6 {
   position: absolute;  
-  top: 530px;
+  top: 475px;
   left: 25px;
   width: 200px; 
   height: 200px;
@@ -193,7 +197,7 @@ li.over {
 
 #pot-image-square7 {
   position: absolute;  
-  top: 530px;
+  top: 475px;
   left: 230px;
   width: 200px; 
   height: 200px;
@@ -206,7 +210,7 @@ li.over {
 
 #pot-image-square8 {
   position: absolute;  
-  top: 530px;
+  top: 475px;
   left: 430px;
   width: 200px; 
   height: 200px;
@@ -219,7 +223,7 @@ li.over {
 
 #pot-image-square9 {
   position: absolute;  
-  top: 530px;
+  top: 475px;
   left: 630px;
   width: 200px; 
   height: 200px;
@@ -232,7 +236,7 @@ li.over {
 
 #pot-image-square10 {
   position: absolute;  
-  top: 530px;
+  top: 475px;
   left: 830px;
   width: 200px; 
   height: 200px;
@@ -241,8 +245,8 @@ li.over {
 
 #draggable-container {
   position: fixed;
-  bottom: 50px; 
-  left: 35%; 
+  bottom: 1%; 
+  left: 8%; 
   transform: translateX(-50%);
 }
 
@@ -264,7 +268,7 @@ li.over {
 #beeemotions {
   position: absolute;
   top: 50%;
-  right: 40px;
+  right: 5.3%;
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
@@ -341,6 +345,7 @@ li.over {
   border-radius: 15px; 
   position: relative;
   margin: 20px auto;
+  
   overflow: hidden; 
 }
 
@@ -350,6 +355,7 @@ li.over {
   width: 100%;
   transition: width 0.3s ease-in-out;
   border-radius: 14px;
+  
 }
 
 .icon {
@@ -373,6 +379,19 @@ li.over {
   border: none;
   font-family: "Pixelify Sans", sans-serif;
   border-radius: 8px;
+}
+
+@keyframes floatBee {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.steve {
+  animation: floatBee 3s ease-in-out infinite;
 }
 
 .square-container {

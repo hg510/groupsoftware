@@ -243,34 +243,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
         switch(seedType) {
             case 'betony':
-                popupContent = ' This is Betony popup';
+                popupContent = 'Betony can last from early-summer to autumn. It is an important source of nectar that is extremely attractive to bees and many species of butterflies. Its bright colour also lures bees in. Betony thrives in a sunny to semi-sunny or shady location and most well-drained soils. It can cope well with heavy clay and locations such as grasslands, open woodlands, and hedgerows, making it an excellent garden plant.';
                 break;
             case 'chamomile':
-                popupContent = 'This is Chamomile popup';
+                popupContent = 'Chamomile blooms in spring and summer. Since chamomile has sweet nectar, fragrant leaves, and is easy to spread and grow, it is loved by bees and other pollinators. Chamomile prefers plenty of sun and light soil that drains freely but does not dry out totally quickly or get waterlogged. While it grows quickly, it needs protection from slugs and snails during its young phase.';
                 break;
             case 'hops':
-                popupContent = 'This is Hops popup';
+                popupContent = 'Hops’ Early varieties start to bloom around the summer solstice while its Alpha varieties tend to bloom later in midsummer. Its nectar does not have sweet scent, making bees generally not interested in it. But bees can depend on it when needed. Hops needs plenty of climbing space in a sunny location with well-draining soil. Ideally, some shade should be provided during the hot afternoon hours.';
                 break;
             case 'lavender':
-                popupContent = 'This is Lavender popup';
+                popupContent = 'Lavender usually blooms from early summer and last until late summer. Due to long bloomer period and abundant amount of nectar and pollen, it is a great and classic source of food for bees. Bees are also attracted to its colourful and fragrant flowers. Lavender needs full sun and well-drained soil to grow best. It prefers low to moderately-fertile soils. Afternoon shade may help in the hot summer climates.';
                 break;
             case 'passion':
-                popupContent = 'This is Passion popup';
+                popupContent = 'Passion flower blooms from early summer through to autumn. It has vibrant colour produce both nectar and pollen, resulting in a vast range of pollinators from insects to hummingbirds. It is deeply loved by the honey bee as it is not only their food source but also hiding spot and gathering place. Passionflower grows best in a sunny spot with the little shelter, and moist but well-drained soil. Most of them also produce edible fruits.';
                 break;
             case 'skullcap':
-                popupContent = 'This is Skullcap popup';
+                popupContent = 'Skullcap blooms during summer and produce nectar and pollen rich flower. Therefore, it becomes a food source of the long-tongued bees. It also attracts a wide range of other insects such as butterflies, leafcutters, and beetles. Skullcap thrives best in partial shade and fertile soil that is moist but not waterlogged. Once the seedlings are established, it is known to spread quickly.';
                 break;
             case 'stjohn':
-                popupContent = 'This is St John\s popup';
+                popupContent = 'St. John’s Wort usually bloom around early-summer or midsummer to early autumn. It has rich amount of nectar and pollen that attracts pollinators especially bees and butterflies. St. John’s Wort has diverse species that come with different requirements. In general, a good planting site for it is a sunny to semi-shady spot with humus-rich well-drained soil.';
                 break;
             case 'valerian':
-                popupContent = 'This is Valerian popup';
+                popupContent = 'Valerian blooms during summer and produce extremely fragrant flowers, making it a great source of nectar that attracts pollinators like Honeybees, Bumblebees, and Solitary bees, including butterflies and moths. Interestingly, cats also appreciate its smell. Valerian thrives best in full sun with consistently moist condition, and soil consisting of fertile loam. However, it can adapt to less ideal circumstance.';
                 break;
             case 'vervain':
-                popupContent = 'This is Vervain popup';
+                popupContent = 'Vervain blooms from late spring to early fall. As it blooms late and profusely, vervain offers both and great amount of nectar and pollen at the time when pollinators, especially bumblebees, are preparing for the coming of fall. Plus, vibrant colour makes it even more desirable for bees. Vervain needs full sun to part shade and average to moist soils to grow. It tolerates wet sites better than most plants.';
                 break;
             case 'viper':
-                popupContent = 'This is Viper popup';
+                popupContent = 'Vipers Bugloss has a long blooming period from sprint to autumn. It produces energy rich nectars regularly throughout the day. Therefore, it attracts all sorts of bees while butterfly and moths also love it. Vipers Bugloss thrives in warm, sunny, dry place and can often be found on dry, ruderal areas. Therefore, the ideal way to plant it is under plenty of sun in a sandy, stony, or gravelly spot. ';
                 break;
             default:
                 popupContent = 'Information about the plant...';
@@ -278,8 +278,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         popup.innerHTML = `
         <div id="closeButton" onclick="closePopup()">&times;</div>
-        <p>${popupContent}</p>  
-        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}">`;
+        <p class="flower-info">${popupContent}</p>  
+        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
+        
 
         var popupX = 100;
         var popupY = 100; 
