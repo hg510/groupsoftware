@@ -65,23 +65,17 @@ function isNearSeed(userLocation, seedLocation) {
 
 map.on('locationfound', function(e) {
     var userLocation = e.latlng;
-    var nearSeed = false;
 
     markerLocations.forEach(function(seed) {
         var seedLocation = L.latLng(seed.location);
         if (isNearSeed(userLocation, seedLocation)) {
-            nearSeed = true;    
             clearRoutingControls();
-            updateScore();
+            updateScore(seed.name);
+        } else {
+            addRouting(userLocation, seedLocation);
         }
     });
-
-    // Update score only if not near any seeds
-    if (!nearSeed) {
-        // Update score without any seed information
-        updateScore();
-    }
-});
+}); 
 
 // Function to update the user's score
 function updateScore() {
@@ -129,39 +123,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
-
-// map.on('locationfound', function(e) {
-//     var userLocation = e.latlng;
-
-//     markerLocations.forEach(function(seed) {
-//         var seedLocation = L.latLng(seed.location);
-//         if (isNearSeed(userLocation, seedLocation)) {
-//             clearRoutingControls();
-//             updateScore(seed.name);
-//         } else {
-//             addRouting(userLocation, seedLocation);
-//         }
-//     });
-// }); 
-
-// function updateScore() {
-//     // Send an AJAX request to your Django backend to update the user's score
-
-//     $.ajax({
-//         url: '/map/seedMap/', // Replace with your endpoint URL
-//         method: 'POST',
-//         data: {
-//             score_increment: 30  // Fixed score increment of 30 points
-//         },
-//         success: function() {
-//             console.log('Score updated successfully.');
-//         },
-//         error: function(error) {
-//             console.error('Error updating score:', error);
-//         }
-//     });
-// }
 
 map.on('locationerror', onLocationError);
 
