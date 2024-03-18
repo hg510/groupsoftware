@@ -1,6 +1,7 @@
 // Author: Iona Cessford and Nur Deeni
 
 var beeImage = document.getElementById('beeImage');
+var petBar = document.getElementById('pet');
 
 // Function to update the pet bar
 function updatePetBar() {
@@ -9,7 +10,7 @@ function updatePetBar() {
   let petLevel = parseInt(petBar.style.width) || 0; // Get the current pet level
 
   // Increment the pet level
-  petLevel += 10; // Increase the pet level by 10 (adjust as needed)
+  petLevel += 5; // Increase the pet level by 10
   if (petLevel > maxPetLevel) {
       petLevel = maxPetLevel; // Ensure pet level doesn't exceed the maximum
   }
@@ -28,6 +29,10 @@ function pet(path) {
   beeImage.addEventListener('click', function() {
       // Change the image source to the pet image
       beeImage.src = petImagePath;
+
+      // Create an audio element for the pet sound
+      var petSound = new Audio('/static/sound/steve_giggle.wav');
+      petSound.play();
   
       setTimeout(function() {
           beeImage.src = path;
@@ -39,35 +44,23 @@ function pet(path) {
 
 // Function to update the health bar based on user's score
 function updateHealthBar(todayScore) {
-    const healthBar = document.getElementById('health');
-    const maxScore = 100; 
+  const healthBar = document.getElementById('health');
+  const maxScore = 13; 
 
-    // Calculate the width percentage based on today's score
-    const widthPercentage = (todayScore / maxScore) * 100;
+  // Calculate the width percentage based on today's score
+  const widthPercentage = (todayScore / maxScore) * 100;
 
-    // Set the width of the health bar
-    healthBar.style.width = widthPercentage + '%';
+  // Set the width of the health bar
+  healthBar.style.width = widthPercentage + '%';
 }
 
 var beeImage = document.getElementById('beeImage');
 
-// Pet function
-// function pet(path) {
-//     beeImage.addEventListener('click', function() {
-//       // Change the image source to the pet image
-//       beeImage.src = petImagePath;
-  
-//       setTimeout(function() {
-//         beeImage.src = path;
-//       }, 1000);
-//     });
-//   }
-  
   function emotion(score) {
     var scoreValue = 0;
     var beeImage = document.getElementById('beeImage');
-    var thresholdHappy = 80; // Define the threshold for happiness
-    var thresholdSad = 60;
+    var thresholdHappy = 60; // Define the threshold for happiness
+    var thresholdSad = 50;
   
     // Update the score value displayed
     scoreValue.textContent = score;
@@ -89,9 +82,7 @@ var beeImage = document.getElementById('beeImage');
     } else {
       pet(mehImagePath);
     }
-  }  
-
-
+  }
 
 // //chabges background based on season
 // var currentdate = new Date();
