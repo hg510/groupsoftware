@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         
             var newImage = new Image();
+            newImage.classList.add('swaying-flower');
             newImage.src = flowerPlantingImages[seedType];
         
             this.innerHTML = ''; 
@@ -127,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var originalSeed = originalContainer.querySelector('img[data-seedType="' + seedType + '"]');
                 if (originalSeed) {
                     originalContainer.removeChild(originalSeed);
+                    originalSeed.classList.remove('swaying-flower');
                 }
             }
 

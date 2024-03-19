@@ -12,24 +12,14 @@
   <link rel="stylesheet" href="{% static 'css/garden.css' %}">
   <link rel="stylesheet" href="{% static 'css/popup.css' %}">
   
-    <a href="{% url 'home' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-home" style="margin-right: 4px;"></i>
-      Home
-    </a>
-    <a href="{% url 'habit_tracker' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-home" style="margin-right: 4px;"></i>
-      Track Habits
-    </a>
-    <a href="{% url 'leaderboard' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
-      Leaderboard
-    </a>
+  <div class="container">
+    <a href="{% url 'home' %}" class="home-btn">Home</a>
+    <a href="{% url 'about' %}" class="home-btn">About Us</a> 
+    <a href="{% url 'garden' %}" class="home-btn">Virtual Garden</a> 
+    <a href="{% url 'habit_tracker' %}" class="home-btn">Track Habits</a>
+    <a href="{% url 'leaderboard' %}" class="home-btn">Leaderboard</a> 
+    <a href="{% url 'map' %}" class="home-btn">Map</a> 
+  </div>
 
     <script>
       var userId = "{{ user.id }}"; 
@@ -69,7 +59,7 @@
         <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square10" class="pot-image">
     </div>
     <ul>
-      <li id="draggable-container"></li>
+      <li id="draggable-container" class="seed"></li>
   </ul>  
 </div>
 
@@ -79,6 +69,12 @@
         <h3>Click on the bee to pet it! </h3>
         <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage" class="steve">
         <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
+
+        <script>
+            var scoreValue = parseFloat(document.getElementById("scoreValue").innerText);
+            document.getElementById("scoreValue").innerText = Math.ceil(scoreValue);
+        </script>
+
         <div class="health-bar">
             <div id="health" class="health"></div>
             <span class="heart">❤</span>
