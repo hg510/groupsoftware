@@ -8,6 +8,8 @@ import json
 from django.utils import timezone
 from datetime import timedelta
 from habittracker.utils import get_today_score
+from django.http import JsonResponse
+from .models import UserSeed
 
 def garden_view(request):
     # Remove expired seeds
@@ -73,3 +75,34 @@ def remove_expired_seeds():
     
     # Delete the expired seeds from the database
     expired_seeds.delete()
+
+
+def userSeeds(request):
+    if request.method == 'POST':
+        # Extract the chosen flower from the POST data
+        chosen_flower = request.POST.get('chosenFlower')
+
+        if chosen_flower:
+            # Save the chosen flower to the database
+            UserSeed.objects.create(chosen_flower=chosen_flower)
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Missing chosen flower data'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+def clearUserSeeds(request):
+    if request.method == 'POST':
+        # Clear the user seeds in the database
+        UserSeed.objects.all().delete()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+def updateDisplayedSeeds(request):
+    # Get all user seeds from the database
+    user_seeds = UserSeed.objects.all()
+    # Extract flower names from user seeds
+    userSeedsArray = [seed.chosen_flower for seed in user_seeds]
+    return JsonResponse({'userSeedsArray': userSeedsArray})

@@ -17,12 +17,12 @@ var seedIcon = L.icon({
 
 // creating seed markers scattered around on campus
 var markerLocations = [
-    { name: "Seed 1", location: [50.7362, -3.5307] },
-    { name: "Seed 2", location: [50.7348, -3.5374] },
-    { name: "Seed 3", location: [50.7366, -3.5333] },
-    { name: "Seed 4", location: [50.7340, -3.5316] },
-    { name: "Seed 5", location: [50.7355, -3.5358] },
-    { name: "Seed 6", location: [50.7367, -3.5369] }
+    { name: "lavender", location: [50.7362, -3.5307] },
+    { name: "vervain", location: [50.7348, -3.5374] },
+    { name: "chamomile", location: [50.7366, -3.5333] },
+    { name: "stjohn", location: [50.7340, -3.5316] },
+    { name: "betony", location: [50.7355, -3.5358] },
+    { name: "viper", location: [50.7367, -3.5369] }
 ];
 
 // adding a popup for the seeds, e.g., seed 1, seed 2, etc. 
@@ -68,9 +68,10 @@ map.on('locationfound', function(e) {
 
     markerLocations.forEach(function(seed) {
         var seedLocation = L.latLng(seed.location);
-        if (isNearSeed(userLocation, seedLocation)) {
-            clearRoutingControls();
-            updateScore(seed.name);
+        if (!isNearSeed(userLocation, seedLocation)) {
+            // clearRoutingControls();
+            // updateScore(seed.name); 
+            onSeedReached(seed.name);
         } else {
             addRouting(userLocation, seedLocation);
         }

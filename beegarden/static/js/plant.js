@@ -171,22 +171,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error('Error saving seed:', error));
     }    
 
-    function getCSRFToken() {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                // Search for CSRF token cookie
-                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
     document.addEventListener("DOMContentLoaded", function() {
         // Fetch planted seeds from the server
         fetchPlantedSeeds();
@@ -228,6 +212,22 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+    function getCSRFToken() {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Search for CSRF token cookie
+                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     // Author: Saida Amirova
 
@@ -312,7 +312,21 @@ document.addEventListener("DOMContentLoaded", function() {
         const flowerName = filename.split('.')[0];
         return flowerName;
     }   
+
     
+    // // Listen for messages from map.js
+    // window.addEventListener('seedReached', function(event) {
+    //     var reachedSeed = event.detail;
+    //     console.log("Received reached seed:", reachedSeed);
+    //     if (reachedSeed) {
+    //         // Handle the reached seed
+    //         userSeeds(reachedSeed);
+    //         // Clear the temporarily stored seed
+    //         localStorage.removeItem('reachedSeed');
+    //     }
+    // });
+    
+
     function handleImageClick(event) {
         console.log("Image clicked");
     
@@ -367,41 +381,103 @@ function randomSeed() {
     return chosenFlower;
 }
 
-// Initialize user seeds array if it doesn't exist in localStorage
-var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
+// // Initialize user seeds array if it doesn't exist in localStorage
+// var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
 
-// Function to add the chosen flower to the user's seeds array
 function userSeeds(chosenFlower) {
-    // Add the chosen flower to the user seeds array
-    userSeedsArray.push(chosenFlower);
-    // Store the updated user seeds array in localStorage
-    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-    console.log("User's seeds:", userSeedsArray);
+    // Send AJAX request to Django view to save the chosen flower
+    fetch('http://127.0.0.1:8000/garden/userSeeds/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({ chosenFlower: chosenFlower })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("User's seed saved successfully");
+        } else {
+            console.error('Failed to save user seed');
+        }
+    })
+    .catch(error => console.error('Error saving user seed:', error));
 }
 
-// Function to clear the user seeds array
+// // Function to add the chosen flower to the user's seeds array
+// function userSeeds(chosenFlower) {
+//     // Add the chosen flower to the user seeds array
+//     userSeedsArray.push(chosenFlower);
+//     // Store the updated user seeds array in localStorage
+//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+//     console.log("User's seeds:", userSeedsArray);
+// }
+
 function clearUserSeeds() {
-    // Empty the user seeds array
-    userSeedsArray = [];
-    // Update the localStorage to reflect the changes
-    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-    console.log("User's seeds cleared.");
+
+    // Send AJAX request to Django view to clear user seeds
+    fetch('http://127.0.0.1:8000/garden/clearUserSeeds/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("User's seeds cleared.");
+        } else {
+            console.error('Failed to clear user seeds');
+        }
+    })
+    .catch(error => console.error('Error clearing user seeds:', error));
 }
 
-// Function to update the displayed seed images based on userSeedsArray
+// // Function to clear the user seeds array
+// function clearUserSeeds() {
+//     // Empty the user seeds array
+//     userSeedsArray = [];
+//     // Update the localStorage to reflect the changes
+//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+//     console.log("User's seeds cleared.");
+// }
+
 function updateDisplayedSeeds() {
-    // Get the draggable container
-    var container = document.getElementById("draggable-container");
 
-    // Clear the existing content of the container
-    container.innerHTML = '';
+    fetch('http://127.0.0.1:8000/garden/updateDisplayedSeeds/')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Check what data you're getting
+        // Clear the existing displayed seeds
+        var container = document.getElementById("draggable-container");
+        container.innerHTML = '';
 
-    // Iterate over userSeedsArray
-    userSeedsArray.forEach(function(seedType) {
-        // Add the seed image to the container
-        addSeedImage(seedType);
-    });
+        // Extract the array from the response object
+        var userSeedsArray = data.userSeedsArray;
+
+        // Iterate over the fetched seeds and add them to the container
+        userSeedsArray.forEach(seed => {
+            addSeedImage(seed);
+        });
+    })
+    .catch(error => console.error('Error fetching user seeds:', error));
 }
+
+
+// // Function to update the displayed seed images based on userSeedsArray
+// function updateDisplayedSeeds() {
+//     // Get the draggable container
+//     var container = document.getElementById("draggable-container");
+
+//     // Clear the existing content of the container
+//     container.innerHTML = '';
+
+//     // Iterate over userSeedsArray
+//     userSeedsArray.forEach(function(seedType) {
+//         // Add the seed image to the container
+//         addSeedImage(seedType);
+//     });
+// }
 
 // Function to add a seed image to the draggable container
 function addSeedImage(seedType) {
@@ -429,7 +505,7 @@ function assignAndDisplay(){
     updateDisplayedSeeds();
 
     // Clear user seeds
-    clearUserSeeds();
+    // clearUserSeeds();
 
 }
 
