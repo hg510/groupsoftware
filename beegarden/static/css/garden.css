@@ -245,7 +245,7 @@ li.over {
 #draggable-container {
   position: fixed;
   bottom: 50px; 
-  left: 35%; 
+  left: 5%; 
   transform: translateX(-50%);
 }
 
@@ -450,21 +450,22 @@ li.over {
 
 @keyframes sway {
   0% {
-    transform: rotateZ(0deg);
+    transform: rotateZ(-5deg) translateY(-1px);
   }
   50% {
-    transform: rotateZ(10deg);
+    transform: rotateZ(5deg) translateY(1px);
   }
   100% {
-    transform: rotateZ(0deg);
+    transform: rotateZ(-5deg) translateY(-1px);
   }
 }
 
+
 .seed {
-  animation: sway 4s ease-in-out infinite alternate;
+  animation: sway 7s ease-in-out infinite alternate;
 }
 
-@keyframes sway {
+@keyframes flower-sway {
   0% {
     transform: rotateZ(0deg);
   }
@@ -477,7 +478,7 @@ li.over {
 }
 
 .small-square {
-  animation: sway 6s ease-in-out infinite alternate;
+  animation: flower-sway 6s ease-in-out infinite alternate;
 }
 
 .square-container {
