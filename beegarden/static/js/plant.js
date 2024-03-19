@@ -7,6 +7,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     console.log("DOM plant content loaded");
+    var authToken = "{{ auth_token }}"; 
     fetchPlantedSeeds();
     
     var addEvent = (function () {
@@ -111,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         
             var newImage = new Image();
+            newImage.classList.add('swaying-flower');
             newImage.src = flowerPlantingImages[seedType];
         
             this.innerHTML = ''; 
@@ -126,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var originalSeed = originalContainer.querySelector('img[data-seedType="' + seedType + '"]');
                 if (originalSeed) {
                     originalContainer.removeChild(originalSeed);
+                    originalSeed.classList.remove('swaying-flower');
                 }
             }
 
@@ -192,11 +195,25 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchPlantedSeeds();
     });
 
+    // var authToken = null;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch the authentication token from the template
+        authToken = "{{ auth_token }}"; 
+    });
+
+    function getAuthToken() {
+        // Return the authentication token from the template
+        return authToken;
+    }
+
     function fetchPlantedSeeds() {
         fetch('http://127.0.0.1:8000/garden/load_planted_seeds/', {
+            method: 'GET',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': getCSRFToken()
+                'X-CSRFToken': getCSRFToken(),
+                'Authorization': 'Bearer ' + getAuthToken()
             }
         })
         .then(response => response.json())
@@ -205,8 +222,8 @@ document.addEventListener("DOMContentLoaded", function() {
             renderPlantedSeeds(data);
         })
         .catch(error => console.error('Error fetching planted seeds:', error));
-    }
-
+    }    
+    
     function renderPlantedSeeds(seeds) {
         if (!Array.isArray(seeds)) {
             console.error("Invalid data format for planted seeds:", seeds);
@@ -433,3 +450,4 @@ function assignAndDisplay(){
 }
 
 assignAndDisplay();
+clearUserSeeds();

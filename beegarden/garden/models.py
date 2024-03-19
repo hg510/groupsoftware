@@ -14,7 +14,7 @@ class PlantedSeed(models.Model):
     seed_type = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     planted_at = models.DateTimeField(default=timezone.now)
-    # planted_by = models.ForeignKey(User, on_delete=models.CASCADE) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.seed_type} at {self.position}"
