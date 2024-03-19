@@ -1,55 +1,32 @@
 /* Author: Saida Amirova */
 
 .popup {
-    width: 15%;
+    width: 15%; 
     height: 50%;
-    background-color: rgb(255, 249, 142);
-    border: black solid;
-    position: relative;
+    background-color: rgb(255, 249, 142); 
+    border: black solid;   
+    position: relative; 
     display: none;
-    overflow: hidden; 
-  }
-  
-  .popup-content {
-    display: flex;
-    padding: 20px;
-    align-items: stretch;
-  }
-  
-  #closeButton {
-    color: black;
+}
+
+#closeButton {
+    color: black;   
     position: absolute;
-    top: 10px;
-    right: 10px;
+    left: 0;
     cursor: pointer;
-  }
-  
-  .real-plant {
-    max-height: 200px; 
-    max-width: 200px; 
-    width: auto; 
-    height: auto; 
-  }
-  
-  .flower-info {
-    flex: 1; 
-  }
-  
-  .flower-info p {
-    color: #333;
+}
+
+.real-plant {
+    height: 200px;
+    width: 200px;
+    border: black solid;
+    margin-left: 60%;
+    margin-right: 30%;
+    margin-top: 5%;
+}
+
+/* Styling for flower information */
+#flowerInfo {
     font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  .image-container {
-    width: 500px; 
-    align-items: center;
-  }
-  
-  /* Adjustments for smaller screens */
-  @media (max-width: 768px) {
-    .popup {
-      width: 80%;
-    }
-  }
-  
+    margin: 20px; /* Adjust margin as needed */
+}

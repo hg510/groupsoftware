@@ -357,4 +357,10 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python,windows,macos,linux,visualstudiocode
-beegarden/db.sqlite3
+beegarden/accounts/__pycache__/models.cpython-312.pyc
+beegarden/accounts/__pycache__/models.cpython-312.pyc
+*.pyc
+*.pyc
+*.pyc
+beegarden/accounts/__pycache__/urls.cpython-312.pyc
+beegarden/accounts/__pycache__/views.cpython-312.pyc

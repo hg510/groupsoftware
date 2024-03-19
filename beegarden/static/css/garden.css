@@ -20,14 +20,13 @@ body {
   font-family: "Pixelify Sans", sans-serif;
 }
 
-h1 {
-  width: 600px;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: rgb(29, 26, 21);
-  text-shadow: 0 0 3px #0fb230, 0 0 5px #df933c;
-  font-weight: 300px;
+
+h1{
+  text-align: left; 
+  font-weight: 200;
   font-size: 80px;
-  color: #eef661;
+  /* border: solid black;
+  background-color: rgb(255, 249, 142); */
   font-family: "Pixelify Sans", sans-serif;
   white-space: nowrap;
   position: absolute;
@@ -42,9 +41,8 @@ h1 span {
 
 
 .holder{
-  width: 1265px;
+  width: 600px;
   margin: 0px auto;
-  margin-top: 40px;
 }
 
 li {
@@ -65,7 +63,7 @@ li a {
 }
 
 img:not([id^="pot-image"]) {
-  width: 133px; 
+  width: 100px; 
   height: auto; 
 }
 
@@ -246,8 +244,8 @@ li.over {
 
 #draggable-container {
   position: fixed;
-  bottom: 1%; 
-  left: 8%; 
+  bottom: 50px; 
+  left: 35%; 
   transform: translateX(-50%);
 }
 
@@ -269,7 +267,7 @@ li.over {
 #beeemotions {
   position: absolute;
   top: 50%;
-  right: 5.3%;
+  right: 40px;
   transform: translateY(-50%);
   border-radius: 20px;
   background-color: #FFFFCC;
@@ -346,7 +344,6 @@ li.over {
   border-radius: 15px; 
   position: relative;
   margin: 20px auto;
-  
   overflow: hidden; 
 }
 
@@ -356,7 +353,6 @@ li.over {
   width: 100%;
   transition: width 0.3s ease-in-out;
   border-radius: 14px;
-  
 }
 
 .icon {

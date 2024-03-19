@@ -67,7 +67,7 @@
       <div class="content">
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
-        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage" class="steve">
+        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
         <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
 
         <script>
@@ -108,12 +108,58 @@
 
     <div class="popup">
       <div id="closeButton" onclick="closePopup()">&times;</div>
-      <div class="popup-content">
-        <div class="flower-info"></div>
-        <div class="image-container">
-          <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
-        </div>
-      </div>
-    </div>
-    
+      <p>
+        This is a popup window!
+        information about the plant...
+      </p>  
+      <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+    </div>    
+
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/popup.js' %}"></script>
+
+
+  <script>
+  //changes the background seasonally
+
+  var winterPath = "{% static 'img/backgroundwinter.png' %}";
+  var springPath = "{% static 'img/backgroundspring.png' %}";
+  var summerPath = "{% static 'img/backgroundsummer.png' %}";
+  var autumnPath = "{% static 'img/backgroundautumn.png' %}";
+
+  </script>
+  <script src="{% static 'js/background.js' %}"></script>
+  <script>
+  changeBackground();
+  </script>
+
+<style>
+.fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+}
+
+.shake {
+    animation: shakeAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shakeAnimation {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+</style>
   <script src="{% static 'js/plant.js' %}"></script>
+
