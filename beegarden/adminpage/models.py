@@ -12,11 +12,16 @@ class HabitRequest(models.Model):
     reviewed = models.BooleanField(default=False, verbose_name="Reviewed")
     status = models.CharField(max_length=10, choices=[('pending', 'Pending'), ('approved', 'Approved'), ('rejected', 'Rejected')], default='pending')
     number_of_habits = models.IntegerField(default=0)
-    
+
     class Meta:
         verbose_name = "Habit Request"
         verbose_name_plural = "Habit Requests"
 
 
+class UserSeedAward(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    awarded = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = ('user', 'awarded')
 

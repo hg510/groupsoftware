@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log("DOM plant content loaded");
     fetchPlantedSeeds();
+    checkForSeedAward();
     
     var addEvent = (function () {
         if (document.addEventListener) {
@@ -418,6 +419,16 @@ function addSeedImage(seedType) {
     document.getElementById('draggable-container').appendChild(newImg);
 }
 
+// function assignAndDisplay() {
+//     return new Promise((resolve, reject) => {
+//         var randomFlower = randomSeed(); 
+//         userSeeds(randomFlower);  
+//         updateDisplayedSeeds();
+//         resolve(); // Resolve the Promise once the seeds are assigned and displayed
+//     });
+// }
+
+
 function assignAndDisplay(){
     
     // Call randomSeed and userSeeds functions
@@ -432,4 +443,52 @@ function assignAndDisplay(){
 
 }
 
-assignAndDisplay();
+
+function checkForSeedAward() {
+    fetch('/check_for_seed_award/', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.hasAward) {
+                assignAndDisplay().then(() => {
+                    clearAwardFlag(); // Call clearAwardFlag here after assignAndDisplay
+                });
+            }
+        })
+        .catch(error => console.error('Error checking for seed award:', error));
+}
+
+
+function clearAwardFlag() {
+    fetch('/clear_seed_award/', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'X-CSRFToken': getCSRFToken(), // Ensure you're getting the CSRF token correctly
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Seed award flag cleared successfully.');
+        }
+    })
+    .catch(error => console.error('Error clearing seed award flag:', error));
+}
+
+function getCSRFToken() {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken=')) {
+                cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
