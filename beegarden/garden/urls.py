@@ -10,4 +10,5 @@ urlpatterns = [
     path('userSeeds/', views.userSeeds, name='userSeeds'),  
     path('clearUserSeeds/', views.clearUserSeeds, name='clearUserSeeds'),    
     path('updateDisplayedSeeds/', views.updateDisplayedSeeds, name='updateDisplayedSeeds'),   
+    path('award_seed/', views.award_seed, name='award_seed'),   
 ]

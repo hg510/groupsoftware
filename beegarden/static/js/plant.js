@@ -381,9 +381,6 @@ function randomSeed() {
     return chosenFlower;
 }
 
-// // Initialize user seeds array if it doesn't exist in localStorage
-// var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
-
 function userSeeds(chosenFlower) {
     // Send AJAX request to Django view to save the chosen flower
     fetch('http://127.0.0.1:8000/garden/userSeeds/', {
@@ -403,15 +400,6 @@ function userSeeds(chosenFlower) {
     })
     .catch(error => console.error('Error saving user seed:', error));
 }
-
-// // Function to add the chosen flower to the user's seeds array
-// function userSeeds(chosenFlower) {
-//     // Add the chosen flower to the user seeds array
-//     userSeedsArray.push(chosenFlower);
-//     // Store the updated user seeds array in localStorage
-//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-//     console.log("User's seeds:", userSeedsArray);
-// }
 
 function clearUserSeeds() {
 
@@ -433,15 +421,6 @@ function clearUserSeeds() {
     .catch(error => console.error('Error clearing user seeds:', error));
 }
 
-// // Function to clear the user seeds array
-// function clearUserSeeds() {
-//     // Empty the user seeds array
-//     userSeedsArray = [];
-//     // Update the localStorage to reflect the changes
-//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-//     console.log("User's seeds cleared.");
-// }
-
 function updateDisplayedSeeds() {
 
     fetch('http://127.0.0.1:8000/garden/updateDisplayedSeeds/')
@@ -462,22 +441,6 @@ function updateDisplayedSeeds() {
     })
     .catch(error => console.error('Error fetching user seeds:', error));
 }
-
-
-// // Function to update the displayed seed images based on userSeedsArray
-// function updateDisplayedSeeds() {
-//     // Get the draggable container
-//     var container = document.getElementById("draggable-container");
-
-//     // Clear the existing content of the container
-//     container.innerHTML = '';
-
-//     // Iterate over userSeedsArray
-//     userSeedsArray.forEach(function(seedType) {
-//         // Add the seed image to the container
-//         addSeedImage(seedType);
-//     });
-// }
 
 // Function to add a seed image to the draggable container
 function addSeedImage(seedType) {

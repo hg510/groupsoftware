@@ -116,3 +116,15 @@ def updateDisplayedSeeds(request):
         return JsonResponse({'userSeedsArray': userSeedsArray})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+    
+def award_seed(request):
+    if request.method == 'POST':
+        seed_name = request.POST.get('seed_name')
+        try:
+            # Create a UserSeed object and save it to the database
+            user_seed = UserSeed(chosen_flower=seed_name)
+            user_seed.save()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

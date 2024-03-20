@@ -33,10 +33,6 @@ markerLocations.forEach(function(seed) {
 
 map.locate({setView: true, maxZoom: 16});
 
-// Define an array to store routing control instances for each seed
-var routingControls = [];
-
-
 function addRouting(userLocation, seedLocation) {
     var control = L.Routing.control({
         waypoints: [
@@ -46,17 +42,8 @@ function addRouting(userLocation, seedLocation) {
         routeWhileDragging: true,
         show: false
     }).addTo(map);
-    
-    routingControls.push(control);
+  
 }
-
-function clearRoutingControls() {
-    routingControls.forEach(function(control) {
-        map.removeControl(control);
-    });
-    routingControls = [];
-}
-
 
 function isNearSeed(userLocation, seedLocation) {
     var distance = userLocation.distanceTo(seedLocation);
@@ -68,15 +55,40 @@ map.on('locationfound', function(e) {
 
     markerLocations.forEach(function(seed) {
         var seedLocation = L.latLng(seed.location);
-        if (!isNearSeed(userLocation, seedLocation)) {
-            // clearRoutingControls();
-            // updateScore(seed.name); 
-            onSeedReached(seed.name);
+        if (isNearSeed(userLocation, seedLocation)) {
+            awardSeedToUser(seed.name); 
+            updateScore();
         } else {
             addRouting(userLocation, seedLocation);
         }
     });
 }); 
+
+function awardSeedToUser(seedName) {
+    // Send an AJAX request to award the seed to the user
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajax({
+        url: 'http://127.0.0.1:8000/garden/award_seed/', 
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken  // Include the CSRF token in the headers
+        },
+        data: {
+            seed_name: seedName
+        },
+        success: function(response) {
+            if (response.success) {
+                console.log('Seed awarded successfully.');
+            } else {
+                console.error('Error awarding seed:', response.error);
+            }
+        },
+        error: function(error) {
+            console.error('Error awarding seed:', error);
+        }
+    });
+}
 
 // Function to update the user's score
 function updateScore() {
