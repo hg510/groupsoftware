@@ -7,6 +7,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     console.log("DOM plant content loaded");
+    var images = document.querySelectorAll('ul li img');
     fetchPlantedSeeds();
     
     var addEvent = (function () {
@@ -39,16 +40,24 @@ document.addEventListener("DOMContentLoaded", function() {
     yum.style.opacity = 1;
 
     // Selects all image elements within list items of unordered lists
-    var images = document.querySelectorAll('ul li img');
+    // var images = document.querySelectorAll('ul li img');
+
+    console.log(images);
+
+    console.log("Before for loop");
 
     // Iterates over each image element
-    for (var i = 0; i < images.length; i++) {
+    for (var i = 0; i > images.length; i++) {
+        console.log("Inside for loop for loop");
         (function() {
             var img = images[i];
             img.setAttribute('draggable', 'true');
             
             // Extract seed type from image source URL
             var seedType = img.src.split('/').pop().split('_')[0];
+
+            console.log('Image source:', img.src);
+            console.log('Extracted seed type:', seedType);
             
             // Set seed type as a data attribute
             img.dataset.seedType = seedType;
@@ -58,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
             img.addEventListener('dragstart', function (e) {
                 e.dataTransfer.effectAllowed = 'copy';
-                e.dataTransfer.setData('seedType', this.dataset.seedType);
+                var seedType = this.dataset.seedType;
+                e.dataTransfer.setData('seedType', seedType);
                 e.dataTransfer.setData('originalContainer', this.parentElement.id);
             });
         })();
@@ -92,7 +102,10 @@ document.addEventListener("DOMContentLoaded", function() {
         square.addEventListener('drop', function (e) {
             e.preventDefault();
             
-            var seedType = e.dataTransfer.getData('seedType');
+            // var seedType = e.dataTransfer.getData('seedType');
+            var seedType = e.dataTransfer.getData('text/plain');
+
+            console.log("New: ", seedType);
             var position = this.id;
 
             savePlantedSeed(seedType,position);
@@ -478,6 +491,13 @@ function addSeedImage(seedType) {
     newImg.setAttribute('draggable', true);
     // Add the 'seed' class to the image
     newImg.classList.add('seed');
+    
+    // Attach a dragstart event listener
+    newImg.addEventListener('dragstart', function(event) {
+        // Set the drag data (seed type)
+        event.dataTransfer.setData('text/plain', seedType);
+    });
+    
     // Append the image to the draggable container
     document.getElementById('draggable-container').appendChild(newImg);
 }

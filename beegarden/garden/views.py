@@ -116,4 +116,3 @@ def updateDisplayedSeeds(request):
         return JsonResponse({'userSeedsArray': userSeedsArray})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-
