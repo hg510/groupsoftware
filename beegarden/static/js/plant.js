@@ -5,117 +5,9 @@
 // This function ensures cross-browser compatibility for attaching event listeners to DOM elements.
 
 document.addEventListener("DOMContentLoaded", function() {
+
     console.log("DOM plant content loaded");
-
-    // Fetch planted seeds and check for new seed awards on page load
     fetchPlantedSeeds();
-    checkForNewSeed();
-
-    function getAuthToken() {
-        // Extract the auth token as needed. If not used, this can be removed.
-        return "{{ auth_token }}";
-    }
-
-    // Function to fetch CSRF token for secure AJAX requests
-    function getCSRFToken() {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken=')) {
-                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    // Function to fetch planted seeds from the server
-    function fetchPlantedSeeds() {
-        fetch('http://127.0.0.1:8000/garden/load_planted_seeds/', {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': getCSRFToken(),
-                'Authorization': 'Bearer ' + getAuthToken()
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Planted seeds data: ", data);
-            renderPlantedSeeds(data);
-        })
-        .catch(error => console.error('Error fetching planted seeds:', error));
-    }    
-
-    function renderPlantedSeeds(seeds) {
-        if (!Array.isArray(seeds)) {
-            console.error("Invalid data format for planted seeds:", seeds);
-            return;
-        }
-    
-        console.log("Rendering planted seeds: ", seeds);
-
-
-        console.log("Before");
-
-        seeds.forEach(seed => {
-            console.log("After");
-            const square = document.getElementById(seed.position);
-            const newImage = new Image();
-            newImage.src = `/static/img/flowers/${seed.seed_type}.png`;
-            square.innerHTML = '';
-            square.appendChild(newImage);
-        });
-    }
-
-    // Function to check for new seed award
-    function checkForNewSeed() {
-        fetch('/check_for_seed_award/', {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': getCSRFToken()
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.hasNewSeed && data.seedType) {
-                displayNewSeedOption(data.seedType);
-            }
-        })
-        .catch(error => console.error('Error checking for new seed:', error));
-    }
-    
-
-    // Function to display the new seed option
-    function displayNewSeedOption(seedType) {
-        // Assuming seedType is the type of seed awarded, and you have predefined images for each seed type
-        const availableSeedsContainer = document.getElementById('available-seeds');
-        if (availableSeedsContainer) {
-            const newSeedImg = document.createElement('img');
-            newSeedImg.src = `/static/img/seeds/${seedType}_seed.png`; // Adjust path as necessary
-            newSeedImg.dataset.seedType = seedType; // Custom data attribute to store seed type
-            newSeedImg.classList.add('draggable-seed'); // Assuming you have CSS for this
-            newSeedImg.setAttribute('draggable', true);
-    
-            // Add dragstart event listener to new seed
-            newSeedImg.addEventListener('dragstart', function(e) {
-                e.dataTransfer.effectAllowed = 'copy';
-                e.dataTransfer.setData('seedType', this.dataset.seedType);
-            });
-    
-            availableSeedsContainer.appendChild(newSeedImg);
-        }
-    }
-    
-
-
-    var authToken = "{{ auth_token }}"; 
-
-    // All additional event listeners and functions related to drag-and-drop functionality
     
     var addEvent = (function () {
         if (document.addEventListener) {
@@ -219,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         
             var newImage = new Image();
-            newImage.classList.add('swaying-flower');
             newImage.src = flowerPlantingImages[seedType];
         
             this.innerHTML = ''; 
@@ -235,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 var originalSeed = originalContainer.querySelector('img[data-seedType="' + seedType + '"]');
                 if (originalSeed) {
                     originalContainer.removeChild(originalSeed);
-                    originalSeed.classList.remove('swaying-flower');
                 }
             }
 
@@ -258,9 +148,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function savePlantedSeed(seedType, position) {
-        console.log("Saving seed: ", seedType, " at position: ", position);
-        // console.log("Flower type: ", seedType);
-        // console.log("At position: ", position);
+        
+        console.log("Flower type: ", seedType);
+        console.log("At position: ", position);
         
         fetch('http://127.0.0.1:8000/garden/save_planted_seed/', {
             method: 'POST',
@@ -281,26 +171,63 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error('Error saving seed:', error));
     }    
 
-
     document.addEventListener("DOMContentLoaded", function() {
         // Fetch planted seeds from the server
         fetchPlantedSeeds();
     });
 
-    // var authToken = null;
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Fetch the authentication token from the template
-        authToken = "{{ auth_token }}"; 
-    });
-
-    function getAuthToken() {
-        // Return the authentication token from the template
-        return authToken;
+    function fetchPlantedSeeds() {
+        fetch('http://127.0.0.1:8000/garden/load_planted_seeds/', {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCSRFToken()
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Planted seeds data: ", data);
+            renderPlantedSeeds(data);
+        })
+        .catch(error => console.error('Error fetching planted seeds:', error));
     }
 
+    function renderPlantedSeeds(seeds) {
+        if (!Array.isArray(seeds)) {
+            console.error("Invalid data format for planted seeds:", seeds);
+            return;
+        }
+    
+        console.log("Rendering planted seeds: ", seeds);
 
+
+        console.log("Before");
+
+        seeds.forEach(seed => {
+            console.log("After");
+            const square = document.getElementById(seed.position);
+            const newImage = new Image();
+            newImage.src = `/static/img/flowers/${seed.seed_type}.png`;
+            square.innerHTML = '';
+            square.appendChild(newImage);
+        });
+    }
 });
+
+    function getCSRFToken() {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Search for CSRF token cookie
+                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     // Author: Saida Amirova
 
@@ -316,34 +243,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
         switch(seedType) {
             case 'betony':
-                popupContent = ' This is Betony popup';
+                popupContent = 'Betony can last from early-summer to autumn. It is an important source of nectar that is extremely attractive to bees and many species of butterflies. Its bright colour also lures bees in. Betony thrives in a sunny to semi-sunny or shady location and most well-drained soils. It can cope well with heavy clay and locations such as grasslands, open woodlands, and hedgerows, making it an excellent garden plant.';
                 break;
             case 'chamomile':
-                popupContent = 'This is Chamomile popup';
+                popupContent = 'Chamomile blooms in spring and summer. Since chamomile has sweet nectar, fragrant leaves, and is easy to spread and grow, it is loved by bees and other pollinators. Chamomile prefers plenty of sun and light soil that drains freely but does not dry out totally quickly or get waterlogged. While it grows quickly, it needs protection from slugs and snails during its young phase.';
                 break;
             case 'hops':
-                popupContent = 'This is Hops popup';
+                popupContent = 'Hops’ Early varieties start to bloom around the summer solstice while its Alpha varieties tend to bloom later in midsummer. Its nectar does not have sweet scent, making bees generally not interested in it. But bees can depend on it when needed. Hops needs plenty of climbing space in a sunny location with well-draining soil. Ideally, some shade should be provided during the hot afternoon hours.';
                 break;
             case 'lavender':
-                popupContent = 'This is Lavender popup';
+                popupContent = 'Lavender usually blooms from early summer and last until late summer. Due to long bloomer period and abundant amount of nectar and pollen, it is a great and classic source of food for bees. Bees are also attracted to its colourful and fragrant flowers. Lavender needs full sun and well-drained soil to grow best. It prefers low to moderately-fertile soils. Afternoon shade may help in the hot summer climates.';
                 break;
             case 'passion':
-                popupContent = 'This is Passion popup';
+                popupContent = 'Passion flower blooms from early summer through to autumn. It has vibrant colour produce both nectar and pollen, resulting in a vast range of pollinators from insects to hummingbirds. It is deeply loved by the honey bee as it is not only their food source but also hiding spot and gathering place. Passionflower grows best in a sunny spot with the little shelter, and moist but well-drained soil. Most of them also produce edible fruits.';
                 break;
             case 'skullcap':
-                popupContent = 'This is Skullcap popup';
+                popupContent = 'Skullcap blooms during summer and produce nectar and pollen rich flower. Therefore, it becomes a food source of the long-tongued bees. It also attracts a wide range of other insects such as butterflies, leafcutters, and beetles. Skullcap thrives best in partial shade and fertile soil that is moist but not waterlogged. Once the seedlings are established, it is known to spread quickly.';
                 break;
             case 'stjohn':
-                popupContent = 'This is St John\s popup';
+                popupContent = 'St. John’s Wort usually bloom around early-summer or midsummer to early autumn. It has rich amount of nectar and pollen that attracts pollinators especially bees and butterflies. St. John’s Wort has diverse species that come with different requirements. In general, a good planting site for it is a sunny to semi-shady spot with humus-rich well-drained soil.';
                 break;
             case 'valerian':
-                popupContent = 'This is Valerian popup';
+                popupContent = 'Valerian blooms during summer and produce extremely fragrant flowers, making it a great source of nectar that attracts pollinators like Honeybees, Bumblebees, and Solitary bees, including butterflies and moths. Interestingly, cats also appreciate its smell. Valerian thrives best in full sun with consistently moist condition, and soil consisting of fertile loam. However, it can adapt to less ideal circumstance.';
                 break;
             case 'vervain':
-                popupContent = 'This is Vervain popup';
+                popupContent = 'Vervain blooms from late spring to early fall. As it blooms late and profusely, vervain offers both and great amount of nectar and pollen at the time when pollinators, especially bumblebees, are preparing for the coming of fall. Plus, vibrant colour makes it even more desirable for bees. Vervain needs full sun to part shade and average to moist soils to grow. It tolerates wet sites better than most plants.';
                 break;
             case 'viper':
-                popupContent = 'This is Viper popup';
+                popupContent = 'Vipers Bugloss has a long blooming period from sprint to autumn. It produces energy rich nectars regularly throughout the day. Therefore, it attracts all sorts of bees while butterfly and moths also love it. Vipers Bugloss thrives in warm, sunny, dry place and can often be found on dry, ruderal areas. Therefore, the ideal way to plant it is under plenty of sun in a sandy, stony, or gravelly spot. ';
                 break;
             default:
                 popupContent = 'Information about the plant...';
@@ -351,8 +278,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         popup.innerHTML = `
         <div id="closeButton" onclick="closePopup()">&times;</div>
-        <p>${popupContent}</p>  
-        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}">`;
+        <p class="flower-info">${popupContent}</p>  
+        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
+        
 
         var popupX = 100;
         var popupY = 100; 
@@ -383,8 +311,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const filename = parts[parts.length - 1];
         const flowerName = filename.split('.')[0];
         return flowerName;
-    }   
+    }  
     
+
     function handleImageClick(event) {
         console.log("Image clicked");
     
@@ -439,41 +368,103 @@ function randomSeed() {
     return chosenFlower;
 }
 
-// Initialize user seeds array if it doesn't exist in localStorage
-var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
+// // Initialize user seeds array if it doesn't exist in localStorage
+// var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
 
-// Function to add the chosen flower to the user's seeds array
 function userSeeds(chosenFlower) {
-    // Add the chosen flower to the user seeds array
-    userSeedsArray.push(chosenFlower);
-    // Store the updated user seeds array in localStorage
-    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-    console.log("User's seeds:", userSeedsArray);
+    // Send AJAX request to Django view to save the chosen flower
+    fetch('http://127.0.0.1:8000/garden/userSeeds/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({ chosenFlower: chosenFlower })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("User's seed saved successfully");
+        } else {
+            console.error('Failed to save user seed');
+        }
+    })
+    .catch(error => console.error('Error saving user seed:', error));
 }
 
-// Function to clear the user seeds array
+// // Function to add the chosen flower to the user's seeds array
+// function userSeeds(chosenFlower) {
+//     // Add the chosen flower to the user seeds array
+//     userSeedsArray.push(chosenFlower);
+//     // Store the updated user seeds array in localStorage
+//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+//     console.log("User's seeds:", userSeedsArray);
+// }
+
 function clearUserSeeds() {
-    // Empty the user seeds array
-    userSeedsArray = [];
-    // Update the localStorage to reflect the changes
-    localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-    console.log("User's seeds cleared.");
+
+    // Send AJAX request to Django view to clear user seeds
+    fetch('http://127.0.0.1:8000/garden/clearUserSeeds/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("User's seeds cleared.");
+        } else {
+            console.error('Failed to clear user seeds');
+        }
+    })
+    .catch(error => console.error('Error clearing user seeds:', error));
 }
 
-// Function to update the displayed seed images based on userSeedsArray
+// // Function to clear the user seeds array
+// function clearUserSeeds() {
+//     // Empty the user seeds array
+//     userSeedsArray = [];
+//     // Update the localStorage to reflect the changes
+//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
+//     console.log("User's seeds cleared.");
+// }
+
 function updateDisplayedSeeds() {
-    // Get the draggable container
-    var container = document.getElementById("draggable-container");
 
-    // Clear the existing content of the container
-    container.innerHTML = '';
+    fetch('http://127.0.0.1:8000/garden/updateDisplayedSeeds/')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Check what data you're getting
+        // Clear the existing displayed seeds
+        var container = document.getElementById("draggable-container");
+        container.innerHTML = '';
 
-    // Iterate over userSeedsArray
-    userSeedsArray.forEach(function(seedType) {
-        // Add the seed image to the container
-        addSeedImage(seedType);
-    });
+        // Extract the array from the response object
+        var userSeedsArray = data.userSeedsArray;
+
+        // Iterate over the fetched seeds and add them to the container
+        userSeedsArray.forEach(seed => {
+            addSeedImage(seed);
+        });
+    })
+    .catch(error => console.error('Error fetching user seeds:', error));
 }
+
+
+// // Function to update the displayed seed images based on userSeedsArray
+// function updateDisplayedSeeds() {
+//     // Get the draggable container
+//     var container = document.getElementById("draggable-container");
+
+//     // Clear the existing content of the container
+//     container.innerHTML = '';
+
+//     // Iterate over userSeedsArray
+//     userSeedsArray.forEach(function(seedType) {
+//         // Add the seed image to the container
+//         addSeedImage(seedType);
+//     });
+// }
 
 // Function to add a seed image to the draggable container
 function addSeedImage(seedType) {
@@ -506,492 +497,3 @@ function assignAndDisplay(){
 }
 
 assignAndDisplay();
-
-// document.addEventListener("DOMContentLoaded", function() {
-
-//     console.log("DOM plant content loaded");
-//     fetchPlantedSeeds();
-//     checkForSeedAward();
-    
-//     var addEvent = (function () {
-//         if (document.addEventListener) {
-//             return function (el, type, fn) {
-//                 if (el && el.nodeName || el === window) {
-//                     el.addEventListener(type, fn, false);
-//                 } else if (el && el.length) {
-//                     for (var i = 0; i < el.length; i++) {
-//                         addEvent(el[i], type, fn);
-//                     }
-//                 }
-//             };
-//         } else {
-//             return function (el, type, fn) {
-//                 if (el && el.nodeName || el === window) {
-//                     el.attachEvent('on' + type, function () { return fn.call(el, window.event); });
-//                 } else if (el && el.length) {
-//                     for (var i = 0; i < el.length; i++) {
-//                         addEvent(el[i], type, fn);
-//                     }
-//                 }
-//             };
-//         }
-//     })();
-
-//     // Creates a paragraph element
-//     var yum = document.createElement('p');
-//     var msie = /*@cc_on!@*/0;
-//     yum.style.opacity = 1;
-
-//     // Selects all image elements within list items of unordered lists
-//     var images = document.querySelectorAll('ul li img');
-
-//     // Iterates over each image element
-//     for (var i = 0; i < images.length; i++) {
-//         (function() {
-//             var img = images[i];
-//             img.setAttribute('draggable', 'true');
-            
-//             // Extract seed type from image source URL
-//             var seedType = img.src.split('/').pop().split('_')[0];
-            
-//             // Set seed type as a data attribute
-//             img.dataset.seedType = seedType;
-
-//             //Pass the flower name
-//             img.dataset.flowerName = seedType;            
-    
-//             img.addEventListener('dragstart', function (e) {
-//                 e.dataTransfer.effectAllowed = 'copy';
-//                 e.dataTransfer.setData('seedType', this.dataset.seedType);
-//                 e.dataTransfer.setData('originalContainer', this.parentElement.id);
-//             });
-//         })();
-//     }    
-
-//     // Selects all elements with the class 'small-square'
-//     var smallSquares = document.querySelectorAll('.small-square');
-
-//     // Iterates over each element with the class 'small-square'
-//     for (var i = 0; i < smallSquares.length; i++) {
-
-//         var dropSound = new Audio("/static/sound/planting_effect.mp3");
-//         var square = smallSquares[i];
-        
-//         square.addEventListener('dragover', function (e) {
-//             if (e.preventDefault) e.preventDefault();
-//             this.classList.add('over');
-//             e.dataTransfer.dropEffect = 'copy';
-//             return false;
-//         });
-
-//         square.addEventListener('dragenter', function (e) {
-//             this.classList.add('over');
-//             return false;
-//         });
-
-//         square.addEventListener('dragleave', function () {
-//             this.classList.remove('over');
-//         });
-
-//         square.addEventListener('drop', function (e) {
-//             e.preventDefault();
-            
-//             var seedType = e.dataTransfer.getData('seedType');
-//             var position = this.id;
-
-//             savePlantedSeed(seedType,position);
-            
-//             var flowerPlantingImages = {                
-//                 betony: "/static/img/flowers/betony.png",
-//                 chamomile: "/static/img/flowers/chamomile.png",
-//                 hops: "/static/img/flowers/hops.png",
-//                 lavender: "/static/img/flowers/lavender.png",
-//                 passion: "/static/img/flowers/passion.png",
-//                 skullcap: "/static/img/flowers/skullcap.png",
-//                 stjohn: "/static/img/flowers/stjohn.png",
-//                 valerian: "/static/img/flowers/valerian.png",
-//                 vervain: "/static/img/flowers/vervain.png",
-//                 viper: "/static/img/flowers/viper.png"
-//             };
-        
-//             var newImage = new Image();
-//             newImage.src = flowerPlantingImages[seedType];
-        
-//             this.innerHTML = ''; 
-//             this.appendChild(newImage);
-        
-//             var yumClone = yum.cloneNode(true);
-//             this.appendChild(yumClone);
-        
-//             // Remove the seed from its original container
-//             var originalContainerId = e.dataTransfer.getData('originalContainer');
-//             var originalContainer = document.getElementById(originalContainerId);
-//             if (originalContainer) {
-//                 var originalSeed = originalContainer.querySelector('img[data-seedType="' + seedType + '"]');
-//                 if (originalSeed) {
-//                     originalContainer.removeChild(originalSeed);
-//                 }
-//             }
-
-//             dropSound.play();
-        
-//             setTimeout(function () {
-//                 var opacity = 1;
-//                 var fadeInterval = setInterval(function () {
-//                     if (opacity <= 0) {
-//                         clearInterval(fadeInterval);
-//                     } else {
-//                         yumClone.style.opacity = opacity;
-//                         opacity -= 0.1;
-//                     }
-//                 }, 50);
-//             }, 250);
-        
-//             return false;
-//         });             
-//     }
-
-//     function savePlantedSeed(seedType, position) {
-        
-//         console.log("Flower type: ", seedType);
-//         console.log("At position: ", position);
-        
-//         fetch('http://127.0.0.1:8000/garden/save_planted_seed/', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'X-Requested-With': 'XMLHttpRequest',
-//                 'X-CSRFToken': getCSRFToken() 
-//             },
-//             body: JSON.stringify({seed_type: seedType, position: position})
-//         })
-//         .then(response => {
-//             if (response.ok) {
-//                 console.log('Seed saved successfully');
-//             } else {
-//                 console.error('Failed to save seed');
-//             }
-//         })
-//         .catch(error => console.error('Error saving seed:', error));
-//     }    
-
-//     function getCSRFToken() {
-//         var cookieValue = null;
-//         if (document.cookie && document.cookie !== '') {
-//             var cookies = document.cookie.split(';');
-//             for (var i = 0; i < cookies.length; i++) {
-//                 var cookie = cookies[i].trim();
-//                 // Search for CSRF token cookie
-//                 if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
-//                     cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
-//                     break;
-//                 }
-//             }
-//         }
-//         return cookieValue;
-//     }
-
-//     document.addEventListener("DOMContentLoaded", function() {
-//         // Fetch planted seeds from the server
-//         fetchPlantedSeeds();
-//     });
-
-//     function fetchPlantedSeeds() {
-//         fetch('http://127.0.0.1:8000/garden/load_planted_seeds/', {
-//             headers: {
-//                 'X-Requested-With': 'XMLHttpRequest',
-//                 'X-CSRFToken': getCSRFToken()
-//             }
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log("Planted seeds data: ", data);
-//             renderPlantedSeeds(data);
-//         })
-//         .catch(error => console.error('Error fetching planted seeds:', error));
-//     }
-
-//     function renderPlantedSeeds(seeds) {
-//         if (!Array.isArray(seeds)) {
-//             console.error("Invalid data format for planted seeds:", seeds);
-//             return;
-//         }
-    
-//         console.log("Rendering planted seeds: ", seeds);
-
-
-//         console.log("Before");
-
-//         seeds.forEach(seed => {
-//             console.log("After");
-//             const square = document.getElementById(seed.position);
-//             const newImage = new Image();
-//             newImage.src = `/static/img/flowers/${seed.seed_type}.png`;
-//             square.innerHTML = '';
-//             square.appendChild(newImage);
-//         });
-//     }
-// });
-
-//     // Author: Saida Amirova
-
-//     var popupOpened = {};
-
-//     /* This function makes the hidden popup visible and shows it over the plant boxes. */
-//     function showPopupAtPosition(squareX, squareY, seedType) {
-//         var popup = document.querySelector('.popup');
-//         popup.style.display = 'block';
-//         popup.style.width = '600px'; 
-
-//         var popupContent = '';
-
-//         switch(seedType) {
-//             case 'betony':
-//                 popupContent = ' This is Betony popup';
-//                 break;
-//             case 'chamomile':
-//                 popupContent = 'This is Chamomile popup';
-//                 break;
-//             case 'hops':
-//                 popupContent = 'This is Hops popup';
-//                 break;
-//             case 'lavender':
-//                 popupContent = 'This is Lavender popup';
-//                 break;
-//             case 'passion':
-//                 popupContent = 'This is Passion popup';
-//                 break;
-//             case 'skullcap':
-//                 popupContent = 'This is Skullcap popup';
-//                 break;
-//             case 'stjohn':
-//                 popupContent = 'This is St John\s popup';
-//                 break;
-//             case 'valerian':
-//                 popupContent = 'This is Valerian popup';
-//                 break;
-//             case 'vervain':
-//                 popupContent = 'This is Vervain popup';
-//                 break;
-//             case 'viper':
-//                 popupContent = 'This is Viper popup';
-//                 break;
-//             default:
-//                 popupContent = 'Information about the plant...';
-//         }    
-
-//         popup.innerHTML = `
-//         <div id="closeButton" onclick="closePopup()">&times;</div>
-//         <p>${popupContent}</p>  
-//         <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}">`;
-
-//         var popupX = 100;
-//         var popupY = 100; 
-
-//         popup.style.left = popupX + 'px';
-//         popup.style.top = popupY + 'px';
-//     }
-
-//     function getSeedType(element) {
-//         while (element && element.tagName !== 'IMG') {
-//             element = element.parentNode;
-//         }
-//         console.log("Element:", element);
-//         console.log("Dataset:", element ? element.dataset : null);
-    
-//         if (element) {
-//             const flowerName = extractFlowerName(element.src);
-//             console.log("Flower name:", flowerName);
-//             return flowerName;
-//         } else {
-//             return null;
-//         }
-//     }    
-    
-//     function extractFlowerName(src) {
-//         // Extracting flower name from image source URL
-//         const parts = src.split('/');
-//         const filename = parts[parts.length - 1];
-//         const flowerName = filename.split('.')[0];
-//         return flowerName;
-//     }   
-    
-//     function handleImageClick(event) {
-//         console.log("Image clicked");
-    
-//         // Check the event target
-//         console.log("Event target:", event.target);
-    
-//         var squareId = event.target.parentElement.id;
-    
-//         var flowerName = getSeedType(event.target);
-    
-//         console.log('Flower name:', flowerName);
-    
-//         if (!popupOpened[squareId]) {
-//             console.log('After if Clicked flower name:', flowerName);
-//             var squareRect = event.target.parentElement.getBoundingClientRect();
-//             var squareX = squareRect.left + window.pageXOffset;
-//             var squareY = squareRect.top + window.pageYOffset;
-    
-//             if (flowerName) {
-//                 showPopupAtPosition(squareX, squareY, flowerName);
-//                 popupOpened[squareId] = true;
-//             } else {
-//                 console.error('Flower name is undefined');
-//             }
-//         }
-//     }    
-
-//     /* This function helps to close the opened popup */
-//     function closePopup() {
-//         var popup = document.querySelector('.popup');
-//         popup.style.display = 'none';
-        
-//         popupOpened = {};
-//     }
-
-//     // adding an event listener to the squares/plant placeholder
-//     document.getElementById('bin').addEventListener('click', function(event) {
-//         if (event.target.tagName === 'IMG' && event.target.parentElement.classList.contains('small-square')) {
-//             handleImageClick(event);
-//         }
-//     });
-
-//     var closeButton = document.getElementById('closeButton');
-//     closeButton.addEventListener('click', closePopup);
-
-
-// // Function to generate a random seed
-// function randomSeed() {
-//     const flowersArray = ["betony", "chamomile", "lavender", "passion", "stjohn", "valerian", "vervain", "viper"];
-//     var chosenFlower = flowersArray[Math.floor(Math.random() * flowersArray.length)];
-//     console.log("Chosen flower:", chosenFlower);
-//     return chosenFlower;
-// }
-
-// // Initialize user seeds array if it doesn't exist in localStorage
-// var userSeedsArray = localStorage.getItem('userSeedsArray') ? JSON.parse(localStorage.getItem('userSeedsArray')) : [];
-
-// // Function to add the chosen flower to the user's seeds array
-// function userSeeds(chosenFlower) {
-//     // Add the chosen flower to the user seeds array
-//     userSeedsArray.push(chosenFlower);
-//     // Store the updated user seeds array in localStorage
-//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-//     console.log("User's seeds:", userSeedsArray);
-// }
-
-// // Function to clear the user seeds array
-// function clearUserSeeds() {
-//     // Empty the user seeds array
-//     userSeedsArray = [];
-//     // Update the localStorage to reflect the changes
-//     localStorage.setItem('userSeedsArray', JSON.stringify(userSeedsArray));
-//     console.log("User's seeds cleared.");
-// }
-
-// // Function to update the displayed seed images based on userSeedsArray
-// function updateDisplayedSeeds() {
-//     // Get the draggable container
-//     var container = document.getElementById("draggable-container");
-
-//     // Clear the existing content of the container
-//     container.innerHTML = '';
-
-//     // Iterate over userSeedsArray
-//     userSeedsArray.forEach(function(seedType) {
-//         // Add the seed image to the container
-//         addSeedImage(seedType);
-//     });
-// }
-
-// // Function to add a seed image to the draggable container
-// function addSeedImage(seedType) {
-//     // Create a new image element
-//     var newImg = document.createElement('img');
-//     // Set the src attribute of the image
-//     newImg.src = "/static/img/seeds/" + seedType + "_seed.png";
-//     // Set the data attributes
-//     newImg.setAttribute('data-seedType', seedType);
-//     newImg.setAttribute('data-flowerName', seedType);
-//     newImg.setAttribute('draggable', true);
-//     // Add the 'seed' class to the image
-//     newImg.classList.add('seed');
-//     // Append the image to the draggable container
-//     document.getElementById('draggable-container').appendChild(newImg);
-// }
-
-// // function assignAndDisplay() {
-// //     return new Promise((resolve, reject) => {
-// //         var randomFlower = randomSeed(); 
-// //         userSeeds(randomFlower);  
-// //         updateDisplayedSeeds();
-// //         resolve(); // Resolve the Promise once the seeds are assigned and displayed
-// //     });
-// // }
-
-
-// function assignAndDisplay(){
-    
-//     // Call randomSeed and userSeeds functions
-//     var randomFlower = randomSeed(); 
-//     userSeeds(randomFlower);  
-
-//     // Update the displayed seeds
-//     updateDisplayedSeeds();
-
-//     // Clear user seeds
-//     clearUserSeeds();
-
-// }
-
-
-// function checkForSeedAward() {
-//     fetch('/check_for_seed_award/', { credentials: 'include' })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.hasAward) {
-//                 assignAndDisplay().then(() => {
-//                     clearAwardFlag(); // Call clearAwardFlag here after assignAndDisplay
-//                 });
-//             }
-//         })
-//         .catch(error => console.error('Error checking for seed award:', error));
-// }
-
-
-// function clearAwardFlag() {
-//     fetch('/clear_seed_award/', {
-//         method: 'POST',
-//         credentials: 'include',
-//         headers: {
-//             'X-CSRFToken': getCSRFToken(), // Ensure you're getting the CSRF token correctly
-//             'Content-Type': 'application/json'
-//         },
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             console.log('Seed award flag cleared successfully.');
-//         }
-//     })
-//     .catch(error => console.error('Error clearing seed award flag:', error));
-// }
-
-// function getCSRFToken() {
-//     let cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         const cookies = document.cookie.split(';');
-//         for (let i = 0; i < cookies.length; i++) {
-//             const cookie = cookies[i].trim();
-//             if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
-
-

@@ -1,20 +1,17 @@
 # views.py
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.http import JsonResponse,HttpResponseBadRequest
 from habittracker.models import UserScore
-from .models import Seed, PlantedSeed
-from adminpage.models import HabitRequest
+from .models import PlantedSeed
 import json
 from django.utils import timezone
 from datetime import timedelta
 from habittracker.utils import get_today_score
+from django.http import JsonResponse
+from .models import UserSeed
 
-@login_required
 def garden_view(request):
-    user_has_new_seed = request.session.pop(f'user_{request.user.id}_has_new_seed', False)
-
     # Remove expired seeds
     remove_expired_seeds()
     
@@ -24,27 +21,8 @@ def garden_view(request):
 
     scaled_score = (today_score / 10) * 100
     
-    # Pass today's score and seed to the template
-    return render(request, 'garden/garden.html', {'today_score': scaled_score, 'user_has_new_seed': user_has_new_seed})
-
-@login_required
-def check_for_seed_award(request):
-    # Example logic to check if the user has a new seed awarded
-    # This is a placeholder logic. Adapt it according to how you're managing seed awards
-    new_seed_awarded = request.session.get('new_seed_awarded', False)
-    seed_type = request.session.get('seed_type', None)
-    
-    response_data = {
-        'hasNewSeed': new_seed_awarded,
-        'seedType': seed_type
-    }
-
-    # Reset the award in the session after it's been checked to avoid repeating the award.
-    if new_seed_awarded:
-        request.session['new_seed_awarded'] = False
-        request.session.pop('seed_type', None)  # Clean up the seed type as well
-
-    return JsonResponse(response_data)
+    # Pass today's score to the template
+    return render(request, 'garden/garden.html', {'today_score': scaled_score})
 
 def save_planted_seed(request):
     if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -97,3 +75,44 @@ def remove_expired_seeds():
     
     # Delete the expired seeds from the database
     expired_seeds.delete()
+
+
+def userSeeds(request):
+    if request.method == 'POST':
+        # Parse JSON body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON payload'})
+
+        # Extract the chosen flower from the JSON data
+        chosen_flower = data.get('chosenFlower')
+
+        if chosen_flower:
+            # Save the chosen flower to the database
+            UserSeed.objects.create(chosen_flower=chosen_flower)
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Missing chosen flower data'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+def clearUserSeeds(request):
+    if request.method == 'POST':
+        # Clear the user seeds in the database
+        UserSeed.objects.all().delete()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+def updateDisplayedSeeds(request):
+    if request.method == 'GET':
+        # Get all user seeds from the database
+        user_seeds = UserSeed.objects.all()
+        # Extract flower names from user seeds
+        userSeedsArray = [seed.chosen_flower for seed in user_seeds]
+        return JsonResponse({'userSeedsArray': userSeedsArray})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
