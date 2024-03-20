@@ -1,22 +1,24 @@
 /* Author: Aisha Farouk */
 
 .body-login {
-    background-image: url('../img/login-background.jpeg');
+    background-image: url('../img/login-background.png');
     background-repeat: no-repeat;
     background-position: center;
     min-height:100vh;
     background-size: cover;
+    overflow: hidden;
 }
 .login-container {
     padding-top: 100px;
     width: 100%;
 }
 .body-register {
-    background-image: url('../img/register-background.jpeg');
+    background-image: url('../img/register-background.png');
     background-repeat: no-repeat;
     background-position: center;
     height:100vh;
     background-size: cover;
+    overflow-x: hidden;
 }
 .register-container {
     padding-top: 50px;
