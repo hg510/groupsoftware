@@ -18,10 +18,4 @@ class HabitRequest(models.Model):
         verbose_name_plural = "Habit Requests"
 
 
-class UserSeedAward(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    awarded = models.BooleanField(default=False)
-
-    class Meta:
-        unique_together = ('user', 'awarded')
 
