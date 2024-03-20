@@ -79,8 +79,14 @@ def remove_expired_seeds():
 
 def userSeeds(request):
     if request.method == 'POST':
-        # Extract the chosen flower from the POST data
-        chosen_flower = request.POST.get('chosenFlower')
+        # Parse JSON body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON payload'})
+
+        # Extract the chosen flower from the JSON data
+        chosen_flower = data.get('chosenFlower')
 
         if chosen_flower:
             # Save the chosen flower to the database
@@ -100,9 +106,14 @@ def clearUserSeeds(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
+
 def updateDisplayedSeeds(request):
-    # Get all user seeds from the database
-    user_seeds = UserSeed.objects.all()
-    # Extract flower names from user seeds
-    userSeedsArray = [seed.chosen_flower for seed in user_seeds]
-    return JsonResponse({'userSeedsArray': userSeedsArray})
+    if request.method == 'GET':
+        # Get all user seeds from the database
+        user_seeds = UserSeed.objects.all()
+        # Extract flower names from user seeds
+        userSeedsArray = [seed.chosen_flower for seed in user_seeds]
+        return JsonResponse({'userSeedsArray': userSeedsArray})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+

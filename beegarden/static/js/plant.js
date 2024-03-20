@@ -311,20 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const filename = parts[parts.length - 1];
         const flowerName = filename.split('.')[0];
         return flowerName;
-    }   
-
-    
-    // // Listen for messages from map.js
-    // window.addEventListener('seedReached', function(event) {
-    //     var reachedSeed = event.detail;
-    //     console.log("Received reached seed:", reachedSeed);
-    //     if (reachedSeed) {
-    //         // Handle the reached seed
-    //         userSeeds(reachedSeed);
-    //         // Clear the temporarily stored seed
-    //         localStorage.removeItem('reachedSeed');
-    //     }
-    // });
+    }  
     
 
     function handleImageClick(event) {
@@ -505,7 +492,7 @@ function assignAndDisplay(){
     updateDisplayedSeeds();
 
     // Clear user seeds
-    // clearUserSeeds();
+    clearUserSeeds();
 
 }
 
