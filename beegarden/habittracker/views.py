@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.shortcuts import render, redirect
 from .models import Habit, UserScore
 from django.db.models import Sum
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 # Manages habit tracking submissions and updates user scores and streaks.
 def habitTracker(request):
@@ -87,6 +89,7 @@ def habitTracker(request):
 
         # Set the score in the session
         request.session['total_score'] = total_score
+        return render(request, 'habitTracker.html', {'form_submitted': True, 'score': total_score})
 
     return render(request, 'habitTracker.html', {'form_submitted': form_submitted, 'score': total_score})
 

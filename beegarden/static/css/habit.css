@@ -10,11 +10,13 @@ body {
     height:100vh;
 }
 
-.container {
+.form-container {
     max-width: 975px; /* Limit container width */
     margin: 0 auto; /* Center container horizontally */
     padding: 20px; /* Add padding inside container */
+    top: 70%;
 }
+
 fieldset {
     border: 2px solid #fff !important;
     border-radius: 10px;
