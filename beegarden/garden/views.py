@@ -8,6 +8,8 @@ import json
 from django.utils import timezone
 from datetime import timedelta
 from habittracker.utils import get_today_score
+from django.http import JsonResponse
+from .models import UserSeed
 
 def garden_view(request):
     # Remove expired seeds
@@ -80,3 +82,56 @@ def remove_expired_seeds():
     
     # Delete the expired seeds from the database
     expired_seeds.delete()
+
+
+def userSeeds(request):
+    if request.method == 'POST':
+        # Parse JSON body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON payload'})
+
+        # Extract the chosen flower from the JSON data
+        chosen_flower = data.get('chosenFlower')
+
+        if chosen_flower:
+            # Save the chosen flower to the database
+            UserSeed.objects.create(chosen_flower=chosen_flower)
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Missing chosen flower data'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+def clearUserSeeds(request):
+    if request.method == 'POST':
+        # Clear the user seeds in the database
+        UserSeed.objects.all().delete()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+def updateDisplayedSeeds(request):
+    if request.method == 'GET':
+        # Get all user seeds from the database
+        user_seeds = UserSeed.objects.all()
+        # Extract flower names from user seeds
+        userSeedsArray = [seed.chosen_flower for seed in user_seeds]
+        return JsonResponse({'userSeedsArray': userSeedsArray})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+    
+def award_seed(request):
+    if request.method == 'POST':
+        seed_name = request.POST.get('seed_name')
+        try:
+            # Create a UserSeed object and save it to the database
+            user_seed = UserSeed(chosen_flower=seed_name)
+            user_seed.save()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

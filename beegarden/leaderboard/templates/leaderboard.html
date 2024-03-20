@@ -22,7 +22,6 @@
         <a href="{% url 'about' %}" class="home-btn">About Us</a> 
         <a href="{% url 'garden' %}" class="home-btn">Virtual Garden</a> 
         <a href="{% url 'habit_tracker' %}" class="home-btn">Track Habits</a>
-        <a href="{% url 'leaderboard' %}" class="home-btn">Leaderboard</a> 
         <a href="{% url 'map' %}" class="home-btn">Map</a> 
       </div>
     <div class="leaderboard">
@@ -32,6 +31,7 @@
             </svg>
             Leaderboard
         </h1>
+        
         <ol>
             {% for user_score in user_scores %}
             <li>

@@ -22,3 +22,9 @@ class PlantedSeed(models.Model):
     def is_expired(self):
         # Check if the seed is older than 6 days
         return timezone.now() - self.planted_at >= timezone.timedelta(days=6)
+    
+class UserSeed(models.Model):
+    chosen_flower = models.CharField(max_length=100) 
+
+    def __str__(self):
+        return self.chosen_flower

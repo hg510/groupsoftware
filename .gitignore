@@ -364,3 +364,5 @@ beegarden/accounts/__pycache__/models.cpython-312.pyc
 *.pyc
 beegarden/accounts/__pycache__/urls.cpython-312.pyc
 beegarden/accounts/__pycache__/views.cpython-312.pyc
+beegarden/db.sqlite3
+*.sqlite3
