@@ -68,7 +68,7 @@ def get_planted_seeds(request):
     
 def remove_expired_seeds():
     # Define the expiration time (5 minutes ago)
-    expiration_time = timezone.now() - timedelta(minutes=1)
+    expiration_time = timezone.now() - timedelta(days=6)
     
     # Query for seeds planted before the expiration time
     expired_seeds = PlantedSeed.objects.filter(planted_at__lt=expiration_time)
