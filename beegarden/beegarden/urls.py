@@ -15,7 +15,7 @@ urlpatterns = [
     path("habit/", include("habittracker.urls")),
     path("garden/", include("garden.urls")),
     path("leaderboard/", include("leaderboard.urls")),
-    path("map/", include("map.urls")),
+    path("map/", include("map.urls"), name="map"),
     path("about/",TemplateView.as_view(template_name="about.html"),name="about"),
     path("adminpage/", adminPage, name="adminpage"),
 ]

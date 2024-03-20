@@ -119,3 +119,5 @@ def increment_streak(user):
     user_score = UserScore.objects.get(user=user)
     user_score.streak_count += 1
     user_score.save()
+
+
