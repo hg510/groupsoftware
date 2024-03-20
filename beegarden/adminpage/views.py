@@ -9,10 +9,11 @@ from django.template import RequestContext
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from garden.models import Seed
+from garden.models import UserSeed
 from habittracker.models import Habit
 from .models import HabitRequest
-
+import random
+       
 @login_required
 def adminPage(request):
     if not request.user.is_staff:
@@ -21,12 +22,24 @@ def adminPage(request):
     if request.method == 'POST':
         approved_request_ids = request.POST.getlist('request_ids')  # Assuming these are the IDs of the approved requests
 
-        # Update status for approved and rejected requests
+        # Predefined list of seed types expected by plant.js
+        seed_types = ["betony", "chamomile", "lavender", "passion", "stjohn", "valerian", "vervain", "viper"]
+
+        # Process approvals
         for request_id in approved_request_ids:
-            HabitRequest.objects.filter(id=request_id).update(status='approved')
-            user_id = HabitRequest.objects.get(id=request_id).user.id
-            # Set a flag in the session for the user who got their request approved
-            request.session[f'user_{user_id}_has_new_seed'] = True
+            try:
+                habit_request = HabitRequest.objects.get(id=request_id, status='pending')
+                habit_request.status = 'approved'
+                habit_request.save()
+
+                # Randomly select a seed type to award
+                chosen_seed = random.choice(seed_types)
+
+                # Create a UserSeed instance for the user
+                UserSeed.objects.create(user=habit_request.user, chosen_flower=chosen_seed)
+            except HabitRequest.DoesNotExist:
+                # In case the request ID is not found or already processed
+                continue
 
         # Auto-reject the rest
         HabitRequest.objects.filter(~Q(id__in=approved_request_ids), status='pending').update(status='rejected')
@@ -55,17 +68,25 @@ def adminPage(request):
     else:
         pending_habit_requests = HabitRequest.objects.filter(status='pending').prefetch_related('user', 'habit')
 
-        habit_forms = [{
-            'request': hr,
-            'habits_completed': hr.number_of_habits,
-        } for hr in pending_habit_requests]
-
         context = {
-            'habit_forms': habit_forms,
-            'message': "No habit forms available for review at the moment." if not habit_forms else ""
+            'habit_forms': [{
+                'request': hr,
+                'habits_completed': hr.number_of_habits,
+            } for hr in pending_habit_requests],
+            'message': "No habit forms available for review at the moment." if not pending_habit_requests else ""
         }
+        # habit_forms = [{
+        #     'request': hr,
+        #     'habits_completed': hr.number_of_habits,
+        # } for hr in pending_habit_requests]
+
+        # context = {
+        #     'habit_forms': habit_forms,
+        #     'message': "No habit forms available for review at the moment." if not habit_forms else ""
+        # }
 
         return render(request, 'admin.html', context)
+
 
 def calculate_daily_score(user):
     today = timezone.now().date()

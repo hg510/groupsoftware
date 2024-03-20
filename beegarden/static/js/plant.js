@@ -492,7 +492,7 @@ function assignAndDisplay(){
     updateDisplayedSeeds();
 
     // Clear user seeds
-    clearUserSeeds();
+    // clearUserSeeds();
 
 }
 

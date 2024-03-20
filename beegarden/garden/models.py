@@ -3,6 +3,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
+
 
 class Seed(models.Model):
     name = models.CharField(max_length=100)
@@ -24,6 +26,7 @@ class PlantedSeed(models.Model):
         return timezone.now() - self.planted_at >= timezone.timedelta(days=6)
     
 class UserSeed(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_seeds')
     chosen_flower = models.CharField(max_length=100) 
 
     def __str__(self):
