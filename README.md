@@ -101,3 +101,7 @@ For further information, visit allaboutcookies.org.
 Our website uses cookies in order to keep you signed in.
 
 You can set your browser not to accept cookies, and the above website tells you how to remove cookies from your browser. 
+
+## BACKGROUND SOURCES:
+https://danielriise.artstation.com/
+https://twitter.com/BloomtownGame/status/1339926193144025088
