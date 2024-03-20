@@ -13,42 +13,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 <body>
 <h1>Habit Tracker</h1>
+<div class="home-btn-container">
+    <a href="{% url 'home' %}" class="home-btn">Home</a>
+    <a href="{% url 'about' %}" class="home-btn">About Us</a> 
+    <a href="{% url 'garden' %}" class="home-btn">Virtual Garden</a> 
+    <a href="{% url 'habit_tracker' %}" class="home-btn">Track Habits</a>
+    <a href="{% url 'leaderboard' %}" class="home-btn">Leaderboard</a> 
+    <a href="{% url 'map' %}" class="home-btn">Map</a> 
+</div>
 <!--Stops the user from submitting more than once per day-->
 {% if form_submitted %}
-<div class="home-btn-container">
-    <a href="{% url 'home' %}" class="home-btn">
-        <i class="fas fa-home" style="margin-right: 4px;"></i>
-        Home
-    </a>
-    <a href="{% url 'habit_tracker' %}" class="home-btn">
-        <i class="fas fa-home" style="margin-right: 4px;"></i>
-        Track Habits
-    </a>
-    <a href="{% url 'leaderboard' %}" class="home-btn">
-        <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
-        Leaderboard
-    </a>
-</div>
 <div class="submitted-form">
     <p>Form already submitted. Please come back tomorrow!</p>
     <p>Your current score: {{ score }}</p>
 </div>
 {% else %}
-    <form method="post" class="container">
-        <div class="home-btn-container">
-            <a href="{% url 'home' %}" class="home-btn">
-                <i class="fas fa-home" style="margin-right: 4px;"></i>
-                Home
-            </a>
-            <a href="{% url 'habit_tracker' %}" class="home-btn">
-                <i class="fas fa-home" style="margin-right: 4px;"></i>
-                Track Habits
-            </a>
-            <a href="{% url 'leaderboard' %}" class="home-btn">
-                <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
-                Leaderboard
-            </a>
-        </div>
+    <form method="post" class="form-container">
         <!--Habits List-->
         {% csrf_token %}
         <fieldset>

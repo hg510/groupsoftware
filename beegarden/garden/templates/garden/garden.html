@@ -1,62 +1,80 @@
   <!-- Author: Nur Deeni and Saida Amirova -->
-  
+
   {% load static %}
 
+  <!-- <audio autoplay loop volume="0.2">
+    <source src="{% static 'sound/default_music.wav' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio> -->
+
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/garden.css' %}">
   <link rel="stylesheet" href="{% static 'css/popup.css' %}">
   
-    <a href="{% url 'home' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-home" style="margin-right: 4px;"></i>
-      Home
-    </a>
-    <a href="{% url 'habit_tracker' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-home" style="margin-right: 4px;"></i>
-      Track Habits
-    </a>
-    <a href="{% url 'leaderboard' %}" 
-      class="home-btn"
-    >
-      <i class="fas fa-list-ol" style="margin-right: 4px;"></i>
-      Leaderboard
-    </a>
-  
+  <div class="container">
+    <a href="{% url 'home' %}" class="home-btn">Home</a>
+    <a href="{% url 'about' %}" class="home-btn">About Us</a> 
+    <a href="{% url 'garden' %}" class="home-btn">Virtual Garden</a> 
+    <a href="{% url 'habit_tracker' %}" class="home-btn">Track Habits</a>
+    <a href="{% url 'leaderboard' %}" class="home-btn">Leaderboard</a> 
+    <a href="{% url 'map' %}" class="home-btn">Map</a> 
+  </div>
+
+    <script>
+      var userId = "{{ user.id }}"; 
+    </script>
+
   <div class="holder">
     <h1>Virtual Garden</h1>
     <div id="bin">
-      <div class="small-square" id="square1">
-      </div>
-      <div class="small-square" id="square2">
-      </div>
-      <div class="small-square" id="square3">
-      </div>
-      <div class="small-square" id="square4">
-      </div>
-      <div class="small-square" id="square5">
-      </div>
-      <div class="small-square" id="square6">
-      </div> 
+        <div class="small-square" id="square1"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square1" class="pot-image">
+        
+        <div class="small-square" id="square2"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square2" class="pot-image">
+        
+        <div class="small-square" id="square3"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square3" class="pot-image">
+        
+        <div class="small-square" id="square4"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square4" class="pot-image">
+        
+        <div class="small-square" id="square5"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square5" class="pot-image">
+        
+        <div class="small-square" id="square6"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square6" class="pot-image">
+        
+        <div class="small-square" id="square7"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square7" class="pot-image">
+        
+        <div class="small-square" id="square8"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square8" class="pot-image">
+        
+        <div class="small-square" id="square9"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square9" class="pot-image">
+        
+        <div class="small-square" id="square10"></div>
+        <img src="{% static 'img/pot.png' %}" alt="Pot" id="pot-image-square10" class="pot-image">
     </div>
     <ul>
-      <li id="draggable-container">
-          <img draggable="true" src="{% static 'img/seeds.png' %}" id="one">
-      </li>
-    </ul>
-  </div>
+      <li id="draggable-container" class="seed"></li>
+  </ul>  
+</div>
 
-    <div class="learn">
-      Click on the plants to learn more!
-    </div>
-  
   <div id="beeemotions" class="pixel-box">
       <div class="content">
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
         <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+        <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
+
+        <script>
+            var scoreValue = parseFloat(document.getElementById("scoreValue").innerText);
+            document.getElementById("scoreValue").innerText = Math.ceil(scoreValue);
+        </script>
+
         <div class="health-bar">
             <div id="health" class="health"></div>
             <span class="heart">❤</span>
@@ -65,7 +83,6 @@
           <div id="pet" class="pet"></div>
           <span class="icon">😊</span>
       </div>
-        <p id="userScore">Score: <span id="scoreValue">{{ score }}</span></p>
       </div>
       <script>
         var happyImagePath = "{% static 'img/happybee.png' %}";
@@ -73,30 +90,76 @@
         var mehImagePath = "{% static 'img/mehbee.png' %}";
         var petImagePath = "{% static 'img/petbee.png' %}";
 
-        function updateHealthBar(score) {
+        function updateHealthBar(today_score) {
             const healthBar = document.getElementById('health');
-            healthBar.style.width = score + '%';
+            healthBar.style.width = today_score + '%';
         }
 
         // Call the updateHealthBar function with the initial score
-        updateHealthBar({{ score }});
+        updateHealthBar({{ today_score }});
       </script>
       <script src="{% static 'js/beeemotions.js' %}"></script>
       <script>
         // Call the emotion function from beeemotions.js
-        emotion({{ score }});
+        emotion({{ today_score }});
       </script>
       </div>
     </div>
 
-  <div class="popup">
-    <div id="closeButton" onclick="close">&times;</div>
-    <p>
-      This is a popup window!
-      information about the plant...
-    </p>  
-    <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
-  </div>
+    <div class="popup">
+      <div id="closeButton" onclick="closePopup()">&times;</div>
+      <p>
+        This is a popup window!
+        information about the plant...
+      </p>  
+      <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+    </div>    
 
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/popup.js' %}"></script>
+
+
+  <script>
+  //changes the background seasonally
+
+  var winterPath = "{% static 'img/backgroundwinter.png' %}";
+  var springPath = "{% static 'img/backgroundspring.png' %}";
+  var summerPath = "{% static 'img/backgroundsummer.png' %}";
+  var autumnPath = "{% static 'img/backgroundautumn.png' %}";
+
+  </script>
+  <script src="{% static 'js/background.js' %}"></script>
+  <script>
+  changeBackground();
+  </script>
+
+<style>
+.fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+}
+
+.shake {
+    animation: shakeAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shakeAnimation {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+</style>
+  <script src="{% static 'js/plant.js' %}"></script>
+

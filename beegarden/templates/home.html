@@ -1,4 +1,4 @@
-<!-- Author: Nur Deeni -->
+<!-- home.html -->
 
 {% extends "base.html" %}
 
@@ -29,8 +29,8 @@
           {% if user.is_authenticated %}
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item active" aria-current="page">
-                <a class="nav-link active" href="{% url 'garden' %}">Virtual Garden</a>
+              <li class="nav-item" aria-current="page">
+                <a class="nav-link" href="{% url 'garden' %}">Virtual Garden</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'habit_tracker' %}">Track Habits</a>
@@ -71,14 +71,11 @@
           {% endif %} 
         </div>
       </div>
+    <video autoplay muted loop id="myVideo">
+        <source src="{% static 'video/bee.mp4' %}" type="video/mp4">
+    </video>
+    <div class="content">
+        <h1>Welcome to the Bee Garden!</h1>
     </div>
-  </nav>
-  <video autoplay muted loop id="myVideo">
-    <source src="{% static 'video/bee.mp4' %}" type="video/mp4">
-  </video>
-  <div class="content">
-    <h1>Welcome to Gardenbee</h1>
-    <p>Lorem ipsum...</p>
-  </div>
 </body>
 {% endblock %}
