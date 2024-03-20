@@ -96,13 +96,12 @@ complete information you believe is incomplete.
 
 Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our websites, we may collect information from you automatically through cookies or similar technology.
 
-## LOGIN AND REGISTER BACKGROUND SOURCE:
-https://danielriise.artstation.com/projects/3ooagm
-https://twitter.com/BloomtownGame/status/1339926193144025088
-
-
 For further information, visit allaboutcookies.org.
 
 Our website uses cookies in order to keep you signed in.
 
 You can set your browser not to accept cookies, and the above website tells you how to remove cookies from your browser. 
+
+## LOGIN AND REGISTER BACKGROUND SOURCE:
+https://danielriise.artstation.com/projects/3ooagm
+https://twitter.com/BloomtownGame/status/1339926193144025088
