@@ -11,7 +11,10 @@ body {
     min-height: 450px;
     height: 100vh;
     margin: 0;
-    background: radial-gradient(ellipse farthest-corner at center top, #1E90FF 0%, #FFD700 100%);
+    background-image: url('/static/img/leaderboard.jpg');
+    background-size: cover; /* Adjust as needed */
+    background-attachment: fixed; /* Adjust as needed */
+    background-position: center top; /* Adjust as needed */
     color: #fff;
     font-family: "Pixelify Sans", sans-serif;
 }
@@ -139,7 +142,7 @@ Leaderboard
     width: 40%;
     background: linear-gradient(to bottom, #3a404d, #181c26);
     border-radius: 10px;
-    box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+    box-shadow: 0 7px 30px rgb(255, 255, 255);
 
     h1 {
         font-size: 18px;
@@ -240,4 +243,11 @@ Leaderboard
     img {
         max-width: 100%;
     }
+}
+
+.score-label {
+    position: absolute;
+    right: 25px;
+    top: 50px;
+    color: #fff;
 }
