@@ -67,6 +67,7 @@
       <div class="content">
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
+<<<<<<< HEAD
         <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
         <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
 
@@ -75,6 +76,10 @@
             document.getElementById("scoreValue").innerText = Math.ceil(scoreValue);
         </script>
 
+=======
+        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage" class="steve">
+        <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
+>>>>>>> origin/new-admin2
         <div class="health-bar">
             <div id="health" class="health"></div>
             <span class="heart">❤</span>
@@ -108,6 +113,7 @@
 
     <div class="popup">
       <div id="closeButton" onclick="closePopup()">&times;</div>
+<<<<<<< HEAD
       <p>
         This is a popup window!
         information about the plant...
@@ -164,3 +170,14 @@
   <script src="{% static 'js/plant.js' %}"></script>
   
 
+=======
+      <div class="popup-content">
+        <div class="flower-info"></div>
+        <div class="image-container">
+          <img class="real-plant" src="{% static 'img/feverfew.jpg' %}" alt="feverfew">
+        </div>
+      </div>
+    </div>
+    
+  <script src="{% static 'js/plant.js' %}"></script>
+>>>>>>> origin/new-admin2

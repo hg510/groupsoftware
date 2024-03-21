@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User
-from .models import Seed, UserGarden, SeedInventory
-import random
+# from django.contrib.auth.models import User
+# from .models import Seed, UserGarden, SeedInventory
+# import random
 
 # This part is meant for the user to be awarded the seed once the admin has approved the habit form
 # It is not working properly. Therefore, it will be improved and validated in the 2nd sprint

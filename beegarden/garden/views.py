@@ -10,6 +10,8 @@ from datetime import timedelta
 from habittracker.utils import get_today_score
 from django.http import JsonResponse
 from .models import UserSeed
+from django.http import JsonResponse
+from .models import UserSeed
 
 def garden_view(request):
     # Remove expired seeds
@@ -75,7 +77,7 @@ def get_planted_seeds(request):
     
 def remove_expired_seeds():
     # Define the expiration time (5 minutes ago)
-    expiration_time = timezone.now() - timedelta(minutes=1)
+    expiration_time = timezone.now() - timedelta(days=6)
     
     # Query for seeds planted before the expiration time
     expired_seeds = PlantedSeed.objects.filter(planted_at__lt=expiration_time)
