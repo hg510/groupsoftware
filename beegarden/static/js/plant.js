@@ -483,4 +483,4 @@ function assignAndDisplay(){
     clearUserSeeds();
 }
 
-assignAndDisplay();
+// assignAndDisplay();
