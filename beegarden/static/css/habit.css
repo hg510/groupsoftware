@@ -148,20 +148,19 @@ input[type="checkbox"] {
     border-radius: 8px;
     width: 600px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 100px;
     text-align: center;
 }
 
 .container {
     position: absolute;
-    top: 0px; 
+    top: 23px; 
     left: 20px; 
     width: calc(100% - 100px); 
     height: 300px;
     padding-top: 30px;
     padding-bottom: 30px;
-  }
-  
+  } 
   
   .home-btn {
     font-size: 1.0em; 

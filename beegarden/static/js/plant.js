@@ -310,10 +310,6 @@ document.addEventListener("DOMContentLoaded", function() {
         <p class="flower-info">${popupContent}</p>  
         <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
         
-        <p class="flower-info">${popupContent}</p>  
-        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
-        
-
         var popupX = 100;
         var popupY = 100; 
 
