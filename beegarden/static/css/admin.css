@@ -35,3 +35,12 @@ body {
     padding: 5px 10px;
     cursor: pointer;
   }
+
+  .messages li {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  .messages .success { background-color: #d4edda; color: #155724; }
+  .messages .error { background-color: #f8d7da; color: #721c24; }
+  .messages .info { background-color: #d1ecf1; color: #0c5460; }
+  

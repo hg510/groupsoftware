@@ -242,6 +242,22 @@ document.addEventListener("DOMContentLoaded", function() {
         return cookieValue;
     }
 
+    function getCSRFToken() {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Search for CSRF token cookie
+                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     // Author: Saida Amirova
 
     var popupOpened = {};
@@ -294,6 +310,9 @@ document.addEventListener("DOMContentLoaded", function() {
         <p class="flower-info">${popupContent}</p>  
         <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
         
+        <p class="flower-info">${popupContent}</p>  
+        <img class="real-plant" src="/static/img/popup/${seedType}_popup.jpg" alt="${seedType}" style="width: 200px;">`;        
+        
 
         var popupX = 100;
         var popupY = 100; 
@@ -325,6 +344,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const flowerName = filename.split('.')[0];
         return flowerName;
     }  
+    
+
+    
     
 
     function handleImageClick(event) {
