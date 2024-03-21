@@ -422,11 +422,10 @@ function clearUserSeeds() {
 }
 
 function updateDisplayedSeeds() {
-
     fetch('http://127.0.0.1:8000/garden/updateDisplayedSeeds/')
     .then(response => response.json())
     .then(data => {
-        console.log(data); // Check what data you're getting
+        console.log("Fetched user seeds:", data.userSeedsArray); // Log the fetched user seeds
         // Clear the existing displayed seeds
         var container = document.getElementById("draggable-container");
         container.innerHTML = '';
@@ -460,6 +459,12 @@ function addSeedImage(seedType) {
         // Set the drag data (seed type)
         event.dataTransfer.setData('text/plain', seedType);
     });
+
+    // Attach a dragend event listener
+    newImg.addEventListener('dragend', function(event) {
+        // Hide the image after it has been dragged and dropped
+        newImg.style.display = 'none';
+    });
     
     // Append the image to the draggable container
     document.getElementById('draggable-container').appendChild(newImg);
@@ -476,7 +481,6 @@ function assignAndDisplay(){
 
     // Clear user seeds
     clearUserSeeds();
-
 }
 
 assignAndDisplay();
