@@ -2,15 +2,12 @@
 
   {% load static %}
 
-  <!-- <audio autoplay loop volume="0.2">
-    <source src="{% static 'sound/default_music.wav' %}" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio> -->
 
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/garden.css' %}">
   <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'icon/favicon.png' %}">
   
   <div class="container">
     <a href="{% url 'home' %}" class="home-btn">Home</a>
@@ -67,7 +64,7 @@
       <div class="content">
         <h2>Meet Steve!</h2>
         <h3>Click on the bee to pet it! </h3>
-        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage">
+        <img src="{% static 'img/mehbee.png' %}" alt="mehbee" id="beeImage" class="steve">
         <p id="userScore">Today's Score: <span id="scoreValue">{{ today_score }}</span></p>
 
         <script>

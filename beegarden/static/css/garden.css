@@ -22,9 +22,13 @@ body {
 
 
 h1{
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(87, 60, 16);
+  text-shadow: 0 0 3px #0fb230, 0 0 5px #df933c;
   text-align: left; 
   font-weight: 200;
   font-size: 80px;
+  color: #eef661;
   /* border: solid black;
   background-color: rgb(255, 249, 142); */
   font-family: "Pixelify Sans", sans-serif;
@@ -41,8 +45,9 @@ h1 span {
 
 
 .holder{
-  width: 600px;
+  width: 1265px;
   margin: 0px auto;
+  margin-top: 40px;
 }
 
 li {
