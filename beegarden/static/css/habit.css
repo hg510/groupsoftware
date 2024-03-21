@@ -2,17 +2,21 @@
 
 body {
     font-family: "Pixelify Sans", sans-serif;
-    background: linear-gradient(to bottom, #1E90FF, #239F02);
+    background-image: url('/static/img/habittracker.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top; 
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
+    overflow-x: hidden;
     position: relative;
     height:100vh;
 }
 
 .form-container {
     max-width: 975px; /* Limit container width */
-    margin: 0 auto; /* Center container horizontally */
+    margin: 70px auto; /* Center container horizontally */
     padding: 20px; /* Add padding inside container */
     top: 70%;
 }
@@ -28,7 +32,7 @@ legend {
 }
 
 h1 {
-    color: #000; /* Gold color for headings */
+    color: #ffffff; /* Gold color for headings */
     font-size: 36px; /* Increase font size */
     text-align: center; /* Center align headings */
     margin-bottom: 0px; /* Add margin below headings */
@@ -155,9 +159,9 @@ input[type="checkbox"] {
 .container {
     position: absolute;
     top: 23px; 
-    left: 20px; 
+    left: 208px; 
     width: calc(100% - 100px); 
-    height: 300px;
+    height: 62px;
     padding-top: 30px;
     padding-bottom: 30px;
   } 

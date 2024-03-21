@@ -1,46 +1,98 @@
 /* Author: Pawarisa Saiyut */
 
 body {
-    background-color: rgb(255, 255, 255);
-  }
-  h1 {
-    color: rgb(0, 0, 0);
-    font-family: verdana;
-    font-size: 300%;
-    text-align: center;
-  }
-  p {
-    color: rgb(0, 0, 0);
-    font-family: verdana;
-    font-size: 160%;
- 
-    margin: 50px;
-  
-  }
-  label {
-    font-size: 16px;
-    color: rgb(0, 0, 0);
-    margin-right: 10px;
-    font-family: verdana;
-    
-  }
+  font-family: "Pixelify Sans", sans-serif;
+  background: linear-gradient(to bottom, #dfaec0, #83c272);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
+  color: #000; /* Text color changed to white for better contrast */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
-  input[type="checkbox"] {
-    margin-right: 5px; 
-  }
+h1 {
+  color: #000; /* Making header text white for better visibility */
+  text-align: center;
+  font-size: 2.5em; /* Adjusted size for consistency */
+  margin-top: 20px; /* Adding top margin */
+}
 
-  input[type="submit"], input[type="reset"] {
-    font-size: 100%;
-    margin: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
+p, label {
+  color: #000; /* Text color changed to white for better contrast */
+  font-size: 18px; /* Adjusting font size for readability */
+}
 
-  .messages li {
-    margin-bottom: 10px;
-    padding: 10px;
-  }
-  .messages .success { background-color: #d4edda; color: #155724; }
-  .messages .error { background-color: #f8d7da; color: #721c24; }
-  .messages .info { background-color: #d1ecf1; color: #0c5460; }
-  
+input[type="checkbox"] {
+  accent-color: #239F02; /* Green accent color for checkboxes */
+}
+
+input[type="submit"], input[type="reset"], .home-btn, .submit-btn, .reset-btn {
+  font-family: "Pixelify Sans", sans-serif;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Customizing buttons for different actions */
+input[type="submit"], .submit-btn {
+  background: linear-gradient(to right, #3498db, #2ecc71); /*  */
+  color: #000;
+}
+
+input[type="reset"], .reset-btn {
+  background: linear-gradient(to right, #3498db, #cb5612); /* Red gradient */
+  color: #000;
+}
+
+/* Styles for messages */
+.messages li {
+  background-color: #f4f4f4; 
+  color: #333; 
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.messages .success { background-color: #d4edda; color: #155724; }
+.messages .error { background-color: #f8d7da; color: #721c24; }
+.messages .info { background-color: #d1ecf1; color: #0c5460; }
+
+/* Styling form container for smaller form presentation */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9); 
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px; 
+  margin: 30px auto; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+fieldset {
+  border: 2px solid #fff; 
+  border-radius: 10px;
+  padding: 20px; 
+}
+
+legend {
+  color: #fff; 
+  font-size: 24px; 
+}
+
+/* Adjustments for checkbox labels to match the style */
+.checkbox-label {
+  color: #fff; 
+  display: block; 
+  margin: 10px 0; 
+}
+
+.checkbox-label span::after {
+  border-color: #fff; 
+}
